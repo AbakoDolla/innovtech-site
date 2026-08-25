@@ -33,5 +33,5 @@
 - [x] Étendre les micro-animations et effets 3D performants aux sections principales.
 - [x] Réduire davantage le poids initial des scripts et valider le découpage de production.
 - [x] Compléter les attributs de chargement et de décodage des médias visibles.
-- [ ] Synchroniser la nouvelle section Services, les animations et les optimisations vers GitHub.
+- [x] Synchroniser la nouvelle section Services, les animations et les optimisations vers GitHub.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.
