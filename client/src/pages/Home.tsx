@@ -58,9 +58,9 @@ export default function Home({ lang }: { lang: Lang }) {
             <div className="hero-grid absolute -inset-8 opacity-70" />
             <div className="hero-ring absolute -right-7 -top-8 h-32 w-32 rounded-full border border-cyan-300/60 sm:-right-3 sm:-top-5" />
             <div className="relative grid min-h-[22rem] grid-cols-[1.15fr_.85fr] gap-3 rounded-[2rem] border border-white/80 bg-white/80 p-3 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:min-h-[27rem] sm:p-4">
-              <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
-              <article className="relative overflow-hidden rounded-[1.35rem] bg-cyan-50 shadow-lg"><img src={heroProducts[1].imageSrc} alt={heroProducts[1].name[lang]} className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[1].name[lang]}</p></article>
-              <article className="relative overflow-hidden rounded-[1.35rem] bg-blue-50 shadow-lg"><img src={heroProducts[2].imageSrc} alt={heroProducts[2].name[lang]} className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/30 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[2].name[lang]}</p></article>
+              <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} fetchPriority="high" decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
+              <article className="relative overflow-hidden rounded-[1.35rem] bg-cyan-50 shadow-lg"><img src={heroProducts[1].imageSrc} alt={heroProducts[1].name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[1].name[lang]}</p></article>
+              <article className="relative overflow-hidden rounded-[1.35rem] bg-blue-50 shadow-lg"><img src={heroProducts[2].imageSrc} alt={heroProducts[2].name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/30 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[2].name[lang]}</p></article>
             </div>
             <div className="absolute -right-1 top-8 hidden rounded-2xl border border-cyan-100 bg-white px-4 py-3 shadow-xl sm:block sm:-right-5">
               <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "Nouveautés" : "New arrivals"}</p>
@@ -118,7 +118,7 @@ export default function Home({ lang }: { lang: Lang }) {
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {mediaCatalog.productGallery.map((item, index) => (
             <Link key={item.id} href={`/boutique?cat=${item.family}`} className="media-card group relative overflow-hidden rounded-[1.65rem] bg-[#081A3C] shadow-[0_18px_40px_rgba(13,62,143,0.14)]">
-              <img src={item.imageSrc} alt={item.label[lang]} className="aspect-[4/3] w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100" />
+              <img src={item.imageSrc} alt={item.label[lang]} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#081A3C]/90 via-[#081A3C]/35 to-transparent p-5 pt-16">
                 <span className="text-xs font-extrabold uppercase tracking-[0.13em] text-cyan-200">0{index + 1}</span>
                 <h3 className="mt-1 font-display text-xl font-bold text-white">{item.label[lang]}</h3>
@@ -132,7 +132,7 @@ export default function Home({ lang }: { lang: Lang }) {
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.95fr]">
           <div className="order-2 lg:order-1">
             <div className="relative overflow-hidden rounded-[2rem] bg-[#EAF4FF] p-3 shadow-[0_24px_50px_rgba(15,79,175,0.12)]">
-              <img src="/manus-storage/laptop-workspace_416f8ab9.jpg" alt={t ? "Espace de travail numérique InnovTech" : "InnovTech digital workspace"} className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
+              <img src="/manus-storage/laptop-workspace_416f8ab9.jpg" alt={t ? "Espace de travail numérique InnovTech" : "InnovTech digital workspace"} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
             </div>
           </div>
           <div className="order-1 lg:order-2">

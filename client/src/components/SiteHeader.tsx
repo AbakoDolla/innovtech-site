@@ -38,6 +38,8 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
           <img
             src="/manus-storage/innovtech-logo-cropped_b88af616.png"
             alt="InnovTech"
+            decoding="async"
+            fetchPriority="high"
             className="h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02] sm:h-[4.1rem]"
           />
         </Link>

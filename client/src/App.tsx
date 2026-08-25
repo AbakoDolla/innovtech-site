@@ -1,24 +1,29 @@
 /** InnovTech design reminder: global layout supports a bilingual, high-trust technology storefront with humane WhatsApp conversion. */
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import type { Lang } from "./lib/site";
-import Home from "./pages/Home";
-import Shop from "./pages/Shop";
-import ProductDetail from "./pages/ProductDetail";
-import Services from "./pages/Services";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import MediaManager from "./pages/MediaManager";
-import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
+const Home = lazy(() => import("./pages/Home"));
+const Shop = lazy(() => import("./pages/Shop"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Services = lazy(() => import("./pages/Services"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const MediaManager = lazy(() => import("./pages/MediaManager"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+function PageLoader() {
+  return <div className="grid min-h-[45vh] place-items-center" role="status" aria-live="polite"><span className="h-9 w-9 animate-spin rounded-full border-2 border-blue-100 border-t-blue-700" /><span className="sr-only">Chargement…</span></div>;
+}
+
 function Router({ lang }: { lang: Lang }) {
-  return <Switch>
+  return <Suspense fallback={<PageLoader />}><Switch>
     <Route path="/">{() => <Home lang={lang} />}</Route>
     <Route path="/boutique">{() => <Shop lang={lang} />}</Route>
     <Route path="/boutique/:id">{(params) => <ProductDetail lang={lang} productId={params.id} />}</Route>
@@ -27,7 +32,7 @@ function Router({ lang }: { lang: Lang }) {
     <Route path="/contact">{() => <Contact lang={lang} />}</Route>
     <Route path="/admin/media">{() => <MediaManager />}</Route>
     <Route>{() => <NotFound />}</Route>
-  </Switch>;
+  </Switch></Suspense>;
 }
 
 function App() {

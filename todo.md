@@ -28,4 +28,10 @@
 - [x] Renforcer la signature visuelle InnovTech : circuits cyan, identité de marque et transitions éditoriales.
 - [x] Vérifier l’accessibilité de la boutique et des fiches produit : focus, clavier, labels et recherche.
 - [x] Ajouter et valider des animations discrètes et respectueuses de `prefers-reduced-motion`.
+- [x] Auditer les poids médias, les images non différées et les animations actuelles.
+- [x] Ajouter des illustrations légères aux cartes de services numériques.
+- [x] Étendre les micro-animations et effets 3D performants aux sections principales.
+- [x] Réduire davantage le poids initial des scripts et valider le découpage de production.
+- [x] Compléter les attributs de chargement et de décodage des médias visibles.
+- [ ] Synchroniser la nouvelle section Services, les animations et les optimisations vers GitHub.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.
