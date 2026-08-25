@@ -23,7 +23,7 @@ describe("InnovTech product catalogue", () => {
     expect(portfolioProjects.length).toBeGreaterThanOrEqual(4);
     portfolioProjects.forEach(project => {
       expect(project.url).toMatch(/^https:\/\//);
-      expect(project.imageSrc).toMatch(/^\/manus-storage\/.+\.webp$/);
+      expect(project.imageSrc).toMatch(/^\/media\/projects\/.+\.webp$/);
       expect(project.title.fr.trim()).not.toHaveLength(0);
       expect(project.title.en.trim()).not.toHaveLength(0);
     });

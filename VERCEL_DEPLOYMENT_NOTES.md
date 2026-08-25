@@ -11,3 +11,7 @@ Après cette correction, le domaine de production `https://innovtech-site.vercel
 La cause de la page blanche était le découpage manuel du bundle qui regroupait React, React DOM et le routeur dans un même fragment. Sur Vercel, ce découpage provoquait une erreur d’initialisation React. Le regroupement manuel a été retiré ; Vite détermine maintenant les dépendances de production sans casser leur ordre d’initialisation.
 
 Le build, les huit tests et l’aperçu statique ont été validés. Le déploiement de production Vercel associé au commit `de07bca` est **Ready** et le domaine `https://innovtech-site.vercel.app/` affiche à nouveau l’interface InnovTech complète.
+
+## Aperçus de réalisations
+
+La page Services de production affiche les quatre cartes de réalisations, mais leurs images visent toujours des chemins `/manus-storage/*.webp`. Ce chemin dépend du proxy de stockage du serveur de développement et n’est pas exposé par le déploiement Vercel statique. Les aperçus doivent donc être intégrés comme fichiers statiques légers sous `/media/projects/` et les quatre références doivent pointer vers ces fichiers.
