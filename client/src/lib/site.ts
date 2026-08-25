@@ -18,11 +18,24 @@ export type CatalogProduct = {
 /** Add the recipient's international WhatsApp number here when it is available, digits only. */
 export const WHATSAPP_NUMBER = "";
 
+const localMediaAliases: Record<string, string> = {
+  "innovtech-logo-cropped.png": "/media/branding/innovtech-logo.png",
+  "innovtech-symbol.png": "/media/branding/innovtech-symbol.png",
+  "innovtech-accessories-collection.png": "/media/products/powerbank-usbc-pexels.jpeg",
+  "powerbank.jpg": "/media/products/powerbank-usbc-pexels.jpeg",
+};
+
+export function localMediaSrc(source: string) {
+  const fileName = source.split("/").pop()?.replace(/_[a-f0-9]{8,}(?=\.)/i, "") || source;
+  if (localMediaAliases[fileName]) return localMediaAliases[fileName];
+  return source.startsWith("/manus-storage/") ? `/media/products/${fileName}` : source;
+}
+
 /**
  * Product names are intentionally descriptive unless InnovTech confirms an exact brand and model.
  * Every card below uses a real photograph stored through the project's media storage.
  */
-export const fullProductCatalog: CatalogProduct[] = [
+const storedProductCatalog: CatalogProduct[] = [
   { id: "smartphone-premium", family: "connected", icon: "Smartphone", imageSrc: "/manus-storage/iphone-15-pro_cdf91d77.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Smartphone", en: "Smartphone" }, name: { fr: "Smartphone haut de gamme", en: "Premium smartphone" }, description: { fr: "Un smartphone moderne pour le travail, les contenus et les échanges quotidiens.", en: "A modern smartphone for work, content and daily communication." }, searchTerms: { fr: ["téléphone", "mobile", "smartphone", "iphone"], en: ["phone", "mobile", "smartphone", "iphone"] } },
   { id: "casque-sans-fil", family: "connected", icon: "Headphones", imageSrc: "/manus-storage/wireless-headphones_580c79de.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Audio", en: "Audio" }, name: { fr: "Casque sans fil", en: "Wireless headphones" }, description: { fr: "Une écoute confortable pour les appels, la musique et les déplacements.", en: "Comfortable listening for calls, music and travel." }, searchTerms: { fr: ["casque", "audio", "bluetooth", "musique"], en: ["headphones", "audio", "bluetooth", "music"] } },
   { id: "ordinateur-portable", family: "computing", icon: "Laptop", imageSrc: "/manus-storage/lenovo-laptop_ed54c0c6.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Bureautique", en: "Work" }, name: { fr: "Ordinateur portable 15 pouces", en: "15-inch laptop" }, description: { fr: "Un poste fiable pour étudier, travailler et organiser vos projets.", en: "A reliable device to study, work and organise your projects." }, searchTerms: { fr: ["ordinateur", "laptop", "portable", "bureautique"], en: ["computer", "laptop", "notebook", "work"] } },
@@ -42,6 +55,11 @@ export const fullProductCatalog: CatalogProduct[] = [
   { id: "tablette", family: "computing", icon: "Tablet", imageSrc: "/manus-storage/tablet_1e61f739.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Mobile", en: "Mobile" }, name: { fr: "Tablette tactile", en: "Tablet" }, description: { fr: "Un écran léger pour lire, créer, apprendre et vous divertir.", en: "A light screen for reading, creating, learning and entertainment." }, searchTerms: { fr: ["tablette", "tablet", "écran", "tactile"], en: ["tablet", "screen", "touch", "mobile"] } },
   { id: "espace-bureau", family: "computing", icon: "Monitor", imageSrc: "/manus-storage/laptop-workspace_416f8ab9.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Installation", en: "Setup" }, name: { fr: "Espace bureau connecté", en: "Connected desk setup" }, description: { fr: "Un ensemble d’équipements pour une installation claire et productive.", en: "An equipment set for a clear, productive setup." }, searchTerms: { fr: ["bureau", "installation", "ordinateur", "espace"], en: ["desk", "setup", "computer", "workspace"] } },
 ];
+
+export const fullProductCatalog = storedProductCatalog.map(product => ({
+  ...product,
+  imageSrc: localMediaSrc(product.imageSrc),
+}));
 
 /** A concise selection used in the smaller homepage modules. */
 export const productCatalog = fullProductCatalog.slice(0, 6);

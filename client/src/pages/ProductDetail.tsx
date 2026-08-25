@@ -2,7 +2,7 @@
 import { Link } from "wouter";
 import { ArrowLeft, CheckCircle2, MessageCircle, ShieldCheck, ShoppingBag } from "lucide-react";
 import type { Lang, ProductFamily } from "@/lib/site";
-import { fullProductCatalog, orderMessage } from "@/lib/site";
+import { fullProductCatalog, localMediaSrc, orderMessage } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const familyLabel: Record<ProductFamily, Record<Lang, string>> = { accessories: { fr: "Accessoires", en: "Accessories" }, connected: { fr: "Objets connectés", en: "Connected devices" }, computing: { fr: "Informatique", en: "Computing" } };

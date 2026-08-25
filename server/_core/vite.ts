@@ -20,6 +20,7 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
+  app.use("/media", express.static(path.resolve(import.meta.dirname, "../..", "media")));
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
@@ -59,6 +60,7 @@ export function serveStatic(app: Express) {
   }
 
   app.use(express.static(distPath));
+  app.use("/media", express.static(path.resolve(import.meta.dirname, "../..", "media")));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {

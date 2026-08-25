@@ -3,7 +3,7 @@ import { Link, useSearch } from "wouter";
 import { BatteryCharging, BriefcaseBusiness, Camera, Cable, ChevronRight, Gamepad2, Headphones, House, Keyboard, Laptop, Monitor, Mouse, Radio, Search, Smartphone, Tablet, Watch, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Lang, ProductFamily, ProductIcon } from "@/lib/site";
-import { fullProductCatalog, orderMessage, productCatalog } from "@/lib/site";
+import { fullProductCatalog, localMediaSrc, orderMessage, productCatalog } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { mediaCatalog } from "@/content/mediaCatalog";
 

@@ -12,19 +12,19 @@ export const mediaCatalog = {
     {
       id: "accessoires-visuel",
       family: "accessories",
-      imageSrc: "/manus-storage/powerbank_9deaccd3.jpg",
+      imageSrc: "/media/products/powerbank-usbc-pexels.jpeg",
       label: { fr: "Les essentiels utiles", en: "Useful essentials" } satisfies BilingualText,
     },
     {
       id: "gadgets-visuel",
       family: "connected",
-      imageSrc: "/manus-storage/smartwatch_17e59ca2.jpg",
+      imageSrc: "/media/products/smartwatch.jpg",
       label: { fr: "Les objets qui suivent votre rythme", en: "Objects that keep up with you" } satisfies BilingualText,
     },
     {
       id: "informatique-visuel",
       family: "computing",
-      imageSrc: "/manus-storage/laptop-workspace_416f8ab9.jpg",
+      imageSrc: "/media/products/laptop-workspace.jpg",
       label: { fr: "Votre espace de création", en: "Your creative workspace" } satisfies BilingualText,
     },
   ],
