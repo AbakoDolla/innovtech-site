@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Code2, Headphones, Layers3, MessageCircle, Sh
 import type { Lang } from "@/lib/site";
 import { orderMessage, quoteMessage } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { mediaCatalog } from "@/content/mediaCatalog";
 
 const highlights = [
   { icon: ShoppingBag, fr: "Des choix pratiques", en: "Practical choices" },
@@ -44,7 +45,7 @@ export default function Home({ lang }: { lang: Lang }) {
           <div className="reveal relative">
             <div className="circuit-lines absolute -inset-5 opacity-60" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white bg-white p-2 shadow-[0_30px_70px_rgba(16,72,165,0.14)] sm:p-3">
-              <img src="/manus-storage/innovtech-hero-collection_4f5f7510.png" alt={t ? "Sélection d’articles high-tech InnovTech" : "InnovTech high-tech selection"} className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
+              <img src={mediaCatalog.hero.imageSrc} alt={mediaCatalog.hero.alt[lang]} className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
             </div>
             <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-lg sm:-left-8">
               <span className="grid h-9 w-9 place-items-center rounded-xl bg-green-100 text-[#1FAF62]"><MessageCircle className="h-5 w-5" /></span>
