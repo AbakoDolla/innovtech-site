@@ -1,4 +1,6 @@
 import type { Express } from "express";
+import fs from "fs";
+import path from "path";
 import { ENV } from "./env";
 
 export function registerStorageProxy(app: Express) {
@@ -6,6 +8,26 @@ export function registerStorageProxy(app: Express) {
     const key = (req.params as Record<string, string>)[0];
     if (!key) {
       res.status(400).send("Missing storage key");
+      return;
+    }
+
+    const fileName = path.basename(key).replace(/_[a-f0-9]{8,}(?=\.)/i, "");
+    const localAliases: Record<string, string> = {
+      "powerbank.jpg": "powerbank-usbc-pexels.jpeg",
+      "powerbank.png": "powerbank-usbc-pexels.jpeg",
+      "innovtech-logo-cropped.png": "innovtech-logo.png",
+      "innovtech-symbol.png": "innovtech-symbol.png",
+      "innovtech-accessories-collection.png": "powerbank-usbc-pexels.jpeg",
+    };
+    const localName = localAliases[fileName] || fileName;
+    const localCandidates = [
+      path.resolve(process.cwd(), "media", "products", localName),
+      path.resolve(process.cwd(), "media", "branding", localName),
+      path.resolve(process.cwd(), "media", localName),
+    ];
+    const localFile = localCandidates.find(candidate => fs.existsSync(candidate));
+    if (localFile) {
+      res.sendFile(localFile);
       return;
     }
 

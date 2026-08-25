@@ -36,7 +36,7 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
       <div className="container flex h-[80px] items-center justify-between gap-4">
         <Link href="/" className="group flex items-center gap-2" aria-label="InnovTech, accueil">
           <img
-            src="/manus-storage/innovtech-logo-cropped_b88af616.png"
+            src="/media/branding/innovtech-logo.png"
             alt="InnovTech"
             decoding="async"
             fetchPriority="high"
