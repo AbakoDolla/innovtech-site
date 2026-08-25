@@ -8,6 +8,7 @@
 - [x] Ajouter un guide de remplacement des médias et de publication sur GitHub.
 - [x] Publier l’archive des visuels et de la vidéo déjà intégrés dans une publication GitHub privée.
 - [x] Copier les images et la vidéo dans le dossier `media/` visible dans le dépôt GitHub.
+- [x] Vérifier et, si besoin, réajouter les fichiers logo InnovTech dans le dossier média GitHub.
 - [x] Activer le stockage de fichiers du projet pour les médias lourds.
 - [x] Retirer les copies médias volumineuses du dossier de déploiement après leur conservation sur GitHub.
 - [ ] Recréer un point de sauvegarde publiable.
