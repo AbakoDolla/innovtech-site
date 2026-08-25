@@ -3,11 +3,11 @@ import { Link, useSearch } from "wouter";
 import { BatteryCharging, Cable, ChevronRight, Headphones, Laptop, MonitorSmartphone, Radio, Search, ShoppingBag } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Lang } from "@/lib/site";
-import { orderMessage, productCatalog } from "@/lib/site";
+import { fullProductCatalog, orderMessage, productCatalog } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { mediaCatalog } from "@/content/mediaCatalog";
 
-const icons = { Cable, Radio, Laptop, Headphones, BatteryCharging, MonitorSmartphone };
+const icons: Record<string, typeof Cable> = { Cable, Radio, Laptop, Headphones, BatteryCharging, MonitorSmartphone };
 
 export default function Shop({ lang }: { lang: Lang }) {
   const search = useSearch();
@@ -20,8 +20,7 @@ export default function Shop({ lang }: { lang: Lang }) {
     ["connected", t ? "Connectés" : "Connected"],
     ["computing", t ? "Informatique" : "Computing"],
   ];
-  const products = useMemo(() => productCatalog.filter((product) => category === "all" || product.family === category), [category]);
-  const gallery = mediaCatalog.productGallery;
+  const products = useMemo(() => fullProductCatalog.filter((product) => category === "all" || product.family === category), [category]);
   const featuredVideo = mediaCatalog.productVideos[0];
 
   return (
@@ -39,15 +38,14 @@ export default function Shop({ lang }: { lang: Lang }) {
           <div className="flex flex-wrap gap-2">
             {filters.map(([value, label]) => <button type="button" key={value} onClick={() => setCategory(value)} className={`rounded-xl px-4 py-2.5 text-sm font-extrabold transition ${category === value ? "bg-blue-700 text-white shadow-[0_8px_18px_rgba(18,103,243,0.2)]" : "bg-blue-50 text-blue-700 hover:bg-blue-100"}`}>{label}</button>)}
           </div>
-          <span className="inline-flex items-center gap-2 text-sm font-bold text-slate-500"><Search className="h-4 w-4" /> {products.length} {t ? "catégories affichées" : "categories shown"}</span>
+          <span className="inline-flex items-center gap-2 text-sm font-bold text-slate-500"><Search className="h-4 w-4" /> {products.length} {t ? "articles affichés" : "products shown"}</span>
         </div>
         <div className="mt-9 grid gap-6 lg:grid-cols-3">
-          {gallery.filter((item) => category === "all" || item.family === category).map((item, index) => {
-            const product = products.find((entry) => entry.family === item.family) || productCatalog.find((entry) => entry.family === item.family)!;
+          {products.map((product, index) => {
             const Icon = icons[product.icon];
-            return <Link href={`/boutique/${product.id}`} key={item.id} className={`group relative overflow-hidden rounded-[1.8rem] border border-slate-100 bg-white shadow-[0_16px_38px_rgba(20,68,145,0.09)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_rgba(20,68,145,0.16)] ${index === 1 ? "lg:translate-y-8" : ""}`}>
-              <div className="relative overflow-hidden bg-[#ECF5FF] p-2.5"><img src={item.imageSrc} alt={product.name[lang]} className="aspect-[4/3] w-full rounded-[1.35rem] object-cover transition duration-500 group-hover:scale-[1.035]" /><span className="absolute left-6 top-6 grid h-11 w-11 place-items-center rounded-xl bg-white/95 text-blue-700 shadow-sm"><Icon className="h-5 w-5" /></span></div>
-              <div className="relative p-6"><div className="circuit-lines absolute inset-0 opacity-35" /><p className="relative text-xs font-extrabold uppercase tracking-[0.14em] text-cyan-600">{item.label[lang]}</p><h2 className="relative mt-2 font-display text-2xl font-bold tracking-[-0.035em] text-[#081A3C]">{product.name[lang]}</h2><p className="relative mt-3 text-sm leading-6 text-slate-600">{product.description[lang]}</p><span className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-extrabold text-blue-700">{t ? "Voir la catégorie" : "View category"}<ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></div>
+            return <Link href={`/boutique/${product.id}`} key={product.id} className={`group relative overflow-hidden rounded-[1.8rem] border border-slate-100 bg-white shadow-[0_16px_38px_rgba(20,68,145,0.09)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_rgba(20,68,145,0.16)] ${index === 1 ? "lg:translate-y-8" : ""}`}>
+              <div className="relative overflow-hidden bg-[#F6F1EA] p-2.5"><img src={product.imageSrc} alt={product.name[lang]} className="aspect-[4/3] w-full rounded-[1.35rem] object-cover transition duration-500 group-hover:scale-[1.035]" /><span className="absolute left-6 top-6 grid h-11 w-11 place-items-center rounded-xl bg-white/95 text-blue-700 shadow-sm"><Icon className="h-5 w-5" /></span><span className="absolute right-6 top-6 rounded-full bg-[#F6B84B] px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#3B2508]">{product.badge[lang]}</span></div>
+              <div className="relative p-6"><p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[#E56B4F]">{product.family === "computing" ? (t ? "Informatique" : "Computing") : product.family === "connected" ? (t ? "Connecté" : "Connected") : (t ? "Accessoires" : "Accessories")}</p><h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.035em] text-[#081A3C]">{product.name[lang]}</h2><p className="mt-3 text-sm leading-6 text-slate-600">{product.description[lang]}</p><div className="mt-5 flex items-center justify-between gap-3"><span className="font-display text-base font-bold text-[#081A3C]">{product.price[lang]}</span><span className="inline-flex items-center gap-1.5 text-sm font-extrabold text-blue-700">{t ? "Voir" : "View"}<ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></div></div>
             </Link>;
           })}
         </div>

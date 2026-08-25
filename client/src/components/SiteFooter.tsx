@@ -1,8 +1,9 @@
 /** InnovTech design reminder: the footer is a calm trust-building landing area, never a dense afterthought. */
 import { Link } from "wouter";
-import { ArrowUpRight, Instagram, Linkedin, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Instagram, Linkedin } from "lucide-react";
 import type { Lang } from "@/lib/site";
 import { whatsappUrl } from "@/lib/site";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function SiteFooter({ lang }: { lang: Lang }) {
   const t = lang === "fr";
@@ -20,14 +21,14 @@ export function SiteFooter({ lang }: { lang: Lang }) {
         <div className="relative grid gap-12 lg:grid-cols-[1.3fr_0.7fr_0.8fr]">
           <div>
             <div className="flex items-center gap-3">
-              <img src="/manus-storage/innovtech-symbol_33e7d57c.png" alt="" className="h-12 w-12 object-contain" />
+              <img src="/media/innovtech-symbol.png" alt="" className="h-12 w-12 object-contain" />
               <span className="font-display text-2xl font-bold tracking-[-0.05em] text-white">Innov<span className="text-cyan-300">Tech</span></span>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-6 text-blue-100/80">
               {t ? "Des articles high-tech et des solutions digitales pensés pour vous aider à avancer, à votre rythme." : "High-tech products and digital solutions designed to help you move forward, at your own pace."}
             </p>
             <a href={whatsappUrl(t ? "Bonjour InnovTech, je souhaite vous contacter." : "Hello InnovTech, I would like to contact you.")} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-cyan-300 transition hover:text-white">
-              <MessageCircle className="h-4 w-4" /> {t ? "Écrire sur WhatsApp" : "Message on WhatsApp"} <ArrowUpRight className="h-4 w-4" />
+              <WhatsAppIcon className="h-4 w-4" /> {t ? "Écrire sur WhatsApp" : "Message on WhatsApp"} <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
           <div>
