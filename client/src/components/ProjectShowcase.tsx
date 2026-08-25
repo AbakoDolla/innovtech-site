@@ -7,7 +7,7 @@ export function ProjectShowcase({ lang }: { lang: Lang }) {
   return (
     <section id="realisations" className="container py-14 sm:py-20">
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-        <div className="max-w-2xl"><p className="eyebrow">{t ? "Réalisations" : "Selected work"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C] sm:text-4xl">{t ? "Des plateformes conçues pour des besoins concrets." : "Platforms designed for real needs."}</h2><p className="mt-4 text-sm leading-6 text-slate-600">{t ? "Une sélection de projets web conçus autour de la présence en ligne, de la vente, de la confiance et des services." : "A selection of web projects built around online presence, sales, trust and services."}</p></div>
+        <div className="max-w-2xl"><p className="eyebrow">{t ? "Réalisations web" : "Web projects"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C] sm:text-4xl">{t ? "Des plateformes conçues pour des besoins concrets." : "Platforms designed for real needs."}</h2><p className="mt-4 text-sm leading-6 text-slate-600">{t ? "Une sélection de projets web conçus autour de la présence en ligne, de la vente, de la confiance et des services." : "A selection of web projects built around online presence, sales, trust and services."}</p></div>
         <span className="inline-flex items-center gap-2 text-sm font-extrabold text-blue-700"><ArrowUpRight className="h-4 w-4" />{t ? "Liens directs vers les projets" : "Direct links to projects"}</span>
       </div>
       <div className="mt-9 grid gap-5 md:grid-cols-2">

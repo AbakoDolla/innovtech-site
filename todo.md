@@ -20,7 +20,7 @@
 - [x] Sélectionner les médias adaptés au hero, à la galerie boutique et aux réalisations.
 - [ ] Ajouter une galerie photo/vidéo et une section « Réalisations web & mobile ».
 - [x] Ajouter une galerie d’aperçus de réalisations web réelles avec liens directs.
-- [ ] Ajouter au moins une réalisation mobile vérifiée, ou limiter définitivement l’intitulé à « Réalisations web ».
+- [x] Limiter l’intitulé actuel à « Réalisations web » tant qu’aucune réalisation mobile vérifiée n’est fournie.
 - [x] Enrichir le hero avec une composition visuelle plus immersive.
 - [x] Vérifier le rendu mobile et ordinateur, puis synchroniser les changements sur GitHub.
 - [x] Récupérer et analyser les dernières modifications apportées sur GitHub.
