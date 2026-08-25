@@ -1,6 +1,6 @@
 /** InnovTech design reminder: global layout supports a bilingual, high-trust technology storefront with humane WhatsApp conversion. */
 import { useEffect, useState } from "react";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
@@ -12,6 +12,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import MediaManager from "./pages/MediaManager";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,18 +25,21 @@ function Router({ lang }: { lang: Lang }) {
     <Route path="/services">{() => <Services lang={lang} />}</Route>
     <Route path="/a-propos">{() => <About lang={lang} />}</Route>
     <Route path="/contact">{() => <Contact lang={lang} />}</Route>
+    <Route path="/admin/media">{() => <MediaManager />}</Route>
     <Route>{() => <NotFound />}</Route>
   </Switch>;
 }
 
 function App() {
+  const [location] = useLocation();
   const [lang, setLang] = useState<Lang>(() => (localStorage.getItem("innovtech-language") === "en" ? "en" : "fr"));
+  const isAdminRoute = location.startsWith("/admin");
   useEffect(() => {
     localStorage.setItem("innovtech-language", lang);
     document.documentElement.lang = lang;
   }, [lang]);
 
-  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white"><SiteHeader lang={lang} onLanguageChange={setLang} /><Router lang={lang} /><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></div><Toaster /></TooltipProvider></ErrorBoundary>;
+  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white">{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
 }
 
 export default App;
