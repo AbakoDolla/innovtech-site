@@ -34,6 +34,6 @@ La zone `webTemplates` contient les modèles présentés dans la page **Services
 
 ## Mettre vos propres fichiers sur le site
 
-Les fichiers affichés sur un site publié doivent avoir une **URL publique**. Vous pouvez utiliser un hébergeur de médias, ou m’envoyer vos photos et vidéos dans cette conversation : je les intégrerai et mettrai à jour la configuration. Pour conserver vos originaux, les médias initiaux seront aussi joints à une publication GitHub du dépôt InnovTech.
+Les fichiers affichés sur un site publié doivent avoir une **URL publique**. Vous pouvez utiliser un hébergeur de médias, ou m’envoyer vos photos et vidéos dans cette conversation : je les intégrerai et mettrai à jour la configuration. Pour conserver vos originaux, les médias initiaux sont également disponibles dans la [publication GitHub « Médias InnovTech v1 »](https://github.com/AbakoDolla/innovtech-site/releases/tag/innovtech-media-v1).
 
 Après toute modification dans GitHub, créez un commit puis poussez-le vers la branche `main`. Le déploiement Vercel se mettra à jour lors de sa connexion et de son paramétrage.
