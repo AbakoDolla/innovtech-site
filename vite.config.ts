@@ -162,8 +162,34 @@ function vitePluginStorageProxy(): Plugin {
           return;
         }
 
+
+function vitePluginBundleLocalMedia(): Plugin {
+  const mediaDir = path.resolve(import.meta.dirname, "media");
+  const publicMediaDir = path.resolve(import.meta.dirname, "client", "public", "media");
+
+  return {
+    name: "bundle-local-media",
+    buildStart() {
+      const files: string[] = [];
+      const collectFiles = (directory: string) => {
+        for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+          const filePath = path.join(directory, entry.name);
+          if (entry.isDirectory()) collectFiles(filePath);
+          else if (/\.(png|jpe?g|webp|mp4)$/i.test(entry.name)) files.push(filePath);
+        }
+      };
+
+      collectFiles(mediaDir);
+      for (const filePath of files) {
+        const destination = path.resolve(publicMediaDir, path.relative(mediaDir, filePath));
+        fs.mkdirSync(path.dirname(destination), { recursive: true });
+        fs.copyFileSync(filePath, destination);
+      }
+    },
+  };
+}
         const forgeBaseUrl = (process.env.BUILT_IN_FORGE_API_URL || "").replace(/\/+$/, "");
-        const forgeKey = process.env.BUILT_IN_FORGE_API_KEY;
+const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginBundleLocalMedia(), vitePluginStorageProxy()];
 
         if (!forgeBaseUrl || !forgeKey) {
           res.writeHead(500, { "Content-Type": "text/plain" });
