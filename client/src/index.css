@@ -49,6 +49,11 @@
   .hero-grid { background-image: linear-gradient(rgba(18,103,243,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(18,103,243,.12) 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(ellipse at center, black 15%, transparent 72%); animation: grid-drift 14s linear infinite; pointer-events: none; }
   .hero-ring { animation: ring-float 5s ease-in-out infinite; pointer-events: none; }
   .hero-depth { transform: translate3d(var(--mx, 0px), var(--my, 0px), 0); transition: transform 180ms ease-out; }
+  main section, main article { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity 700ms cubic-bezier(.23,1,.32,1), transform 700ms cubic-bezier(.23,1,.32,1); }
+  main section.is-visible, main article.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
+  main section:nth-of-type(2), main article:nth-of-type(2) { transition-delay: 70ms; }
+  main section:nth-of-type(3), main article:nth-of-type(3) { transition-delay: 140ms; }
+  main section:nth-of-type(4), main article:nth-of-type(4) { transition-delay: 210ms; }
   .defer-render { content-visibility: auto; contain-intrinsic-size: auto 640px; }
   .service-card { isolation: isolate; transition: transform 260ms cubic-bezier(.23,1,.32,1), box-shadow 260ms cubic-bezier(.23,1,.32,1); }
   .service-card:hover { transform: translateY(-5px); box-shadow: 0 24px 54px rgba(20,68,145,.12); }
@@ -97,5 +102,5 @@
   @keyframes chip-drift { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -7px, 0); } }
   @keyframes service-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
   .service-float { animation: service-float 5s ease-in-out infinite; } .service-float--slow { animation-duration: 6.5s; animation-delay: -1.5s; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal, .hero-grid, .hero-ring, .service-float, .service-chip, .service-code-pill { animation: none; } .hero-depth, .product-card, .product-card::after, .proof-card, .service-card, .service-icon-cube, .service-step, .motion-card { transform: none; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal, .hero-grid, .hero-ring, .service-float, .service-chip, .service-code-pill { animation: none; } main section, main article, main section.is-visible, main article.is-visible, .hero-depth, .product-card, .product-card::after, .proof-card, .service-card, .service-icon-cube, .service-step, .motion-card { opacity: 1; transform: none; transition: none; } }
 }
