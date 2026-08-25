@@ -16,9 +16,11 @@
 - [x] Retirer les copies médias volumineuses du dossier de déploiement après leur conservation sur GitHub.
 - [x] Recréer un point de sauvegarde publiable.
 - [x] Ajouter et vérifier un bouton WhatsApp flottant global, sur ordinateur et mobile.
-- [ ] Recevoir les liens, captures ou noms des modèles de sites web et applications à présenter.
-- [ ] Sélectionner les médias adaptés au hero, à la galerie boutique et aux réalisations.
+- [x] Recevoir les liens, captures ou noms des modèles de sites web et applications à présenter.
+- [x] Sélectionner les médias adaptés au hero, à la galerie boutique et aux réalisations.
 - [ ] Ajouter une galerie photo/vidéo et une section « Réalisations web & mobile ».
+- [x] Ajouter une galerie d’aperçus de réalisations web réelles avec liens directs.
+- [ ] Ajouter au moins une réalisation mobile vérifiée, ou limiter définitivement l’intitulé à « Réalisations web ».
 - [x] Enrichir le hero avec une composition visuelle plus immersive.
 - [x] Vérifier le rendu mobile et ordinateur, puis synchroniser les changements sur GitHub.
 - [x] Récupérer et analyser les dernières modifications apportées sur GitHub.
@@ -39,4 +41,13 @@
 - [x] Vérifier la présence distante de la version complète dans le dépôt GitHub.
 - [x] Vérifier à distance les pages, composants, styles, configurations et notes modifiés récemment.
 - [x] Confirmer l’archive média GitHub, qui contient les images et la vidéo de démonstration.
+- [x] Examiner les sites fournis et préparer leurs références pour la galerie de réalisations.
+- [x] Vérifier les exigences officielles de l’API WhatsApp Business pour un assistant conforme.
+- [x] Ajouter un formulaire gratuit de demande de rendez-vous qui prépare le message WhatsApp.
+- [x] Ajouter des instructions de gestion via WhatsApp Business : réponses rapides, libellés et rappels manuels.
+- [x] Créer une galerie professionnelle des réalisations réelles avec liens externes et aperçus.
+- [x] Présenter les options de gestion des rendez-vous et faire choisir l’intégration adaptée.
+- [ ] Concevoir l’assistant de qualification client, prise de rendez-vous et suivi automatisé.
+- [x] Concevoir un parcours gratuit assisté de prise de rendez-vous via WhatsApp Business.
+- [x] Intégrer les réalisations validées dans la section dédiée du site.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.

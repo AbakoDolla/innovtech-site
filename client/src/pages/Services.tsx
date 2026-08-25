@@ -4,6 +4,7 @@ import type { Lang } from "@/lib/site";
 import { quoteMessage, serviceCatalog } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ServiceVisual } from "@/components/ServiceVisual";
+import { ProjectShowcase } from "@/components/ProjectShowcase";
 
 const icons = { PanelsTopLeft, Globe2, Smartphone };
 
@@ -53,6 +54,7 @@ export default function Services({ lang }: { lang: Lang }) {
           <div className="grid gap-3 sm:grid-cols-3">{[{ n: "01", fr: "Échange", en: "Conversation" }, { n: "02", fr: "Conception", en: "Design" }, { n: "03", fr: "Livraison", en: "Delivery" }].map(({ n, fr, en }) => <div key={n} className="service-step rounded-2xl bg-white p-4 shadow-sm"><span className="font-display text-2xl font-bold text-cyan-500">{n}</span><p className="mt-5 flex items-center gap-2 text-sm font-extrabold text-[#081A3C]"><Check className="h-4 w-4 text-blue-700" />{t ? fr : en}</p></div>)}</div>
         </div>
       </section>
+      <ProjectShowcase lang={lang} />
     </main>
   );
 }

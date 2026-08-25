@@ -15,6 +15,15 @@ export type CatalogProduct = {
   searchTerms: Record<Lang, string[]>;
 };
 
+export type PortfolioProject = {
+  id: string;
+  url: string;
+  imageSrc: string;
+  category: Record<Lang, string>;
+  title: Record<Lang, string>;
+  description: Record<Lang, string>;
+};
+
 /** Add the recipient's international WhatsApp number here when it is available, digits only. */
 export const WHATSAPP_NUMBER = "";
 
@@ -69,6 +78,13 @@ export const serviceCatalog = [
   { id: "app-web", icon: "Globe2", title: { fr: "Applications web", en: "Web applications" }, description: { fr: "Des outils sur mesure pour simplifier vos opérations et vos échanges.", en: "Custom tools that simplify your operations and communication." }, detail: { fr: "Nous transformons votre besoin en une application web organisée, accessible et adaptée à vos usages.", en: "We turn your need into an organised, accessible web application tailored to the way you work." } },
   { id: "app-mobile", icon: "Smartphone", title: { fr: "Applications mobiles", en: "Mobile applications" }, description: { fr: "Des expériences mobiles intuitives, conçues pour être utilisées partout.", en: "Intuitive mobile experiences made to be used everywhere." }, detail: { fr: "Du parcours utilisateur à l’interface finale, chaque écran sert votre objectif et vos utilisateurs.", en: "From user journey to final interface, every screen serves your goal and your users." } },
 ] as const;
+
+export const portfolioProjects: PortfolioProject[] = [
+  { id: "portfolio-evans", url: "https://portfolio-evans-abah.vercel.app", imageSrc: "/manus-storage/portfolio-evans_ef6ccd07.webp", category: { fr: "Portfolio & cybersécurité", en: "Portfolio & cybersecurity" }, title: { fr: "Portfolio Evans Abah", en: "Evans Abah portfolio" }, description: { fr: "Un portfolio bilingue pour présenter des compétences en développement full-stack et cybersécurité.", en: "A bilingual portfolio showcasing full-stack development and cybersecurity expertise." } },
+  { id: "boo", url: "https://boowebapp.vercel.app", imageSrc: "/manus-storage/boo-commerce_7af351b5.webp", category: { fr: "E-commerce & WhatsApp", en: "E-commerce & WhatsApp" }, title: { fr: "BOO — Jus de Baobab", en: "BOO — Baobab juice" }, description: { fr: "Une boutique artisanale avec catalogue, panier et passage fluide de la commande à WhatsApp.", en: "An artisanal storefront with catalogue, cart and a smooth handoff to WhatsApp ordering." } },
+  { id: "verifio", url: "https://verifiowebapp.vercel.app", imageSrc: "/manus-storage/verifio-commerce_9386ce59.webp", category: { fr: "Commerce social", en: "Social commerce" }, title: { fr: "Verifio", en: "Verifio" }, description: { fr: "Un concept de tiers de confiance pour vérifier des vendeurs et sécuriser le commerce social.", en: "A trusted-third-party concept for verifying sellers and securing social commerce." } },
+  { id: "star-life", url: "https://star-live-co.vercel.app", imageSrc: "/manus-storage/star-life-services_6f48c7e7.webp", category: { fr: "Site corporate", en: "Corporate website" }, title: { fr: "Star-Life & Company", en: "Star-Life & Company" }, description: { fr: "Un site de présentation multiservices avec offres, formulaires de demande et contact direct.", en: "A multi-service showcase with offers, request forms and direct contact." } },
+];
 
 export function whatsappUrl(message: string) {
   const recipient = WHATSAPP_NUMBER.trim();

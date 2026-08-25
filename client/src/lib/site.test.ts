@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fullProductCatalog } from "./site";
+import { fullProductCatalog, portfolioProjects } from "./site";
 
 describe("InnovTech product catalogue", () => {
   it("maps every curated product to a stored image and a valid category", () => {
@@ -16,6 +16,16 @@ describe("InnovTech product catalogue", () => {
     fullProductCatalog.forEach(product => {
       expect(product.searchTerms.fr.length).toBeGreaterThan(0);
       expect(product.searchTerms.en.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("keeps every showcased project linked, illustrated and bilingual", () => {
+    expect(portfolioProjects.length).toBeGreaterThanOrEqual(4);
+    portfolioProjects.forEach(project => {
+      expect(project.url).toMatch(/^https:\/\//);
+      expect(project.imageSrc).toMatch(/^\/manus-storage\/.+\.webp$/);
+      expect(project.title.fr.trim()).not.toHaveLength(0);
+      expect(project.title.en.trim()).not.toHaveLength(0);
     });
   });
 });
