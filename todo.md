@@ -53,4 +53,5 @@
 - [x] Finaliser le déploiement Vercel après résolution de la connexion.
 - [x] Corriger le déploiement Vercel qui affichait le code serveur brut au lieu du site InnovTech.
 - [x] Corriger le chargement blanc constaté sur le nouveau domaine de production Vercel.
-- [ ] Corriger les aperçus de réalisations web absents dans la section Services sur Vercel.
+- [x] Corriger les aperçus de réalisations web absents dans la section Services sur Vercel.
+- [x] Vérifier les quatre aperçus sur le domaine de production principal Vercel après bascule du nouveau déploiement.

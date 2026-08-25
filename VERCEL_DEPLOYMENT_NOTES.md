@@ -15,3 +15,7 @@ Le build, les huit tests et l’aperçu statique ont été validés. Le déploie
 ## Aperçus de réalisations
 
 La page Services de production affiche les quatre cartes de réalisations, mais leurs images visent toujours des chemins `/manus-storage/*.webp`. Ce chemin dépend du proxy de stockage du serveur de développement et n’est pas exposé par le déploiement Vercel statique. Les aperçus doivent donc être intégrés comme fichiers statiques légers sous `/media/projects/` et les quatre références doivent pointer vers ces fichiers.
+
+Le correctif a été déployé avec le commit `f622238`. Les quatre fichiers WebP présents sous `/media/projects/` répondent en production avec un statut HTTP `200` et le type `image/webp`.
+
+La validation a également été effectuée sur le domaine de production principal `https://innovtech-site.vercel.app/services`, après bascule du nouveau déploiement : les quatre mêmes fichiers répondent correctement.
