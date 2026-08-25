@@ -34,7 +34,9 @@
 - [x] Réduire davantage le poids initial des scripts et valider le découpage de production.
 - [x] Compléter les attributs de chargement et de décodage des médias visibles.
 - [x] Synchroniser la nouvelle section Services, les animations et les optimisations vers GitHub.
-- [ ] Inventorier les derniers fichiers locaux non synchronisés, y compris effets et configurations.
-- [ ] Envoyer intégralement les derniers fichiers code, animations, illustrations et médias utiles vers GitHub.
-- [ ] Vérifier la présence distante de la version complète dans le dépôt GitHub.
+- [x] Inventorier les derniers fichiers locaux non synchronisés, y compris effets et configurations.
+- [x] Envoyer intégralement les derniers fichiers code, animations, illustrations et médias utiles vers GitHub.
+- [x] Vérifier la présence distante de la version complète dans le dépôt GitHub.
+- [x] Vérifier à distance les pages, composants, styles, configurations et notes modifiés récemment.
+- [x] Confirmer l’archive média GitHub, qui contient les images et la vidéo de démonstration.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.
