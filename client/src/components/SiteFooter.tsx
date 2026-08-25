@@ -21,7 +21,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
         <div className="relative grid gap-12 lg:grid-cols-[1.3fr_0.7fr_0.8fr]">
           <div>
             <div className="flex items-center gap-3">
-              <img src="/media/innovtech-symbol.png" alt="" className="h-12 w-12 object-contain" />
+              <img src="/manus-storage/innovtech-symbol_064b449f.png" alt="" className="h-12 w-12 object-contain" />
               <span className="font-display text-2xl font-bold tracking-[-0.05em] text-white">Innov<span className="text-cyan-300">Tech</span></span>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-6 text-blue-100/80">

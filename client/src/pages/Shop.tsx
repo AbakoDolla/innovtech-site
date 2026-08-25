@@ -1,79 +1,39 @@
-/** InnovTech design reminder: product discovery uses gallery cards, generous white space, and a clear WhatsApp handoff. */
+/** InnovTech design reminder: product discovery uses a calm editorial catalogue, one reliable image per item and a clear WhatsApp handoff. */
 import { Link, useSearch } from "wouter";
-import { BatteryCharging, Cable, ChevronRight, Headphones, Laptop, MonitorSmartphone, Radio, Search, ShoppingBag } from "lucide-react";
+import { BatteryCharging, BriefcaseBusiness, Camera, Cable, ChevronRight, Gamepad2, Headphones, House, Keyboard, Laptop, Monitor, Mouse, Radio, Search, Smartphone, Tablet, Watch, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import type { Lang } from "@/lib/site";
+import type { Lang, ProductFamily, ProductIcon } from "@/lib/site";
 import { fullProductCatalog, orderMessage, productCatalog } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { mediaCatalog } from "@/content/mediaCatalog";
 
-const icons: Record<string, typeof Cable> = { Cable, Radio, Laptop, Headphones, BatteryCharging, MonitorSmartphone };
+const icons: Record<ProductIcon, typeof Cable> = { Smartphone, Headphones, Laptop, Camera, BatteryCharging, Watch, Monitor, Gamepad2, Keyboard, Mouse, House, Tablet, BriefcaseBusiness };
+const familyLabel: Record<ProductFamily, Record<Lang, string>> = { accessories: { fr: "Accessoires", en: "Accessories" }, connected: { fr: "Objets connectés", en: "Connected devices" }, computing: { fr: "Informatique", en: "Computing" } };
 
 export default function Shop({ lang }: { lang: Lang }) {
   const search = useSearch();
-  const startingCategory = new URLSearchParams(search).get("cat") || "all";
-  const [category, setCategory] = useState(startingCategory);
+  const requestedCategory = new URLSearchParams(search).get("cat") as ProductFamily | null;
+  const [category, setCategory] = useState<ProductFamily | "all">(requestedCategory && ["accessories", "connected", "computing"].includes(requestedCategory) ? requestedCategory : "all");
+  const [query, setQuery] = useState("");
   const t = lang === "fr";
-  const filters = [
-    ["all", t ? "Tout voir" : "All products"],
-    ["accessories", t ? "Accessoires" : "Accessories"],
-    ["connected", t ? "Connectés" : "Connected"],
-    ["computing", t ? "Informatique" : "Computing"],
-  ];
-  const products = useMemo(() => fullProductCatalog.filter((product) => category === "all" || product.family === category), [category]);
+  const filters: Array<[ProductFamily | "all", string]> = [["all", t ? "Tout voir" : "All products"], ["accessories", t ? "Accessoires" : "Accessories"], ["connected", t ? "Connectés" : "Connected"], ["computing", t ? "Informatique" : "Computing"]];
+  const normalisedQuery = query.trim().toLocaleLowerCase();
+  const products = useMemo(() => fullProductCatalog.filter((product) => {
+    const byCategory = category === "all" || product.family === category;
+    const searchable = [product.name.fr, product.name.en, product.description.fr, product.description.en, ...product.searchTerms.fr, ...product.searchTerms.en, familyLabel[product.family].fr, familyLabel[product.family].en].join(" ").toLocaleLowerCase();
+    return byCategory && (!normalisedQuery || searchable.includes(normalisedQuery));
+  }), [category, normalisedQuery]);
   const featuredVideo = mediaCatalog.productVideos[0];
 
-  return (
-    <main>
-      <section className="relative overflow-hidden bg-[#F4F8FF] py-14 sm:py-20">
-        <div className="hero-orb right-[7%] top-[-80px]" />
-        <div className="container relative max-w-5xl">
-          <p className="eyebrow">{t ? "Boutique" : "Shop"}</p>
-          <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold tracking-[-0.055em] text-[#081A3C] sm:text-6xl">{t ? "Des technologies choisies pour vous accompagner." : "Technology selected to support you."}</h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">{t ? "Parcourez nos familles de produits et dites-nous ce dont vous avez besoin. Nous finalisons avec vous directement sur WhatsApp." : "Browse our product families and tell us what you need. We finalise together directly on WhatsApp."}</p>
-        </div>
-      </section>
-      <section className="container py-10 sm:py-14">
-        <div className="relative flex flex-col gap-4 border-b border-slate-100 pb-7 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-2">
-            {filters.map(([value, label]) => <button type="button" key={value} onClick={() => setCategory(value)} className={`rounded-xl px-4 py-2.5 text-sm font-extrabold transition ${category === value ? "bg-blue-700 text-white shadow-[0_8px_18px_rgba(18,103,243,0.2)]" : "bg-blue-50 text-blue-700 hover:bg-blue-100"}`}>{label}</button>)}
-          </div>
-          <span className="inline-flex items-center gap-2 text-sm font-bold text-slate-500"><Search className="h-4 w-4" /> {products.length} {t ? "articles affichés" : "products shown"}</span>
-        </div>
-        <div className="mt-9 grid gap-6 lg:grid-cols-3">
-          {products.map((product, index) => {
-            const Icon = icons[product.icon];
-            return <Link href={`/boutique/${product.id}`} key={product.id} className={`group relative overflow-hidden rounded-[1.8rem] border border-slate-100 bg-white shadow-[0_16px_38px_rgba(20,68,145,0.09)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_rgba(20,68,145,0.16)] ${index === 1 ? "lg:translate-y-8" : ""}`}>
-              <div className="relative overflow-hidden bg-[#F6F1EA] p-2.5"><img src={product.imageSrc} alt={product.name[lang]} className="aspect-[4/3] w-full rounded-[1.35rem] object-cover transition duration-500 group-hover:scale-[1.035]" /><span className="absolute left-6 top-6 grid h-11 w-11 place-items-center rounded-xl bg-white/95 text-blue-700 shadow-sm"><Icon className="h-5 w-5" /></span><span className="absolute right-6 top-6 rounded-full bg-[#F6B84B] px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#3B2508]">{product.badge[lang]}</span></div>
-              <div className="relative p-6"><p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[#E56B4F]">{product.family === "computing" ? (t ? "Informatique" : "Computing") : product.family === "connected" ? (t ? "Connecté" : "Connected") : (t ? "Accessoires" : "Accessories")}</p><h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.035em] text-[#081A3C]">{product.name[lang]}</h2><p className="mt-3 text-sm leading-6 text-slate-600">{product.description[lang]}</p><div className="mt-5 flex items-center justify-between gap-3"><span className="font-display text-base font-bold text-[#081A3C]">{product.price[lang]}</span><span className="inline-flex items-center gap-1.5 text-sm font-extrabold text-blue-700">{t ? "Voir" : "View"}<ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></div></div>
-            </Link>;
-          })}
-        </div>
-        <div className="relative mt-16 overflow-hidden rounded-3xl border border-blue-100 bg-white p-6 shadow-[0_14px_34px_rgba(20,68,145,0.06)] sm:p-8">
-          <div className="circuit-lines absolute inset-0 opacity-40" />
-          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"><div><p className="eyebrow">{t ? "Autres univers" : "Other collections"}</p><h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[#081A3C]">{t ? "Explorez aussi selon votre besoin." : "Also explore by your need."}</h2></div><div className="flex flex-wrap gap-2">{productCatalog.slice(3).map((product) => <Link key={product.id} href={`/boutique/${product.id}`} className="rounded-xl border border-blue-100 bg-white/85 px-3.5 py-2 text-sm font-bold text-blue-700 transition hover:border-blue-300 hover:bg-blue-50">{product.name[lang]}</Link>)}</div></div>
-        </div>
-        <section className="relative mt-16 overflow-hidden rounded-[2rem] bg-[#081A3C] p-5 text-white shadow-[0_22px_48px_rgba(8,26,60,0.18)] sm:p-8">
-          <div className="absolute -right-16 -top-20 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
-          <div className="relative grid gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-            <div className="relative mx-auto max-w-[290px] overflow-hidden rounded-[1.7rem] border border-white/20 bg-slate-900 p-1.5 shadow-2xl">
-              <video controls playsInline preload="metadata" className="aspect-[9/16] w-full rounded-[1.3rem] object-cover" aria-label={featuredVideo.title[lang]}>
-                <source src={featuredVideo.videoSrc} type="video/mp4" />
-                {t ? "Votre navigateur ne peut pas lire cette vidéo." : "Your browser cannot play this video."}
-              </video>
-              <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Vidéo réelle" : "Real video"}</span>
-            </div>
-            <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">{t ? "Démonstration produit" : "Product demonstration"}</p>
-              <h2 className="mt-3 max-w-xl font-display text-3xl font-bold tracking-[-0.045em] sm:text-4xl">{featuredVideo.title[lang]}</h2>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-blue-100/80">{featuredVideo.description[lang]}</p>
-              <p className="mt-4 text-sm font-extrabold text-cyan-300">{featuredVideo.price[lang]}</p>
-              <div className="mt-7"><WhatsAppButton lang={lang} message={orderMessage(featuredVideo.orderName[lang], lang)} /></div>
-            </div>
-          </div>
-        </section>
-      </section>
-      <section className="container pb-4"><div className="grid gap-6 overflow-hidden rounded-[2rem] bg-[#EAF4FF] p-6 sm:p-9 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><img src="/manus-storage/innovtech-accessories-collection_be834898.png" alt={t ? "Accessoires InnovTech" : "InnovTech accessories"} className="aspect-[3/2] w-full rounded-2xl object-cover shadow-lg" /><div><p className="eyebrow">{t ? "Commande accompagnée" : "Supported order"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C]">{t ? "Vous cherchez un produit précis ?" : "Looking for a specific product?"}</h2><p className="mt-4 max-w-xl text-sm leading-6 text-slate-600">{t ? "Écrivez-nous le modèle, la référence ou simplement ce dont vous avez besoin. Nous vous orienterons vers une solution adaptée." : "Send us the model, reference, or simply what you need. We will guide you toward a suitable option."}</p><Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-5 py-3 text-sm font-extrabold text-white shadow-[0_12px_28px_rgba(18,103,243,0.2)] transition hover:bg-blue-800"><ShoppingBag className="h-4 w-4" />{t ? "Nous écrire" : "Message us"}</Link></div></div></section>
-    </main>
-  );
+  return <main><section className="commerce-hero relative overflow-hidden py-14 sm:py-20"><div className="hero-orb right-[7%] top-[-80px]" /><div className="circuit-lines absolute inset-0 opacity-55" /><div className="container relative max-w-5xl"><p className="eyebrow">{t ? "Boutique" : "Shop"}</p><h1 className="mt-3 max-w-3xl font-display text-4xl font-bold tracking-[-0.055em] text-[#081A3C] sm:text-6xl">{t ? "Des produits utiles, présentés avec clarté." : "Useful products, presented with clarity."}</h1><p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">{t ? "Chaque article est rangé par besoin, accompagné d’une photo réelle et d’un accès direct à notre équipe sur WhatsApp." : "Every item is organised by need, paired with a real photo and a direct line to our team on WhatsApp."}</p></div></section>
+
+  <section className="container py-10 sm:py-14"><div className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-4 shadow-[0_14px_34px_rgba(20,68,145,0.06)] sm:p-5"><div className="circuit-lines pointer-events-none absolute -right-20 -top-24 h-64 w-64 opacity-20" /><div className="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"><div className="flex flex-wrap gap-2">{filters.map(([value, label]) => <button type="button" key={value} onClick={() => setCategory(value)} aria-pressed={category === value} className={`rounded-xl px-4 py-2.5 text-sm font-extrabold transition ${category === value ? "bg-blue-700 text-white shadow-[0_8px_18px_rgba(18,103,243,0.2)]" : "bg-[#F4F8FF] text-blue-700 hover:bg-blue-100"}`}>{label}</button>)}</div><label className="relative block w-full lg:max-w-sm"><span className="sr-only">{t ? "Rechercher un produit" : "Search for a product"}</span><Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t ? "Rechercher un produit…" : "Search products…"} className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-10 pr-10 text-sm font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100" />{query && <button type="button" onClick={() => setQuery("")} className="absolute right-3 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" aria-label={t ? "Effacer la recherche" : "Clear search"}><X className="h-4 w-4" /></button>}</label></div><div className="relative mt-4 flex items-center justify-between border-t border-slate-100 pt-4 text-sm"><p className="font-semibold text-slate-500">{products.length} {t ? (products.length > 1 ? "produits trouvés" : "produit trouvé") : (products.length > 1 ? "products found" : "product found")}</p><p className="hidden text-slate-400 sm:block">{t ? "Cliquez sur un article pour demander sa disponibilité." : "Select an item to ask about availability."}</p></div></div>
+
+  {products.length > 0 ? <div className="catalog-grid mt-9 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{products.map((product) => { const Icon = icons[product.icon]; return <Link href={`/boutique/${product.id}`} key={product.id} aria-label={`${t ? "Voir les détails de" : "View details for"} ${product.name[lang]}`} className="product-card group flex h-full flex-col overflow-hidden rounded-[1.55rem] border border-slate-100 bg-white shadow-[0_14px_34px_rgba(20,68,145,0.08)] transition duration-300 hover:-translate-y-1 hover:border-blue-100 hover:shadow-[0_22px_48px_rgba(20,68,145,0.15)]"><div className="relative overflow-hidden bg-slate-50 p-2.5"><img src={product.imageSrc} alt={product.name[lang]} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-[1.1rem] object-cover transition duration-500 group-hover:scale-[1.03]" /><span className="absolute left-5 top-5 grid h-9 w-9 place-items-center rounded-xl bg-white/95 text-blue-700 shadow-sm"><Icon className="h-4 w-4" /></span><span className="absolute right-5 top-5 rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.1em] text-slate-600 shadow-sm">{product.badge[lang]}</span></div><div className="flex flex-1 flex-col p-5"><p className="text-[0.67rem] font-extrabold uppercase tracking-[0.14em] text-cyan-700">{familyLabel[product.family][lang]}</p><h2 className="mt-2 font-display text-xl font-bold tracking-[-0.03em] text-[#081A3C]">{product.name[lang]}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{product.description[lang]}</p><div className="mt-auto flex items-center justify-between gap-3 pt-5"><span className="text-sm font-extrabold text-[#081A3C]">{product.price[lang]}</span><span className="inline-flex items-center gap-1 text-sm font-extrabold text-blue-700">{t ? "Détails" : "Details"}<ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></div></div></Link>; })}</div> : <div className="mt-9 rounded-3xl border border-dashed border-blue-200 bg-blue-50/60 px-6 py-14 text-center"><Search className="mx-auto h-7 w-7 text-blue-600" /><h2 className="mt-4 font-display text-2xl font-bold text-[#081A3C]">{t ? "Aucun produit ne correspond à votre recherche." : "No product matches your search."}</h2><p className="mx-auto mt-3 max-w-md text-sm leading-6 text-slate-600">{t ? "Essayez un autre mot, changez de catégorie ou contactez-nous pour un besoin particulier." : "Try another keyword, switch category, or contact us for a specific need."}</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); }} className="mt-6 rounded-xl bg-blue-700 px-4 py-3 text-sm font-extrabold text-white transition hover:bg-blue-800">{t ? "Voir tous les produits" : "View all products"}</button></div>}
+
+  <div className="relative mt-16 overflow-hidden rounded-3xl border border-blue-100 bg-white p-6 shadow-[0_14px_34px_rgba(20,68,145,0.06)] sm:p-8"><div className="circuit-lines absolute inset-0 opacity-30" /><div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"><div><p className="eyebrow">{t ? "Sélection rapide" : "Quick selection"}</p><h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[#081A3C]">{t ? "Vos indispensables, en un regard." : "Your essentials, at a glance."}</h2></div><div className="flex flex-wrap gap-2">{productCatalog.slice(0, 6).map((product) => <Link key={product.id} href={`/boutique/${product.id}`} className="rounded-xl border border-blue-100 bg-white/85 px-3.5 py-2 text-sm font-bold text-blue-700 transition hover:border-blue-300 hover:bg-blue-50">{product.name[lang]}</Link>)}</div></div></div>
+
+  <section className="relative mt-16 overflow-hidden rounded-[2rem] bg-[#081A3C] p-5 text-white shadow-[0_22px_48px_rgba(8,26,60,0.18)] sm:p-8"><div className="absolute -right-16 -top-20 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" /><div className="relative grid gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-center"><div className="relative mx-auto max-w-[290px] overflow-hidden rounded-[1.7rem] border border-white/20 bg-slate-900 p-1.5 shadow-2xl"><video controls playsInline preload="metadata" className="aspect-[9/16] w-full rounded-[1.3rem] object-cover" aria-label={featuredVideo.title[lang]}><source src={featuredVideo.videoSrc} type="video/mp4" />{t ? "Votre navigateur ne peut pas lire cette vidéo." : "Your browser cannot play this video."}</video><span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Vidéo réelle" : "Real video"}</span></div><div><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">{t ? "Démonstration produit" : "Product demonstration"}</p><h2 className="mt-3 max-w-xl font-display text-3xl font-bold tracking-[-0.045em] sm:text-4xl">{featuredVideo.title[lang]}</h2><p className="mt-4 max-w-xl text-sm leading-6 text-blue-100/80">{featuredVideo.description[lang]}</p><p className="mt-4 text-sm font-extrabold text-cyan-300">{featuredVideo.price[lang]}</p><div className="mt-7"><WhatsAppButton lang={lang} message={orderMessage(featuredVideo.orderName[lang], lang)} /></div></div></div></section></section>
+
+  <section className="container pb-4"><div className="grid gap-6 overflow-hidden rounded-[2rem] bg-[#EAF4FF] p-6 sm:p-9 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><img src="/manus-storage/innovtech-accessories-collection_be834898.png" alt={t ? "Accessoires InnovTech" : "InnovTech accessories"} loading="lazy" className="aspect-[3/2] w-full rounded-2xl object-cover shadow-lg" /><div><p className="eyebrow">{t ? "Commande accompagnée" : "Supported order"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C]">{t ? "Vous cherchez un produit précis ?" : "Looking for a specific product?"}</h2><p className="mt-4 max-w-xl text-sm leading-6 text-slate-600">{t ? "Écrivez-nous le modèle, la référence ou simplement ce dont vous avez besoin. Nous vous orienterons vers une solution adaptée." : "Send us the model, reference, or simply what you need. We will guide you toward a suitable option."}</p><Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-5 py-3 text-sm font-extrabold text-white shadow-[0_12px_28px_rgba(18,103,243,0.2)] transition hover:bg-blue-800">{t ? "Nous écrire" : "Message us"}<ChevronRight className="h-4 w-4" /></Link></div></div></section></main>;
 }

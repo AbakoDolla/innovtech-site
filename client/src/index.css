@@ -26,7 +26,7 @@
   html { scroll-behavior: smooth; }
   body { @apply bg-background text-foreground font-sans antialiased; }
   .scroll-progress { position: fixed; inset: 0 auto auto 0; z-index: 100; height: 4px; background: linear-gradient(90deg, #1267F3, #13D5F4, #F6B84B, #E56B4F); box-shadow: 0 0 14px rgba(19,213,244,.65); transition: width 120ms ease-out; }
-  a:focus-visible, button:focus-visible { @apply outline-none ring-2 ring-blue-500 ring-offset-2; }
+  a:focus-visible, button:focus-visible, input:focus-visible { @apply outline-none ring-2 ring-blue-500 ring-offset-2; }
   button:not(:disabled), a[href] { @apply cursor-pointer; }
   ::selection { background: #BAEAFF; color: #081A3C; }
   ::-webkit-scrollbar { width: 11px; }
@@ -49,9 +49,16 @@
   .hero-grid { background-image: linear-gradient(rgba(18,103,243,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(18,103,243,.12) 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(ellipse at center, black 15%, transparent 72%); animation: grid-drift 14s linear infinite; pointer-events: none; }
   .hero-ring { animation: ring-float 5s ease-in-out infinite; pointer-events: none; }
   .hero-depth { transform: translate3d(var(--mx, 0px), var(--my, 0px), 0); transition: transform 180ms ease-out; }
-  main section, main article { animation: section-in 700ms cubic-bezier(.23,1,.32,1) both; }
-  main > section:not(:has(img)) { background-image: linear-gradient(90deg, rgba(244,248,255,.97) 0%, rgba(244,248,255,.88) 48%, rgba(244,248,255,.7) 100%), url('/media/products/camera-4k.jpg'); background-position: center, right center; background-repeat: no-repeat; background-size: cover; }
-  main > section:nth-of-type(2):not(:has(img)) { background-image: linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.78)), url('/media/products/lenovo-laptop.jpg'); }
+  .commerce-hero { background-image: linear-gradient(110deg, rgba(244,248,255,.98) 0%, rgba(244,248,255,.88) 52%, rgba(232,249,255,.75) 100%); }
+  .commerce-hero::after { position: absolute; right: -5rem; top: -6rem; height: 28rem; width: 28rem; border: 1px solid rgba(19, 213, 244, .38); border-radius: 999px; content: ""; box-shadow: 0 0 0 3.5rem rgba(19, 213, 244, .05), 0 0 0 7rem rgba(18, 103, 243, .035); pointer-events: none; }
+  .catalog-grid { position: relative; }
+  .catalog-grid::before { position: absolute; top: 4.5rem; bottom: 4.5rem; left: 50%; width: 1px; background: linear-gradient(180deg, transparent, rgba(19, 213, 244, .5), transparent); content: ""; pointer-events: none; }
+  .product-card { isolation: isolate; }
+  .product-card::after { position: absolute; inset: 0; z-index: -1; background: linear-gradient(140deg, rgba(19,213,244,.16), transparent 34%, rgba(18,103,243,.06)); content: ""; opacity: 0; transition: opacity 240ms cubic-bezier(.23,1,.32,1); }
+  .product-card:hover::after, .product-card:focus-visible::after { opacity: 1; }
+  .detail-spread::before { position: absolute; right: 6%; bottom: -4rem; height: 12rem; width: 12rem; border: 1px solid rgba(19,213,244,.32); border-radius: 999px; box-shadow: 0 0 0 2rem rgba(19,213,244,.05); content: ""; pointer-events: none; }
+  .proof-card { transition: transform 200ms cubic-bezier(.23,1,.32,1), box-shadow 200ms cubic-bezier(.23,1,.32,1); }
+  .proof-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(20,68,145,.08); }
   .media-card { isolation: isolate; }
   .media-card::after { position: absolute; inset: 0; z-index: -1; content: ""; background: linear-gradient(135deg, rgba(19,213,244,.3), transparent 45%); opacity: 0; transition: opacity 300ms ease; }
   .media-card:hover::after { opacity: 1; }
@@ -62,5 +69,5 @@
   @keyframes section-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes grid-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(28px, 28px, 0); } }
   @keyframes ring-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(10px) rotate(12deg); } }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal, .hero-grid, .hero-ring, main section, main article { animation: none; } .hero-depth { transform: none; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal, .hero-grid, .hero-ring { animation: none; } .hero-depth, .product-card, .product-card::after, .proof-card { transform: none; transition: none; } }
 }
