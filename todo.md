@@ -52,3 +52,4 @@
 - [x] Intégrer les réalisations validées dans la section dédiée du site.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.
 - [ ] Corriger le déploiement Vercel qui affiche le code serveur brut au lieu du site InnovTech.
+- [ ] Corriger le chargement blanc constaté sur le nouveau domaine de production Vercel.
