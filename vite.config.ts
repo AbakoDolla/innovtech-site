@@ -161,7 +161,6 @@ function vitePluginStorageProxy(): Plugin {
           res.end("Missing storage key");
           return;
         }
-
         const forgeBaseUrl = (process.env.BUILT_IN_FORGE_API_URL || "").replace(/\/+$/, "");
         const forgeKey = process.env.BUILT_IN_FORGE_API_KEY;
 
@@ -199,6 +198,41 @@ function vitePluginStorageProxy(): Plugin {
           res.end("Storage proxy error");
         }
       });
+    },
+  };
+}
+
+function vitePluginBundleLocalMedia(): Plugin {
+  const mediaDir = path.resolve(import.meta.dirname, "media");
+  const publicMediaDir = path.resolve(import.meta.dirname, "client", "public", "media");
+
+  return {
+    name: "bundle-local-media",
+    transform(code, id) {
+      if (!id.includes(`${path.sep}client${path.sep}src${path.sep}`)) return null;
+      const rewritten = code.replace(/\/manus-storage\/([^"'`]+)/g, (_match, rawFileName: string) => {
+        const fileName = rawFileName.replace(/_[a-f0-9]{8,}(?=\.)/i, "");
+        if (fileName === "innovtech-logo-cropped.png") return "/media/branding/innovtech-logo.png";
+        if (fileName === "innovtech-symbol.png") return "/media/branding/innovtech-symbol.png";
+        if (fileName === "innovtech-accessories-collection.png") return "/media/products/powerbank-usbc-pexels.jpeg";
+        return `/media/products/${fileName}`;
+      });
+      return rewritten === code ? null : { code: rewritten, map: null };
+    },
+    buildStart() {
+      const copyFiles = (directory: string) => {
+        for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+          const filePath = path.join(directory, entry.name);
+          if (entry.isDirectory()) copyFiles(filePath);
+          else if (/\.(png|jpe?g|webp|mp4)$/i.test(entry.name)) {
+            const destination = path.resolve(publicMediaDir, path.relative(mediaDir, filePath));
+            fs.mkdirSync(path.dirname(destination), { recursive: true });
+            fs.copyFileSync(filePath, destination);
+          }
+        }
+      };
+
+      copyFiles(mediaDir);
     },
   };
 }

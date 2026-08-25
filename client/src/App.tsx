@@ -5,7 +5,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
-import type { Lang } from "./lib/site";
+import { localMediaSrc, type Lang } from "./lib/site";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -58,7 +58,18 @@ function App() {
     updateProgress();
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
-    return () => { observer.disconnect(); mutations.disconnect(); window.removeEventListener("scroll", updateProgress); window.removeEventListener("resize", updateProgress); };
+    const recoverImage = (event: Event) => {
+      const image = event.target;
+      if (!(image instanceof HTMLImageElement) || image.dataset.localFallback === "true") return;
+      const pathname = new URL(image.src, window.location.origin).pathname;
+      const fallback = localMediaSrc(pathname);
+      if (fallback !== pathname) {
+        image.dataset.localFallback = "true";
+        image.src = fallback;
+      }
+    };
+    document.addEventListener("error", recoverImage, true);
+    return () => { observer.disconnect(); mutations.disconnect(); window.removeEventListener("scroll", updateProgress); window.removeEventListener("resize", updateProgress); document.removeEventListener("error", recoverImage, true); };
   }, []);
 
   return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white"><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
