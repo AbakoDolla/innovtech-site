@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, Code2, Headphones, Layers3, ShieldCheck, ShoppingBag, Smartphone, Sparkles } from "lucide-react";
 import type { Lang } from "@/lib/site";
-import { orderMessage, quoteMessage } from "@/lib/site";
+import { fullProductCatalog, orderMessage, quoteMessage } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { mediaCatalog } from "@/content/mediaCatalog";
@@ -18,6 +18,7 @@ const highlights = [
 export default function Home({ lang }: { lang: Lang }) {
   const t = lang === "fr";
   const [categoryCarousel, setCategoryCarousel] = useState<CarouselApi>();
+  const heroProducts = [fullProductCatalog[3], fullProductCatalog[1], fullProductCatalog[2]];
 
   useEffect(() => {
     if (!categoryCarousel) return;
@@ -56,12 +57,10 @@ export default function Home({ lang }: { lang: Lang }) {
           <div className="reveal hero-depth relative px-2 pb-8 sm:px-5">
             <div className="hero-grid absolute -inset-8 opacity-70" />
             <div className="hero-ring absolute -right-7 -top-8 h-32 w-32 rounded-full border border-cyan-300/60 sm:-right-3 sm:-top-5" />
-            <div className="relative rounded-[2rem] border border-white/80 bg-white/80 p-2 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:p-3">
-              <div className="relative overflow-hidden rounded-[1.55rem] bg-[#081A3C] [transform:perspective(1200px)_rotateY(-3deg)_rotateX(2deg)] transition duration-500 hover:[transform:perspective(1200px)_rotateY(0deg)_rotateX(0deg)]">
-                <img src={mediaCatalog.hero.imageSrc} alt={mediaCatalog.hero.alt[lang]} className="aspect-[3/2] w-full object-cover opacity-95" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent to-cyan-300/20" />
-                <div className="absolute left-5 top-5 rounded-xl border border-white/30 bg-[#081A3C]/70 px-3 py-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-cyan-100 backdrop-blur">{t ? "Sélection du moment" : "Trending selection"}</div>
-              </div>
+            <div className="relative grid min-h-[22rem] grid-cols-[1.15fr_.85fr] gap-3 rounded-[2rem] border border-white/80 bg-white/80 p-3 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:min-h-[27rem] sm:p-4">
+              <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
+              <article className="relative overflow-hidden rounded-[1.35rem] bg-cyan-50 shadow-lg"><img src={heroProducts[1].imageSrc} alt={heroProducts[1].name[lang]} className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[1].name[lang]}</p></article>
+              <article className="relative overflow-hidden rounded-[1.35rem] bg-blue-50 shadow-lg"><img src={heroProducts[2].imageSrc} alt={heroProducts[2].name[lang]} className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/30 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[2].name[lang]}</p></article>
             </div>
             <div className="absolute -right-1 top-8 hidden rounded-2xl border border-cyan-100 bg-white px-4 py-3 shadow-xl sm:block sm:-right-5">
               <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "Nouveautés" : "New arrivals"}</p>
@@ -133,7 +132,7 @@ export default function Home({ lang }: { lang: Lang }) {
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.95fr]">
           <div className="order-2 lg:order-1">
             <div className="relative overflow-hidden rounded-[2rem] bg-[#EAF4FF] p-3 shadow-[0_24px_50px_rgba(15,79,175,0.12)]">
-              <img src="/media/innovtech-digital-solutions.png" alt={t ? "Solutions digitales InnovTech" : "InnovTech digital solutions"} className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
+              <img src="/manus-storage/laptop-workspace_416f8ab9.jpg" alt={t ? "Espace de travail numérique InnovTech" : "InnovTech digital workspace"} className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
             </div>
           </div>
           <div className="order-1 lg:order-2">

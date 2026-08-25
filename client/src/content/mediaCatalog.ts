@@ -8,28 +8,23 @@ import type { Lang } from "@/lib/site";
 type BilingualText = Record<Lang, string>;
 
 export const mediaCatalog = {
-  hero: {
-    imageSrc: "/media/innovtech-hero-collection.png",
-    alt: { fr: "Sélection d’articles high-tech InnovTech", en: "InnovTech high-tech selection" } satisfies BilingualText,
-  },
-
   productGallery: [
     {
       id: "accessoires-visuel",
       family: "accessories",
-      imageSrc: "/media/innovtech-gallery-accessories.png",
+      imageSrc: "/manus-storage/powerbank_9deaccd3.jpg",
       label: { fr: "Les essentiels utiles", en: "Useful essentials" } satisfies BilingualText,
     },
     {
       id: "gadgets-visuel",
       family: "connected",
-      imageSrc: "/media/innovtech-gallery-connected.png",
+      imageSrc: "/manus-storage/smartwatch_17e59ca2.jpg",
       label: { fr: "Les objets qui suivent votre rythme", en: "Objects that keep up with you" } satisfies BilingualText,
     },
     {
       id: "informatique-visuel",
       family: "computing",
-      imageSrc: "/media/innovtech-gallery-computing.png",
+      imageSrc: "/manus-storage/laptop-workspace_416f8ab9.jpg",
       label: { fr: "Votre espace de création", en: "Your creative workspace" } satisfies BilingualText,
     },
   ],
@@ -37,7 +32,7 @@ export const mediaCatalog = {
   productVideos: [
     {
       id: "serrure-connectee",
-      videoSrc: "/media/innovtech-serrure-connectee.mp4",
+      videoSrc: "/manus-storage/innovtech-serrure-connectee_b90fe309.mp4",
       title: { fr: "La sécurité connectée, en situation réelle.", en: "Connected security, in a real setting." } satisfies BilingualText,
       description: {
         fr: "Serrure intelligente avec accès par empreinte digitale, clavier tactile et poignée réversible.",
@@ -49,28 +44,6 @@ export const mediaCatalog = {
     // Duplicate the object above to add another video. Give it a unique id and replace videoSrc.
   ],
 
-  webTemplates: [
-    {
-      id: "restaurant",
-      imageSrc: "/media/innovtech-template-restaurant.png",
-      title: { fr: "Site de restaurant", en: "Restaurant website" } satisfies BilingualText,
-      category: { fr: "Modèle vitrine", en: "Showcase concept" } satisfies BilingualText,
-      description: { fr: "Un site immersif conçu autour des réservations et de l’univers culinaire.", en: "An immersive concept built around bookings and a culinary universe." } satisfies BilingualText,
-    },
-    {
-      id: "fashion",
-      imageSrc: "/media/innovtech-template-fashion.png",
-      title: { fr: "Boutique mode & beauté", en: "Fashion & beauty store" } satisfies BilingualText,
-      category: { fr: "Modèle e-commerce", en: "E-commerce concept" } satisfies BilingualText,
-      description: { fr: "Une expérience de marque éditoriale qui met les produits au premier plan.", en: "An editorial brand experience that puts products in the spotlight." } satisfies BilingualText,
-    },
-    {
-      id: "mobile",
-      imageSrc: "/media/innovtech-template-mobile.png",
-      title: { fr: "Application de services", en: "Services mobile app" } satisfies BilingualText,
-      category: { fr: "Modèle mobile", en: "Mobile concept" } satisfies BilingualText,
-      description: { fr: "Une interface mobile conçue pour des parcours simples et une action rapide.", en: "A mobile interface designed for simple journeys and quick action." } satisfies BilingualText,
-    },
-    // Add your own website screenshots here. Replace imageSrc with your public image URL.
-  ],
+  /** Add your own screenshots here only when you are ready to show a real reference. */
+  webTemplates: [] as Array<{ id: string; imageSrc: string; title: BilingualText; category: BilingualText; description: BilingualText }>,
 } as const;

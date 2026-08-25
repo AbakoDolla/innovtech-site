@@ -16,7 +16,7 @@
 - [ ] Recevoir les liens, captures ou noms des modèles de sites web et applications à présenter.
 - [ ] Sélectionner les médias adaptés au hero, à la galerie boutique et aux réalisations.
 - [ ] Ajouter une galerie photo/vidéo et une section « Réalisations web & mobile ».
-- [ ] Enrichir le hero avec une composition visuelle plus immersive.
+- [x] Enrichir le hero avec une composition visuelle plus immersive.
 - [x] Vérifier le rendu mobile et ordinateur, puis synchroniser les changements sur GitHub.
 - [x] Récupérer et analyser les dernières modifications apportées sur GitHub.
 - [x] Structurer les produits fournis par catégorie, recherche et informations de commande.
