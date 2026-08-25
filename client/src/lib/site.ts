@@ -1,112 +1,55 @@
 /** InnovTech design reminder: clear premium commerce, blue/cyan circuit accents, WhatsApp is the human conversion path. */
 export type Lang = "fr" | "en";
+export type ProductFamily = "accessories" | "connected" | "computing";
+export type ProductIcon = "Smartphone" | "Headphones" | "Laptop" | "Camera" | "BatteryCharging" | "Watch" | "Monitor" | "Gamepad2" | "Keyboard" | "Mouse" | "House" | "Tablet" | "BriefcaseBusiness";
+
+export type CatalogProduct = {
+  id: string;
+  family: ProductFamily;
+  icon: ProductIcon;
+  imageSrc: string;
+  price: Record<Lang, string>;
+  badge: Record<Lang, string>;
+  name: Record<Lang, string>;
+  description: Record<Lang, string>;
+  searchTerms: Record<Lang, string[]>;
+};
 
 /** Add the recipient's international WhatsApp number here when it is available, digits only. */
 export const WHATSAPP_NUMBER = "";
 
-export const productCatalog = [
-  {
-    id: "accessoires",
-    family: "accessories",
-    icon: "Cable",
-    name: { fr: "Accessoires électroniques", en: "Electronic accessories" },
-    description: {
-      fr: "Chargeurs, câbles, batteries et indispensables du quotidien.",
-      en: "Chargers, cables, batteries and day-to-day essentials.",
-    },
-  },
-  {
-    id: "gadgets",
-    family: "connected",
-    icon: "Radio",
-    name: { fr: "Gadgets connectés", en: "Connected gadgets" },
-    description: {
-      fr: "Objets intelligents pour rester connecté simplement.",
-      en: "Smart objects that keep you effortlessly connected.",
-    },
-  },
-  {
-    id: "informatique",
-    family: "computing",
-    icon: "Laptop",
-    name: { fr: "Équipement informatique", en: "Computer equipment" },
-    description: {
-      fr: "Ordinateurs, périphériques et matériel adapté à vos besoins.",
-      en: "Computers, peripherals and equipment matched to your needs.",
-    },
-  },
-  {
-    id: "audio",
-    family: "connected",
-    icon: "Headphones",
-    name: { fr: "Audio & mobilité", en: "Audio & mobility" },
-    description: {
-      fr: "Écouteurs, casques et outils pratiques pour bouger librement.",
-      en: "Earbuds, headphones and practical tools for moving freely.",
-    },
-  },
-  {
-    id: "energie",
-    family: "accessories",
-    icon: "BatteryCharging",
-    name: { fr: "Énergie & recharge", en: "Power & charging" },
-    description: {
-      fr: "Solutions de recharge fiables pour vos appareils essentiels.",
-      en: "Reliable charging solutions for your essential devices.",
-    },
-  },
-  {
-    id: "bureau",
-    family: "computing",
-    icon: "MonitorSmartphone",
-    name: { fr: "Espace de travail", en: "Workspace" },
-    description: {
-      fr: "Les accessoires qui rendent votre bureau plus fluide.",
-      en: "Accessories that make your workspace more seamless.",
-    },
-  },
-] as const;
+/**
+ * Product names are intentionally descriptive unless InnovTech confirms an exact brand and model.
+ * Every card below uses a real photograph stored through the project's media storage.
+ */
+export const fullProductCatalog: CatalogProduct[] = [
+  { id: "smartphone-premium", family: "connected", icon: "Smartphone", imageSrc: "/manus-storage/iphone-15-pro_cdf91d77.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Smartphone", en: "Smartphone" }, name: { fr: "Smartphone haut de gamme", en: "Premium smartphone" }, description: { fr: "Un smartphone moderne pour le travail, les contenus et les échanges quotidiens.", en: "A modern smartphone for work, content and daily communication." }, searchTerms: { fr: ["téléphone", "mobile", "smartphone", "iphone"], en: ["phone", "mobile", "smartphone", "iphone"] } },
+  { id: "casque-sans-fil", family: "connected", icon: "Headphones", imageSrc: "/manus-storage/wireless-headphones_580c79de.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Audio", en: "Audio" }, name: { fr: "Casque sans fil", en: "Wireless headphones" }, description: { fr: "Une écoute confortable pour les appels, la musique et les déplacements.", en: "Comfortable listening for calls, music and travel." }, searchTerms: { fr: ["casque", "audio", "bluetooth", "musique"], en: ["headphones", "audio", "bluetooth", "music"] } },
+  { id: "ordinateur-portable", family: "computing", icon: "Laptop", imageSrc: "/manus-storage/lenovo-laptop_ed54c0c6.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Bureautique", en: "Work" }, name: { fr: "Ordinateur portable 15 pouces", en: "15-inch laptop" }, description: { fr: "Un poste fiable pour étudier, travailler et organiser vos projets.", en: "A reliable device to study, work and organise your projects." }, searchTerms: { fr: ["ordinateur", "laptop", "portable", "bureautique"], en: ["computer", "laptop", "notebook", "work"] } },
+  { id: "camera-4k", family: "connected", icon: "Camera", imageSrc: "/manus-storage/camera-4k_87697128.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Création", en: "Creation" }, name: { fr: "Caméra 4K", en: "4K camera" }, description: { fr: "Pour réaliser des photos et vidéos avec une qualité détaillée.", en: "For detailed photos and videos." }, searchTerms: { fr: ["caméra", "photo", "vidéo", "4k"], en: ["camera", "photo", "video", "4k"] } },
+  { id: "powerbank-20000", family: "accessories", icon: "BatteryCharging", imageSrc: "/manus-storage/powerbank_9deaccd3.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Recharge", en: "Charging" }, name: { fr: "Batterie externe 20 000 mAh", en: "20,000 mAh power bank" }, description: { fr: "Une réserve d’énergie pratique pour conserver vos appareils chargés.", en: "Practical backup power for keeping your devices charged." }, searchTerms: { fr: ["powerbank", "batterie", "recharge", "chargeur"], en: ["power bank", "battery", "charger", "charging"] } },
+  { id: "montre-connectee", family: "connected", icon: "Watch", imageSrc: "/manus-storage/smartwatch_17e59ca2.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Connecté", en: "Connected" }, name: { fr: "Montre connectée", en: "Smartwatch" }, description: { fr: "Notifications, suivi quotidien et style, réunis à votre poignet.", en: "Notifications, daily tracking and style, gathered on your wrist." }, searchTerms: { fr: ["montre", "smartwatch", "bracelet", "fitness"], en: ["watch", "smartwatch", "fitness", "tracker"] } },
+  { id: "ecouteurs-sans-fil", family: "connected", icon: "Headphones", imageSrc: "/manus-storage/earbuds_3a9a7005.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Nomade", en: "On the go" }, name: { fr: "Écouteurs sans fil", en: "Wireless earbuds" }, description: { fr: "Un format compact pour vos appels et vos moments d’écoute.", en: "A compact format for calls and listening." }, searchTerms: { fr: ["écouteurs", "oreillettes", "bluetooth", "audio"], en: ["earbuds", "earphones", "bluetooth", "audio"] } },
+  { id: "ordinateur-bureau", family: "computing", icon: "Monitor", imageSrc: "/manus-storage/desktop-computer_dadd7606.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Bureau", en: "Desk" }, name: { fr: "Ordinateur de bureau", en: "Desktop computer" }, description: { fr: "Une configuration fixe adaptée à la productivité et aux usages quotidiens.", en: "A desktop setup for productivity and everyday use." }, searchTerms: { fr: ["ordinateur", "desktop", "pc", "bureau"], en: ["computer", "desktop", "pc", "office"] } },
+  { id: "console-jeu", family: "connected", icon: "Gamepad2", imageSrc: "/manus-storage/gaming-console_6af626a9.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Gaming", en: "Gaming" }, name: { fr: "Console de jeu", en: "Gaming console" }, description: { fr: "Pour profiter d’une expérience de jeu et de divertissement à la maison.", en: "For gaming and entertainment at home." }, searchTerms: { fr: ["console", "jeu", "gaming", "manette"], en: ["console", "game", "gaming", "controller"] } },
+  { id: "ordinateur-gaming", family: "computing", icon: "Laptop", imageSrc: "/manus-storage/gaming-laptop_d23cf7b0.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Performance", en: "Performance" }, name: { fr: "Ordinateur portable gaming", en: "Gaming laptop" }, description: { fr: "Un portable conçu pour les usages exigeants, les jeux et la création.", en: "A laptop for demanding use, gaming and creation." }, searchTerms: { fr: ["gaming", "ordinateur", "laptop", "jeu"], en: ["gaming", "computer", "laptop", "game"] } },
+  { id: "clavier-sans-fil", family: "accessories", icon: "Keyboard", imageSrc: "/manus-storage/keyboard_0dec143b.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Bureau", en: "Desk" }, name: { fr: "Clavier sans fil", en: "Wireless keyboard" }, description: { fr: "Un accessoire pratique pour travailler avec confort et précision.", en: "A practical accessory for comfortable, precise work." }, searchTerms: { fr: ["clavier", "keyboard", "sans fil", "bureau"], en: ["keyboard", "wireless", "desk", "office"] } },
+  { id: "souris-ergonomique", family: "accessories", icon: "Mouse", imageSrc: "/manus-storage/mouse_06464198.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Bureau", en: "Desk" }, name: { fr: "Souris ergonomique", en: "Ergonomic mouse" }, description: { fr: "Une souris pensée pour accompagner les longues journées de travail.", en: "A mouse designed for long work sessions." }, searchTerms: { fr: ["souris", "mouse", "ergonomique", "bureau"], en: ["mouse", "ergonomic", "desk", "office"] } },
+  { id: "poste-travail", family: "computing", icon: "BriefcaseBusiness", imageSrc: "/manus-storage/computer-desk_0cf57fc2.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Espace pro", en: "Workplace" }, name: { fr: "Poste de travail informatique", en: "Computer workstation" }, description: { fr: "Une solution complète pour aménager un espace de travail efficace.", en: "A complete solution for an efficient work setup." }, searchTerms: { fr: ["bureau", "poste", "travail", "ordinateur"], en: ["desk", "workstation", "office", "computer"] } },
+  { id: "ordinateur-pro", family: "computing", icon: "Laptop", imageSrc: "/manus-storage/office-laptop_c154e954.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Professionnel", en: "Professional" }, name: { fr: "Ordinateur portable professionnel", en: "Business laptop" }, description: { fr: "Un ordinateur dédié aux projets, à la bureautique et aux échanges.", en: "A laptop for projects, office work and communication." }, searchTerms: { fr: ["ordinateur", "portable", "professionnel", "travail"], en: ["laptop", "business", "professional", "work"] } },
+  { id: "smartphone-noir", family: "connected", icon: "Smartphone", imageSrc: "/manus-storage/phone-dark_05202b05.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Mobile", en: "Mobile" }, name: { fr: "Smartphone noir", en: "Black smartphone" }, description: { fr: "Un format moderne pour rester connecté avec élégance.", en: "A modern format for staying connected in style." }, searchTerms: { fr: ["téléphone", "smartphone", "noir", "mobile"], en: ["phone", "smartphone", "black", "mobile"] } },
+  { id: "maison-connectee", family: "connected", icon: "House", imageSrc: "/manus-storage/smart-home_8774ad68.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Maison", en: "Home" }, name: { fr: "Kit maison connectée", en: "Smart home kit" }, description: { fr: "Des objets intelligents pour simplifier certains gestes au quotidien.", en: "Smart devices to simplify everyday routines." }, searchTerms: { fr: ["maison", "smart home", "connecté", "domotique"], en: ["home", "smart", "connected", "automation"] } },
+  { id: "tablette", family: "computing", icon: "Tablet", imageSrc: "/manus-storage/tablet_1e61f739.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Mobile", en: "Mobile" }, name: { fr: "Tablette tactile", en: "Tablet" }, description: { fr: "Un écran léger pour lire, créer, apprendre et vous divertir.", en: "A light screen for reading, creating, learning and entertainment." }, searchTerms: { fr: ["tablette", "tablet", "écran", "tactile"], en: ["tablet", "screen", "touch", "mobile"] } },
+  { id: "espace-bureau", family: "computing", icon: "Monitor", imageSrc: "/manus-storage/laptop-workspace_416f8ab9.jpg", price: { fr: "Prix sur demande", en: "Price on request" }, badge: { fr: "Installation", en: "Setup" }, name: { fr: "Espace bureau connecté", en: "Connected desk setup" }, description: { fr: "Un ensemble d’équipements pour une installation claire et productive.", en: "An equipment set for a clear, productive setup." }, searchTerms: { fr: ["bureau", "installation", "ordinateur", "espace"], en: ["desk", "setup", "computer", "workspace"] } },
+];
+
+/** A concise selection used in the smaller homepage modules. */
+export const productCatalog = fullProductCatalog.slice(0, 6);
 
 export const serviceCatalog = [
-  {
-    id: "site-web",
-    icon: "PanelsTopLeft",
-    title: { fr: "Création de sites web", en: "Website creation" },
-    description: {
-      fr: "Des sites vitrines modernes, rapides et pensés pour inspirer confiance.",
-      en: "Modern, fast showcase websites built to inspire confidence.",
-    },
-    detail: {
-      fr: "Conseil, conception, interface responsive et mise en ligne : votre présence digitale prend une forme claire et utile.",
-      en: "Consulting, design, responsive interface and launch: your digital presence takes a clear, useful form.",
-    },
-  },
-  {
-    id: "app-web",
-    icon: "Globe2",
-    title: { fr: "Applications web", en: "Web applications" },
-    description: {
-      fr: "Des outils sur mesure pour simplifier vos opérations et vos échanges.",
-      en: "Custom tools that simplify your operations and communication.",
-    },
-    detail: {
-      fr: "Nous transformons votre besoin en une application web organisée, accessible et adaptée à vos usages.",
-      en: "We turn your need into an organised, accessible web application tailored to the way you work.",
-    },
-  },
-  {
-    id: "app-mobile",
-    icon: "Smartphone",
-    title: { fr: "Applications mobiles", en: "Mobile applications" },
-    description: {
-      fr: "Des expériences mobiles intuitives, conçues pour être utilisées partout.",
-      en: "Intuitive mobile experiences made to be used everywhere.",
-    },
-    detail: {
-      fr: "Du parcours utilisateur à l’interface finale, chaque écran sert votre objectif et vos utilisateurs.",
-      en: "From user journey to final interface, every screen serves your goal and your users.",
-    },
-  },
+  { id: "site-web", icon: "PanelsTopLeft", title: { fr: "Création de sites web", en: "Website creation" }, description: { fr: "Des sites vitrines modernes, rapides et pensés pour inspirer confiance.", en: "Modern, fast showcase websites built to inspire confidence." }, detail: { fr: "Conseil, conception, interface responsive et mise en ligne : votre présence digitale prend une forme claire et utile.", en: "Consulting, design, responsive interface and launch: your digital presence takes a clear, useful form." } },
+  { id: "app-web", icon: "Globe2", title: { fr: "Applications web", en: "Web applications" }, description: { fr: "Des outils sur mesure pour simplifier vos opérations et vos échanges.", en: "Custom tools that simplify your operations and communication." }, detail: { fr: "Nous transformons votre besoin en une application web organisée, accessible et adaptée à vos usages.", en: "We turn your need into an organised, accessible web application tailored to the way you work." } },
+  { id: "app-mobile", icon: "Smartphone", title: { fr: "Applications mobiles", en: "Mobile applications" }, description: { fr: "Des expériences mobiles intuitives, conçues pour être utilisées partout.", en: "Intuitive mobile experiences made to be used everywhere." }, detail: { fr: "Du parcours utilisateur à l’interface finale, chaque écran sert votre objectif et vos utilisateurs.", en: "From user journey to final interface, every screen serves your goal and your users." } },
 ] as const;
 
 export function whatsappUrl(message: string) {
@@ -115,13 +58,9 @@ export function whatsappUrl(message: string) {
 }
 
 export function orderMessage(item: string, lang: Lang) {
-  return lang === "fr"
-    ? `Bonjour InnovTech, je souhaite avoir plus d’informations ou commander : ${item}.`
-    : `Hello InnovTech, I would like more information about or to order: ${item}.`;
+  return lang === "fr" ? `Bonjour InnovTech, je souhaite avoir plus d’informations ou commander : ${item}.` : `Hello InnovTech, I would like more information about or to order: ${item}.`;
 }
 
 export function quoteMessage(service: string, lang: Lang) {
-  return lang === "fr"
-    ? `Bonjour InnovTech, je souhaite demander un devis pour : ${service}.`
-    : `Hello InnovTech, I would like to request a quote for: ${service}.`;
+  return lang === "fr" ? `Bonjour InnovTech, je souhaite demander un devis pour : ${service}.` : `Hello InnovTech, I would like to request a quote for: ${service}.`;
 }

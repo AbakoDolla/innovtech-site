@@ -17,6 +17,11 @@ async function startServer() {
       : path.resolve(__dirname, "..", "dist", "public");
 
   app.use(express.static(staticPath));
+  app.use("/media", express.static(path.resolve(__dirname, "..", "media")));
+  app.use("/manus-storage", (req, res, next) => {
+    req.url = req.url.replace(/_[a-f0-9]{8,}(?=\.)/, "");
+    express.static(path.resolve(__dirname, "..", "media"))(req, res, next);
+  });
 
   // Handle client-side routing - serve index.html for all routes
   app.get("*", (_req, res) => {

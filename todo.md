@@ -18,4 +18,11 @@
 - [ ] Ajouter une galerie photo/vidéo et une section « Réalisations web & mobile ».
 - [ ] Enrichir le hero avec une composition visuelle plus immersive.
 - [x] Vérifier le rendu mobile et ordinateur, puis synchroniser les changements sur GitHub.
+- [x] Récupérer et analyser les dernières modifications apportées sur GitHub.
+- [x] Structurer les produits fournis par catégorie, recherche et informations de commande.
+- [x] Collecter et intégrer des visuels réalistes correspondant à chaque produit identifié.
+- [x] Repenser la boutique avec une recherche claire, un affichage sobre et des interactions professionnelles.
+- [x] Renforcer la signature visuelle InnovTech : circuits cyan, identité de marque et transitions éditoriales.
+- [x] Vérifier l’accessibilité de la boutique et des fiches produit : focus, clavier, labels et recherche.
+- [x] Ajouter et valider des animations discrètes et respectueuses de `prefers-reduced-motion`.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.
