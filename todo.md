@@ -51,3 +51,4 @@
 - [x] Concevoir un parcours gratuit assisté de prise de rendez-vous via WhatsApp Business.
 - [x] Intégrer les réalisations validées dans la section dédiée du site.
 - [ ] Finaliser le déploiement Vercel après résolution de la connexion.
+- [ ] Corriger le déploiement Vercel qui affiche le code serveur brut au lieu du site InnovTech.
