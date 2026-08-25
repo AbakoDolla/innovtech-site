@@ -7,6 +7,7 @@
 - [x] Créer un fichier central de configuration pour les images, vidéos, prix et liens WhatsApp.
 - [x] Ajouter un guide de remplacement des médias et de publication sur GitHub.
 - [x] Publier l’archive des visuels et de la vidéo déjà intégrés dans une publication GitHub privée.
+- [x] Ajouter et vérifier un bouton WhatsApp flottant global, sur ordinateur et mobile.
 - [ ] Recevoir les liens, captures ou noms des modèles de sites web et applications à présenter.
 - [ ] Sélectionner les médias adaptés au hero, à la galerie boutique et aux réalisations.
 - [ ] Ajouter une galerie photo/vidéo et une section « Réalisations web & mobile ».

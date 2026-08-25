@@ -4,6 +4,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
+import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import type { Lang } from "./lib/site";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
@@ -34,7 +35,7 @@ function App() {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white"><SiteHeader lang={lang} onLanguageChange={setLang} /><Router lang={lang} /><SiteFooter lang={lang} /></div><Toaster /></TooltipProvider></ErrorBoundary>;
+  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white"><SiteHeader lang={lang} onLanguageChange={setLang} /><Router lang={lang} /><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></div><Toaster /></TooltipProvider></ErrorBoundary>;
 }
 
 export default App;
