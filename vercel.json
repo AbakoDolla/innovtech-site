@@ -4,6 +4,14 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist/public",
+  "functions": {
+    "api/trpc/[trpc].ts": {
+      "includeFiles": "dist/vercel-trpc.mjs"
+    },
+    "api/oauth/callback.ts": {
+      "includeFiles": "dist/vercel-oauth.mjs"
+    }
+  },
   "rewrites": [
     {
       "source": "/:path((?!api/).*)",
