@@ -9,6 +9,7 @@ import { localMediaSrc, type Lang } from "./lib/site";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazyWithRetry } from "@/lib/lazyWithRetry";
+import { revealPageSections } from "@/lib/pageVisibility";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
@@ -45,6 +46,15 @@ function App() {
     localStorage.setItem("innovtech-language", lang);
     document.documentElement.lang = lang;
   }, [lang]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => revealPageSections());
+    const fallback = window.setTimeout(revealPageSections, 500);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(fallback);
+    };
+  }, [location]);
 
   useEffect(() => {
     const updateProgress = () => {
