@@ -1,5 +1,5 @@
 /** InnovTech design reminder: global layout supports a bilingual, high-trust technology storefront with humane WhatsApp conversion. */
-import { lazy, Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SiteFooter } from "./components/SiteFooter";
@@ -8,15 +8,16 @@ import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { localMediaSrc, type Lang } from "./lib/site";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
 
-const Home = lazy(() => import("./pages/Home"));
-const Shop = lazy(() => import("./pages/Shop"));
-const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-const Services = lazy(() => import("./pages/Services"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const MediaManager = lazy(() => import("./pages/MediaManager"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const Home = lazyWithRetry(() => import("./pages/Home"));
+const Shop = lazyWithRetry(() => import("./pages/Shop"));
+const ProductDetail = lazyWithRetry(() => import("./pages/ProductDetail"));
+const Services = lazyWithRetry(() => import("./pages/Services"));
+const About = lazyWithRetry(() => import("./pages/About"));
+const Contact = lazyWithRetry(() => import("./pages/Contact"));
+const MediaManager = lazyWithRetry(() => import("./pages/MediaManager"));
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 function PageLoader() {
   return <div className="grid min-h-[45vh] place-items-center" role="status" aria-live="polite"><span className="h-9 w-9 animate-spin rounded-full border-2 border-blue-100 border-t-blue-700" /><span className="sr-only">Chargement…</span></div>;

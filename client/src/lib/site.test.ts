@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fullProductCatalog, portfolioProjects } from "./site";
+import { fullProductCatalog, portfolioProjects, productOrderMessage } from "./site";
 
 describe("InnovTech product catalogue", () => {
   it("maps every curated product to a stored image and a valid category", () => {
@@ -27,5 +27,11 @@ describe("InnovTech product catalogue", () => {
       expect(project.title.fr.trim()).not.toHaveLength(0);
       expect(project.title.en.trim()).not.toHaveLength(0);
     });
+  });
+
+  it("prepares a quantity-specific WhatsApp order message", () => {
+    expect(productOrderMessage("Casque sans fil", 3, "fr")).toContain("Quantité souhaitée : 3");
+    expect(productOrderMessage("Wireless headphones", 2, "en")).toContain("Requested quantity: 2");
+    expect(productOrderMessage("Article", 0, "fr")).toContain("Quantité souhaitée : 1");
   });
 });

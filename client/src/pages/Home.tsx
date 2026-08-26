@@ -28,43 +28,47 @@ export default function Home({ lang }: { lang: Lang }) {
 
   return (
     <main>
-      <section className="relative overflow-hidden pb-14 pt-10 sm:pb-20 sm:pt-16" onMouseMove={(event) => { const bounds = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--mx", `${(event.clientX - bounds.left - bounds.width / 2) / 28}px`); event.currentTarget.style.setProperty("--my", `${(event.clientY - bounds.top - bounds.height / 2) / 38}px`); }} onMouseLeave={(event) => { event.currentTarget.style.setProperty("--mx", "0px"); event.currentTarget.style.setProperty("--my", "0px"); }}>
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(120deg,#FFFFFF_0%,#F3F8FF_48%,#EAFBFF_100%)] pb-16 pt-9 sm:pb-24 sm:pt-16" onMouseMove={(event) => { const bounds = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--mx", `${(event.clientX - bounds.left - bounds.width / 2) / 28}px`); event.currentTarget.style.setProperty("--my", `${(event.clientY - bounds.top - bounds.height / 2) / 38}px`); }} onMouseLeave={(event) => { event.currentTarget.style.setProperty("--mx", "0px"); event.currentTarget.style.setProperty("--my", "0px"); }}>
         <div className="hero-orb left-[42%] top-6" />
-        <div className="container relative grid items-center gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-4">
+        <div className="circuit-lines pointer-events-none absolute inset-0 opacity-35" />
+        <div className="container relative grid items-center gap-9 lg:grid-cols-[0.86fr_1.14fr] lg:gap-5">
           <div className="max-w-2xl">
-            <div className="reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800">
+            <div className="reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/85 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800 shadow-sm backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-cyan-600" />
-              {t ? "TECHNOLOGIE & SOLUTIONS DIGITALES" : "TECHNOLOGY & DIGITAL SOLUTIONS"}
+              {t ? "INNOVTECH · SÉLECTION & SOLUTIONS" : "INNOVTECH · SELECTION & SOLUTIONS"}
             </div>
-            <h1 className="reveal mt-6 max-w-xl font-display text-[2.65rem] font-bold leading-[0.98] tracking-[-0.055em] text-[#081A3C] sm:text-6xl lg:text-[4.5rem]">
-              {t ? <>Tout votre univers <span className="text-blue-600">technologique</span>, au même endroit.</> : <>Your complete <span className="text-blue-600">technology</span> world, all in one place.</>}
+            <h1 className="reveal mt-6 max-w-2xl font-display text-[2.8rem] font-bold leading-[0.94] tracking-[-0.065em] text-[#081A3C] sm:text-6xl lg:text-[4.9rem]">
+              {t ? <>La tech qui fait <span className="text-blue-600">avancer</span> vos idées.</> : <>Technology that moves your <span className="text-blue-600">ideas</span> forward.</>}
             </h1>
             <p className="reveal mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-              {t ? "Découvrez des articles high-tech, des accessoires électroniques et des solutions web & mobile conçus pour simplifier votre quotidien et faire progresser vos projets." : "Discover high-tech products, electronic accessories and web & mobile solutions made to simplify your day and move your projects forward."}
+              {t ? "Produits high-tech, accessoires fiables et expériences digitales : une sélection claire pour votre quotidien et vos projets ambitieux." : "High-tech products, reliable accessories and digital experiences: a clear selection for your everyday needs and ambitious projects."}
             </p>
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/boutique" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]">
-                <ShoppingBag className="h-4 w-4" /> {t ? "Explorer les produits" : "Explore products"} <ArrowRight className="h-4 w-4" />
+                <ShoppingBag className="h-4 w-4" /> {t ? "Voir la sélection" : "View the selection"} <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/services" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]">
-                <Code2 className="h-4 w-4" /> {t ? "Demander un devis" : "Request a quote"}
+              <Link href="/services" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white/85 px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]">
+                <Code2 className="h-4 w-4" /> {t ? "Construire un projet" : "Build a project"}
               </Link>
             </div>
-            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3">
+            <div className="mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-blue-100 bg-white/75 shadow-[0_12px_26px_rgba(20,68,145,0.07)] backdrop-blur">
+              {[{ value: "18+", fr: "Produits", en: "Products" }, { value: "3", fr: "Expertises", en: "Expertises" }, { value: "1:1", fr: "Conseil", en: "Guidance" }].map(({ value, fr, en }) => <div key={value} className="border-r border-blue-100 px-3 py-3 last:border-r-0 sm:px-4"><strong className="block font-display text-lg font-bold tracking-[-0.05em] text-[#081A3C] sm:text-xl">{value}</strong><span className="mt-0.5 block text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-slate-500">{t ? fr : en}</span></div>)}
+            </div>
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
               {highlights.map(({ icon: Icon, fr, en }) => <div key={fr} className="flex items-center gap-2 text-xs font-bold text-slate-600"><span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-700"><Icon className="h-3.5 w-3.5" /></span>{t ? fr : en}</div>)}
             </div>
           </div>
-          <div className="reveal hero-depth relative px-2 pb-8 sm:px-5">
+          <div className="reveal hero-depth relative px-1 pb-8 sm:px-5">
             <div className="hero-grid absolute -inset-8 opacity-70" />
             <div className="hero-ring absolute -right-7 -top-8 h-32 w-32 rounded-full border border-cyan-300/60 sm:-right-3 sm:-top-5" />
-            <div className="relative grid min-h-[22rem] grid-cols-[1.15fr_.85fr] gap-3 rounded-[2rem] border border-white/80 bg-white/80 p-3 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:min-h-[27rem] sm:p-4">
+            <div className="relative grid min-h-[23rem] grid-cols-[1.15fr_.85fr] gap-3 rounded-[2rem] border border-white/80 bg-white/85 p-3 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:min-h-[29rem] sm:p-4">
               <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} fetchPriority="high" decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
               <article className="relative overflow-hidden rounded-[1.35rem] bg-cyan-50 shadow-lg"><img src={heroProducts[1].imageSrc} alt={heroProducts[1].name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[1].name[lang]}</p></article>
               <article className="relative overflow-hidden rounded-[1.35rem] bg-blue-50 shadow-lg"><img src={heroProducts[2].imageSrc} alt={heroProducts[2].name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/30 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[2].name[lang]}</p></article>
             </div>
             <div className="absolute -right-1 top-8 hidden rounded-2xl border border-cyan-100 bg-white px-4 py-3 shadow-xl sm:block sm:-right-5">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "Nouveautés" : "New arrivals"}</p>
-              <p className="mt-1 font-display text-lg font-bold text-[#081A3C]">{t ? "Tech utile." : "Useful tech."}</p>
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "La promesse" : "The promise"}</p>
+              <p className="mt-1 font-display text-lg font-bold text-[#081A3C]">{t ? "Choisir juste." : "Choose better."}</p>
             </div>
             <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-lg sm:-left-8">
               <span className="grid h-9 w-9 place-items-center rounded-xl bg-green-100 text-[#1FAF62]"><WhatsAppIcon className="h-5 w-5" /></span>

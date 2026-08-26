@@ -55,3 +55,11 @@
 - [x] Corriger le chargement blanc constaté sur le nouveau domaine de production Vercel.
 - [x] Corriger les aperçus de réalisations web absents dans la section Services sur Vercel.
 - [x] Vérifier les quatre aperçus sur le domaine de production principal Vercel après bascule du nouveau déploiement.
+- [x] Corriger l’accès et le rendu des pages Services et publiques sur mobile.
+- [x] Ajouter un sélecteur de quantité et un message WhatsApp détaillé avant la commande d’un article.
+- [x] Repenser l’interface mobile-first avec un hero et des sections premium, rapides et distinctifs.
+- [x] Ajouter les mécanismes de partage des produits et une configuration de liens de réseaux sociaux.
+- [x] Ajouter le logo InnovTech aux aperçus du site et aux métadonnées de partage.
+- [x] Préparer des liens de produits partageables pour Facebook et les autres réseaux.
+- [ ] Rendre le dépôt `AbakoDolla/innovtech-site` public avec le lien du site Vercel documenté.
+- [ ] Renseigner les URL réelles des pages Facebook, Instagram et LinkedIn InnovTech lorsqu’elles seront fournies.

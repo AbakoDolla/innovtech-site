@@ -1,8 +1,8 @@
 /** InnovTech design reminder: the footer is a calm trust-building landing area, never a dense afterthought. */
 import { Link } from "wouter";
-import { ArrowUpRight, Instagram, Linkedin } from "lucide-react";
+import { ArrowUpRight, Facebook, Instagram, Linkedin, Share2 } from "lucide-react";
 import type { Lang } from "@/lib/site";
-import { whatsappUrl } from "@/lib/site";
+import { SOCIAL_PROFILES, whatsappUrl } from "@/lib/site";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function SiteFooter({ lang }: { lang: Lang }) {
@@ -13,6 +13,11 @@ export function SiteFooter({ lang }: { lang: Lang }) {
     [t ? "À propos" : "About", "/a-propos"],
     [t ? "Contact" : "Contact", "/contact"],
   ];
+  const profiles = [
+    { label: "Facebook", href: SOCIAL_PROFILES.facebook, icon: Facebook },
+    { label: "Instagram", href: SOCIAL_PROFILES.instagram, icon: Instagram },
+    { label: "LinkedIn", href: SOCIAL_PROFILES.linkedin, icon: Linkedin },
+  ].filter((profile) => Boolean(profile.href));
 
   return (
     <footer className="mt-20 overflow-hidden bg-[#081A3C] text-white">
@@ -39,10 +44,8 @@ export function SiteFooter({ lang }: { lang: Lang }) {
           </div>
           <div>
             <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">{t ? "Réseaux" : "Social"}</p>
-            <p className="mt-4 text-sm leading-6 text-blue-100/80">{t ? "Suivez l’évolution de nos produits et de nos projets sur nos réseaux sociaux." : "Follow the evolution of our products and projects on our social channels."}</p>
-            <div className="mt-5 flex gap-3">
-              {[Instagram, Linkedin].map((Icon, index) => <span key={index} className="grid h-9 w-9 place-items-center rounded-xl border border-white/15 text-blue-100/60"><Icon className="h-4 w-4" /></span>)}
-            </div>
+            <p className="mt-4 text-sm leading-6 text-blue-100/80">{t ? "Partagez un article depuis sa fiche, ou retrouvez bientôt les publications InnovTech ici." : "Share a product from its page, or find InnovTech posts here soon."}</p>
+            {profiles.length > 0 ? <div className="mt-5 flex gap-3">{profiles.map(({ label, href, icon: Icon }) => <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 text-blue-100 transition hover:border-cyan-300 hover:text-cyan-300"><Icon className="h-4 w-4" /></a>)}</div> : <Link href="/boutique" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-cyan-300 transition hover:text-white"><Share2 className="h-4 w-4" />{t ? "Partager un produit" : "Share a product"}<ArrowUpRight className="h-4 w-4" /></Link>}
           </div>
         </div>
         <div className="relative mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-blue-100/55 sm:flex-row sm:items-center sm:justify-between">

@@ -27,6 +27,13 @@ export type PortfolioProject = {
 /** Add the recipient's international WhatsApp number here when it is available, digits only. */
 export const WHATSAPP_NUMBER = "";
 
+/** Add the public profile URLs once the InnovTech Facebook and Instagram pages are ready. */
+export const SOCIAL_PROFILES = {
+  facebook: "",
+  instagram: "",
+  linkedin: "",
+} as const;
+
 const localMediaAliases: Record<string, string> = {
   "innovtech-logo-cropped.png": "/media/branding/innovtech-logo.png",
   "innovtech-symbol.png": "/media/branding/innovtech-symbol.png",
@@ -93,6 +100,13 @@ export function whatsappUrl(message: string) {
 
 export function orderMessage(item: string, lang: Lang) {
   return lang === "fr" ? `Bonjour InnovTech, je souhaite avoir plus d’informations ou commander : ${item}.` : `Hello InnovTech, I would like more information about or to order: ${item}.`;
+}
+
+export function productOrderMessage(item: string, quantity: number, lang: Lang) {
+  const requestedQuantity = Math.max(1, Math.floor(quantity) || 1);
+  return lang === "fr"
+    ? `Bonjour InnovTech, je souhaite commander : ${item}. Quantité souhaitée : ${requestedQuantity}. Merci de confirmer la disponibilité et le prix.`
+    : `Hello InnovTech, I would like to order: ${item}. Requested quantity: ${requestedQuantity}. Please confirm availability and price.`;
 }
 
 export function quoteMessage(service: string, lang: Lang) {

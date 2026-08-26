@@ -13,13 +13,12 @@ export default function Services({ lang }: { lang: Lang }) {
 
   return (
     <main>
-      <section className="relative overflow-hidden bg-[#F4F8FF] py-16 sm:py-24">
+      <section className="relative overflow-hidden bg-[linear-gradient(120deg,#F4F8FF_0%,#FFFFFF_60%,#EAFBFF_100%)] py-14 sm:py-24">
         <div className="hero-orb left-[-5%] top-[-110px]" />
         <div className="circuit-lines absolute inset-0 opacity-55" />
-        <div className="container relative">
-          <p className="eyebrow">{t ? "Services numériques" : "Digital services"}</p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-[-0.055em] text-[#081A3C] sm:text-6xl">{t ? "Donnez une forme utile à vos idées." : "Give your ideas a useful form."}</h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600">{t ? "Du premier échange à l’interface finale, nous concevons des solutions digitales compréhensibles, belles et pensées pour vos objectifs." : "From the first conversation to the final interface, we design digital solutions that are clear, polished and built around your goals."}</p>
+        <div className="container relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div><p className="eyebrow">{t ? "Services numériques" : "Digital services"}</p><h1 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-[-0.06em] text-[#081A3C] sm:text-6xl">{t ? <>Une expérience digitale, <span className="text-blue-600">à votre mesure.</span></> : <>A digital experience, <span className="text-blue-600">made for you.</span></>}</h1><p className="mt-6 max-w-2xl text-base leading-7 text-slate-600">{t ? "Du premier échange à l’interface finale, nous concevons des solutions compréhensibles, belles et pensées pour vos objectifs." : "From the first conversation to the final interface, we design clear, polished solutions built around your goals."}</p><div className="mt-7"><WhatsAppButton lang={lang} compact quote message={quoteMessage(t ? "un projet digital" : "a digital project", lang)} /></div></div>
+          <div className="grid gap-3 rounded-[1.8rem] border border-white bg-white/75 p-4 shadow-[0_20px_48px_rgba(18,103,243,0.10)] backdrop-blur sm:grid-cols-3 sm:p-5">{[{ n: "01", fr: "Brief clair", en: "Clear brief" }, { n: "02", fr: "Design utile", en: "Useful design" }, { n: "03", fr: "Livraison", en: "Delivery" }].map(({ n, fr, en }) => <div key={n} className="rounded-2xl bg-[#F4F8FF] p-4"><span className="font-display text-2xl font-bold tracking-[-0.05em] text-cyan-600">{n}</span><p className="mt-5 text-sm font-extrabold text-[#081A3C]">{t ? fr : en}</p></div>)}</div>
         </div>
       </section>
 

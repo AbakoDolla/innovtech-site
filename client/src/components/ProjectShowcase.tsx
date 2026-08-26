@@ -12,7 +12,7 @@ export function ProjectShowcase({ lang }: { lang: Lang }) {
       </div>
       <div className="mt-9 grid gap-5 md:grid-cols-2">
         {portfolioProjects.map((project, index) => <a key={project.id} href={project.url} target="_blank" rel="noreferrer" className={`project-card group relative overflow-hidden rounded-[1.75rem] border border-slate-100 bg-white shadow-[0_16px_34px_rgba(20,68,145,0.07)] transition focus:outline-none focus:ring-4 focus:ring-blue-200 ${index % 2 === 1 ? "md:translate-y-8" : ""}`}>
-          <div className="aspect-[16/9] overflow-hidden bg-slate-100"><img src={project.imageSrc} alt={project.title[lang]} loading="lazy" decoding="async" className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" /></div>
+          <div className="aspect-[16/9] overflow-hidden bg-slate-100"><img src={project.imageSrc} alt={project.title[lang]} loading={index < 2 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} decoding="async" className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" /></div>
           <div className="relative p-6"><span className="text-xs font-extrabold uppercase tracking-[0.14em] text-cyan-600">{project.category[lang]}</span><h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[#081A3C]">{project.title[lang]}</h3><p className="mt-3 min-h-12 text-sm leading-6 text-slate-600">{project.description[lang]}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-blue-700">{t ? "Voir le projet" : "View project"}<ExternalLink className="h-4 w-4" /></span></div>
         </a>)}
       </div>
