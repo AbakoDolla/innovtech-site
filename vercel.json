@@ -6,10 +6,10 @@
   "outputDirectory": "dist/public",
   "functions": {
     "api/trpc/[trpc].ts": {
-      "includeFiles": "dist/vercel-trpc.mjs"
+      "includeFiles": "dist/vercel-trpc.cjs"
     },
     "api/oauth/callback.ts": {
-      "includeFiles": "dist/vercel-oauth.mjs"
+      "includeFiles": "dist/vercel-oauth.cjs"
     }
   },
   "rewrites": [
