@@ -1,270 +1,35 @@
-import { useAuth } from "@/_core/hooks/useAuth";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarInset,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-  SidebarTrigger,
-  useSidebar,
-} from "@/components/ui/sidebar";
-import { startLogin } from "@/const";
-import { useIsMobile } from "@/hooks/useMobile";
-import { Boxes, CircleCheck, FilePenLine, Globe2, ImagePlus, LayoutDashboard, Loader2, LogOut, PanelLeft } from "lucide-react";
-import { CSSProperties, useEffect, useRef, useState } from "react";
-import { useLocation } from "wouter";
-import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useSupabaseAuth } from "@/contexts/SupabaseAuthContext";
+import { Boxes, FilePenLine, Globe2, ImagePlus, LayoutDashboard, Loader2, LockKeyhole, LogOut } from "lucide-react";
+import { useState } from "react";
+import { Link, useLocation } from "wouter";
+import { toast } from "sonner";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Vue d’ensemble", path: "/admin" },
-  { icon: Boxes, label: "Catalogue & prix", path: "/admin/catalogue" },
-  { icon: CircleCheck, label: "Disponibilités", path: "/admin/disponibilites" },
-  { icon: FilePenLine, label: "Contenus & SEO", path: "/admin/contenus" },
-  { icon: ImagePlus, label: "Bibliothèque média", path: "/admin/media" },
-  { icon: Globe2, label: "Voir le site", path: "/" },
+const links = [
+  { icon: LayoutDashboard, label: "Vue d’ensemble", href: "/admin" },
+  { icon: Boxes, label: "Catalogue & prix", href: "/admin/catalogue" },
+  { icon: FilePenLine, label: "Disponibilités", href: "/admin/disponibilites" },
+  { icon: FilePenLine, label: "Contenus & SEO", href: "/admin/contenus" },
+  { icon: ImagePlus, label: "Médias", href: "/admin/media" },
+  { icon: Globe2, label: "Voir le site", href: "/" },
 ];
 
-const SIDEBAR_WIDTH_KEY = "sidebar-width";
-const DEFAULT_WIDTH = 280;
-const MIN_WIDTH = 200;
-const MAX_WIDTH = 480;
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [sidebarWidth, setSidebarWidth] = useState(() => {
-    const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
-    return saved ? parseInt(saved, 10) : DEFAULT_WIDTH;
-  });
-  const { loading, user } = useAuth();
-
-  useEffect(() => {
-    localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
-  }, [sidebarWidth]);
-
-  if (loading) {
-    return <div className="grid min-h-screen place-items-center bg-[#F7FAFF] px-6 text-center"><div><Loader2 className="mx-auto h-8 w-8 animate-spin text-blue-700" /><p className="mt-4 text-sm font-bold text-slate-600">Vérification de votre session InnovTech…</p></div></div>;
-  }
-
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center gap-8 p-8 max-w-md w-full">
-          <div className="flex flex-col items-center gap-6">
-            <h1 className="text-2xl font-semibold tracking-tight text-center">
-              Sign in to continue
-            </h1>
-            <p className="text-sm text-muted-foreground text-center max-w-sm">
-              Access to this dashboard requires authentication. Continue to launch the login flow.
-            </p>
-          </div>
-          <Button
-            onClick={() => startLogin()}
-            size="lg"
-            className="w-full shadow-lg hover:shadow-xl transition-all"
-          >
-            Sign in
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  if (user.role !== "admin") {
-    return <div className="grid min-h-screen place-items-center bg-[#F7FAFF] px-6 text-center"><div className="max-w-md rounded-3xl border border-amber-100 bg-white p-8 shadow-sm"><h1 className="font-display text-2xl font-bold text-[#081A3C]">Accès réservé</h1><p className="mt-3 text-sm leading-6 text-slate-600">Ce tableau de bord est réservé au compte administrateur InnovTech.</p></div></div>;
-  }
-
-  return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": `${sidebarWidth}px`,
-        } as CSSProperties
-      }
-    >
-      <DashboardLayoutContent setSidebarWidth={setSidebarWidth}>
-        {children}
-      </DashboardLayoutContent>
-    </SidebarProvider>
-  );
+function LoginScreen() {
+  const { user, isAdmin, loading, signIn, signUp, signOut } = useSupabaseAuth();
+  const [email, setEmail] = useState("evansabah2006@gmail.com");
+  const [password, setPassword] = useState("");
+  const [pending, setPending] = useState(false);
+  if (loading) return <div className="grid min-h-screen place-items-center bg-[#F3F8FF]"><Loader2 className="h-8 w-8 animate-spin text-blue-700" /></div>;
+  if (user && !isAdmin) return <div className="grid min-h-screen place-items-center bg-[#F3F8FF] p-6"><article className="max-w-md rounded-3xl bg-white p-8 text-center shadow-sm"><LockKeyhole className="mx-auto h-8 w-8 text-amber-600" /><h1 className="mt-5 font-display text-2xl font-bold text-[#081A3C]">Accès réservé</h1><p className="mt-3 text-sm leading-6 text-slate-600">Ce compte n’a pas le rôle administrateur InnovTech. Utilisez l’adresse propriétaire ou changez de compte.</p><Button className="mt-6" variant="outline" onClick={() => void signOut()}>Changer de compte</Button></article></div>;
+  if (user) return null;
+  const submit = async (mode: "signin" | "signup") => { if (password.length < 8) { toast.error("Utilisez au moins 8 caractères."); return; } setPending(true); const result = mode === "signin" ? await signIn(email, password) : await signUp(email, password); setPending(false); if (result.error) toast.error(result.error); else toast.success(result.message || "Opération terminée."); };
+  return <div className="grid min-h-screen place-items-center bg-[#F3F8FF] p-6"><article className="w-full max-w-md rounded-[2rem] border border-blue-100 bg-white p-8 shadow-[0_20px_50px_rgba(20,68,145,0.12)]"><div className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-700 text-white"><LockKeyhole className="h-5 w-5" /></div><p className="mt-6 text-xs font-extrabold uppercase tracking-[0.15em] text-blue-700">InnovTech · administration</p><h1 className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-[#081A3C]">Accédez à votre tableau de bord</h1><p className="mt-3 text-sm leading-6 text-slate-600">Connexion sécurisée par Supabase. La création initiale est limitée au propriétaire de la plateforme.</p><div className="mt-7 grid gap-4"><label className="grid gap-2 text-sm font-bold text-slate-700">E-mail<Input type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label><label className="grid gap-2 text-sm font-bold text-slate-700">Mot de passe<Input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label><Button className="bg-blue-700 hover:bg-blue-800" disabled={pending} onClick={() => void submit("signin")}>{pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Se connecter</Button><Button variant="outline" disabled={pending} onClick={() => void submit("signup")}>Créer mon accès administrateur</Button></div></article></div>;
 }
 
-type DashboardLayoutContentProps = {
-  children: React.ReactNode;
-  setSidebarWidth: (width: number) => void;
-};
-
-function DashboardLayoutContent({
-  children,
-  setSidebarWidth,
-}: DashboardLayoutContentProps) {
-  const { user, logout } = useAuth();
-  const [location, setLocation] = useLocation();
-  const { state, toggleSidebar } = useSidebar();
-  const isCollapsed = state === "collapsed";
-  const [isResizing, setIsResizing] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const activeMenuItem = menuItems.find(item => item.path === location);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (isCollapsed) {
-      setIsResizing(false);
-    }
-  }, [isCollapsed]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isResizing) return;
-
-      const sidebarLeft = sidebarRef.current?.getBoundingClientRect().left ?? 0;
-      const newWidth = e.clientX - sidebarLeft;
-      if (newWidth >= MIN_WIDTH && newWidth <= MAX_WIDTH) {
-        setSidebarWidth(newWidth);
-      }
-    };
-
-    const handleMouseUp = () => {
-      setIsResizing(false);
-    };
-
-    if (isResizing) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor = "col-resize";
-      document.body.style.userSelect = "none";
-    }
-
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor = "";
-      document.body.style.userSelect = "";
-    };
-  }, [isResizing, setSidebarWidth]);
-
-  return (
-    <>
-      <div className="relative" ref={sidebarRef}>
-        <Sidebar
-          collapsible="icon"
-          className="border-r-0"
-          disableTransition={isResizing}
-        >
-          <SidebarHeader className="h-16 justify-center">
-            <div className="flex items-center gap-3 px-2 transition-all w-full">
-              <button
-                onClick={toggleSidebar}
-                className="h-8 w-8 flex items-center justify-center hover:bg-accent rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
-                aria-label="Toggle navigation"
-              >
-                <PanelLeft className="h-4 w-4 text-muted-foreground" />
-              </button>
-              {!isCollapsed ? (
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold tracking-tight truncate">
-                    InnovTech
-                  </span>
-                </div>
-              ) : null}
-            </div>
-          </SidebarHeader>
-
-          <SidebarContent className="gap-0">
-            <SidebarMenu className="px-2 py-1">
-              {menuItems.map(item => {
-                const isActive = location === item.path;
-                return (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton
-                      isActive={isActive}
-                      onClick={() => setLocation(item.path)}
-                      tooltip={item.label}
-                      className={`h-10 transition-all font-normal`}
-                    >
-                      <item.icon
-                        className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
-                      />
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarContent>
-
-          <SidebarFooter className="p-3">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-3 rounded-lg px-1 py-1 hover:bg-accent/50 transition-colors w-full text-left group-data-[collapsible=icon]:justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                  <Avatar className="h-9 w-9 border shrink-0">
-                    <AvatarFallback className="text-xs font-medium">
-                      {user?.name?.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
-                    <p className="text-sm font-medium truncate leading-none">
-                      {user?.name || "-"}
-                    </p>
-                    <p className="text-xs text-muted-foreground truncate mt-1.5">
-                      {user?.email || "-"}
-                    </p>
-                  </div>
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem
-                  onClick={logout}
-                  className="cursor-pointer text-destructive focus:text-destructive"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Sign out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarFooter>
-        </Sidebar>
-        <div
-          className={`absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-primary/20 transition-colors ${isCollapsed ? "hidden" : ""}`}
-          onMouseDown={() => {
-            if (isCollapsed) return;
-            setIsResizing(true);
-          }}
-          style={{ zIndex: 50 }}
-        />
-      </div>
-
-      <SidebarInset>
-        {isMobile && (
-          <div className="flex border-b h-14 items-center justify-between bg-background/95 px-2 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
-            <div className="flex items-center gap-2">
-              <SidebarTrigger className="h-9 w-9 rounded-lg bg-background" />
-              <div className="flex items-center gap-3">
-                <div className="flex flex-col gap-1">
-                  <span className="tracking-tight text-foreground">
-                    {activeMenuItem?.label ?? "Menu"}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        <main className="flex-1 p-4">{children}</main>
-      </SidebarInset>
-    </>
-  );
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const { user, isAdmin, signOut } = useSupabaseAuth();
+  const [location] = useLocation();
+  if (!user || !isAdmin) return <LoginScreen />;
+  return <div className="min-h-screen bg-[#F7FAFF] text-[#081A3C] lg:grid lg:grid-cols-[270px_1fr]"><aside className="border-b border-blue-100 bg-white p-5 lg:min-h-screen lg:border-b-0 lg:border-r"><div className="flex items-center justify-between gap-3"><Link href="/admin" className="font-display text-xl font-bold text-blue-700">InnovTech <span className="text-[#081A3C]">Admin</span></Link><Button variant="ghost" size="icon" onClick={() => void signOut()} aria-label="Se déconnecter"><LogOut className="h-4 w-4" /></Button></div><p className="mt-2 truncate text-xs font-bold text-slate-500">{user.email}</p><nav className="mt-7 grid gap-1">{links.map((item) => <Link key={item.href} href={item.href} className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold transition ${location === item.href ? "bg-blue-700 text-white" : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"}`}><item.icon className="h-4 w-4" />{item.label}</Link>)}</nav></aside><main className="min-w-0 p-4 sm:p-7">{children}</main></div>;
 }

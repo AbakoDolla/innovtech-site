@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { catalogWithFallback, toCatalogProduct } from "./managedCatalog";
+import { catalogWithFallback } from "./managedCatalog";
+import { toCatalogProduct, type SupabaseCatalogRow } from "./supabaseCatalog";
 
-const persisted = { slug: "produit-test", family: "security", icon: "Fingerprint", nameFr: "Produit test", nameEn: "Test product", descriptionFr: "Description française suffisamment longue.", descriptionEn: "English description long enough.", badgeFr: "Nouveau", badgeEn: "New", priceFr: "10 000 FCFA", priceEn: "10,000 XAF", imageUrl: "/media/test.jpg", searchTermsFr: '["test","serrure"]', searchTermsEn: '["test","lock"]', availabilityNoteFr: "Disponible sur demande", availabilityNoteEn: "Available on request" };
+const persisted: SupabaseCatalogRow = { id: "catalog-row", slug: "produit-test", category: "security", icon: "Fingerprint", name_fr: "Produit test", name_en: "Test product", description_fr: "Description française suffisamment longue.", description_en: "English description long enough.", badge_fr: "Nouveau", badge_en: "New", price_label: "10 000 FCFA", price_label_en: "10,000 XAF", image_url: "/media/test.jpg", search_terms_fr: ["test", "serrure"], search_terms_en: ["test", "lock"], availability_note_fr: "Disponible sur demande", availability_note_en: "Available on request", availability_status: "available", status: "published", sort_order: 0 };
 
 describe("managed catalogue", () => {
   it("maps a persisted product to the public product contract", () => {

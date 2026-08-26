@@ -1,34 +1,19 @@
-import { trpc } from "@/lib/trpc";
-import { fullProductCatalog, type CatalogProduct, type ProductFamily, type ProductIcon } from "@/lib/site";
+import { fullProductCatalog } from "@/lib/site";
+import { supabase } from "@/lib/supabase";
+import { toCatalogProduct, type SupabaseCatalogRow } from "@/lib/supabaseCatalog";
+import { useEffect, useState } from "react";
 
-type PersistedProduct = {
-  slug: string; family: string; icon: string; nameFr: string; nameEn: string; descriptionFr: string; descriptionEn: string; badgeFr: string; badgeEn: string; priceFr: string; priceEn: string; imageUrl: string; searchTermsFr: string; searchTermsEn: string; availabilityNoteFr: string; availabilityNoteEn: string;
-};
-
-function parseTerms(raw: string) {
-  try { const parsed = JSON.parse(raw); return Array.isArray(parsed) ? parsed.filter((value): value is string => typeof value === "string") : []; } catch { return []; }
-}
-
-export function toCatalogProduct(product: PersistedProduct): CatalogProduct {
-  return {
-    id: product.slug,
-    family: product.family as ProductFamily,
-    icon: product.icon as ProductIcon,
-    imageSrc: product.imageUrl,
-    price: { fr: product.priceFr, en: product.priceEn },
-    badge: { fr: product.badgeFr, en: product.badgeEn },
-    name: { fr: product.nameFr, en: product.nameEn },
-    description: { fr: product.descriptionFr, en: product.descriptionEn },
-    searchTerms: { fr: parseTerms(product.searchTermsFr), en: parseTerms(product.searchTermsEn) },
-    availability: { fr: product.availabilityNoteFr || "Disponibilité à confirmer avec notre équipe.", en: product.availabilityNoteEn || "Availability to confirm with our team." },
-  };
-}
-
-export function catalogWithFallback(products: PersistedProduct[] | undefined) {
-  return products?.length ? products.map(toCatalogProduct) : fullProductCatalog;
-}
+export function catalogWithFallback(rows?: SupabaseCatalogRow[]) { return rows?.length ? rows.map(toCatalogProduct) : fullProductCatalog; }
 
 export function useManagedCatalog() {
-  const query = trpc.catalog.list.useQuery();
-  return { ...query, catalog: catalogWithFallback(query.data as PersistedProduct[] | undefined) };
+  const [rows, setRows] = useState<SupabaseCatalogRow[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    let active = true;
+    supabase.from("innovtech_catalog_products").select("*").eq("status", "published").order("sort_order").then(({ data }) => {
+      if (active) { setRows((data || []) as SupabaseCatalogRow[]); setIsLoading(false); }
+    });
+    return () => { active = false; };
+  }, []);
+  return { catalog: catalogWithFallback(rows), isLoading };
 }

@@ -21,5 +21,6 @@ export function toCatalogProduct(row: SupabaseCatalogRow): CatalogProduct {
     name: { fr: row.name_fr, en: row.name_en },
     description: { fr: row.description_fr, en: row.description_en },
     searchTerms: { fr: terms(row.search_terms_fr), en: terms(row.search_terms_en) },
+    availability: { fr: row.availability_note_fr || "Disponibilité à confirmer avec notre équipe.", en: row.availability_note_en || "Availability to confirm with our team." },
   };
 }

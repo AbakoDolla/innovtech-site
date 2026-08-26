@@ -112,3 +112,13 @@
 - [ ] Préparer Vercel pour servir le backend tRPC et le tableau de bord avec le site public synchronisé.
 - [ ] Vérifier en production Vercel les routes API, la connexion administrateur et la synchronisation catalogue après publication.
 - [ ] Corriger le déclenchement du bouton de connexion administrateur sur le domaine Vercel.
+- [x] Remplacer le garde OAuth Manus indisponible dans la région par Supabase Auth pour les routes d’administration.
+- [x] Versionner les migrations Supabase du dashboard, des champs d’affichage et du prix anglais.
+- [x] Appliquer et vérifier la migration `price_label_en` sur le projet Supabase InnovTech.
+- [x] Connecter les pages publiques au catalogue Supabase publié avec un fallback vers les 11 produits existants.
+- [x] Valider TypeScript, 31 tests unitaires et la compilation de production après la réintégration de la branche principale.
+- [ ] Configurer les URL de redirection Supabase Auth pour `https://innovtech-site.vercel.app` et les aperçus nécessaires.
+- [ ] Créer le premier compte administrateur `evansabah2006@gmail.com`, puis vérifier l’attribution automatique du rôle.
+- [ ] Importer les 11 produits dans Supabase depuis le dashboard et vérifier le catalogue public alimenté par ces données.
+- [ ] Vérifier en production Vercel l’accès Supabase, les règles RLS, la disponibilité, les prix et le masquage d’un produit.
+- [ ] Connecter Supabase Storage à la gestion des médias pour les futurs téléversements d’images et vidéos.
