@@ -70,4 +70,4 @@
 - [x] Rechercher et intégrer des visuels réels sans filigrane pour le nouveau catalogue.
 - [ ] Remplacer ou confirmer les visuels spécialisés par des images propriétaires ou explicitement autorisées, avec sources exactes par produit.
 - [ ] Vérifier visuellement chaque image du catalogue spécialisé en production et sur mobile après déploiement.
-- [ ] Éliminer définitivement l’écran blanc persistant de la Boutique sur Vercel et mobile.
+- [x] Éliminer définitivement l’écran blanc persistant de la Boutique sur Vercel et mobile.
