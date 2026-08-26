@@ -27,7 +27,7 @@ export default function Home({ lang }: { lang: Lang }) {
   }, [categoryCarousel]);
 
   return (
-    <main>
+    <main className="home-page">
       <section className="relative isolate overflow-hidden bg-[linear-gradient(120deg,#FFFFFF_0%,#F3F8FF_48%,#EAFBFF_100%)] pb-16 pt-9 sm:pb-24 sm:pt-16" onMouseMove={(event) => { const bounds = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--mx", `${(event.clientX - bounds.left - bounds.width / 2) / 28}px`); event.currentTarget.style.setProperty("--my", `${(event.clientY - bounds.top - bounds.height / 2) / 38}px`); }} onMouseLeave={(event) => { event.currentTarget.style.setProperty("--mx", "0px"); event.currentTarget.style.setProperty("--my", "0px"); }}>
         <div className="hero-orb left-[42%] top-6" />
         <div className="circuit-lines pointer-events-none absolute inset-0 opacity-35" />

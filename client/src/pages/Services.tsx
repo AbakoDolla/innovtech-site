@@ -12,7 +12,7 @@ export default function Services({ lang }: { lang: Lang }) {
   const t = lang === "fr";
 
   return (
-    <main>
+      <main className="services-page">
       <section className="relative overflow-hidden bg-[linear-gradient(120deg,#F4F8FF_0%,#FFFFFF_60%,#EAFBFF_100%)] py-14 sm:py-24">
         <div className="hero-orb left-[-5%] top-[-110px]" />
         <div className="circuit-lines absolute inset-0 opacity-55" />

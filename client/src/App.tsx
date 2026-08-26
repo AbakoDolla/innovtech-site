@@ -73,7 +73,7 @@ function App() {
     return () => { observer.disconnect(); mutations.disconnect(); window.removeEventListener("scroll", updateProgress); window.removeEventListener("resize", updateProgress); document.removeEventListener("error", recoverImage, true); };
   }, []);
 
-  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white"><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
+  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#081426]"><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
 }
 
 export default App;
