@@ -6,9 +6,19 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
 
+export function resolveHmrPort(value: string | undefined): number {
+  const parsed = Number.parseInt(value ?? "", 10);
+  return Number.isInteger(parsed) && parsed > 0 && parsed <= 65_535 ? parsed : 3000;
+}
+
 export async function setupVite(app: Express, server: Server) {
+  // Vite runs in middleware mode on the Express server, not on its standalone
+  // default port (5173). Declare the shared preview port to prevent its HMR
+  // client from falling back to an inaccessible localhost:5173 WebSocket.
   const serverOptions = {
     middlewareMode: true,
+    port: resolveHmrPort(process.env.PORT),
+    strictPort: true,
     hmr: { server },
     allowedHosts: true as const,
   };

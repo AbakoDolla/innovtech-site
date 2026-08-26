@@ -79,3 +79,4 @@
 - [x] Vérifier visuellement le mode sombre sur toutes les pages publiques et fiches produit en mobile et bureau, puis corriger les incohérences restantes.
 - [ ] Remplacer les surcharges de thème sombre fragiles par des styles ciblés sur les composants et pages critiques.
 - [ ] Contrôler les contrastes, focus, champs, boutons et liens du thème sombre sur Boutique, Services, Contact, À propos et les fiches produit.
+- [x] Corriger la connexion WebSocket Vite du rechargement à chaud dans l’aperçu sécurisé.
