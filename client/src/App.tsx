@@ -21,6 +21,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Legal, { type LegalPageKind } from "./pages/Legal";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminAvailability from "./pages/AdminAvailability";
 
 const MediaManager = lazyWithRetry(() => import("./pages/MediaManager"));
 
@@ -41,6 +43,10 @@ function Router({ lang }: { lang: Lang }) {
     <Route path="/cgu">{() => <Legal lang={lang} kind={"terms" satisfies LegalPageKind} />}</Route>
     <Route path="/conditions-vente">{() => <Legal lang={lang} kind={"sales" satisfies LegalPageKind} />}</Route>
     <Route path="/cookies">{() => <Legal lang={lang} kind={"cookies" satisfies LegalPageKind} />}</Route>
+    <Route path="/admin">{() => <AdminDashboard />}</Route>
+    <Route path="/admin/catalogue">{() => <AdminDashboard section="catalog" />}</Route>
+    <Route path="/admin/disponibilites">{() => <AdminAvailability />}</Route>
+    <Route path="/admin/contenus">{() => <AdminDashboard section="content" />}</Route>
     <Route path="/admin/media">{() => <MediaManager />}</Route>
     <Route>{() => <NotFound />}</Route>
   </Switch></Suspense>;

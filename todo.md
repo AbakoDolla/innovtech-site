@@ -100,3 +100,12 @@
 - [x] Adapter le logo InnovTech pour une intégration sans fond gênant en thèmes clair et sombre.
 - [x] Renforcer les métadonnées SEO, les données structurées et les signaux d’indexation du site InnovTech.
 - [ ] Préparer le référencement local Cameroun et international avec des informations commerciales vérifiables.
+- [x] Créer une URL d’administration sécurisée, distincte des parcours publics InnovTech.
+- [ ] Créer un backend et un modèle de données pour administrer produits, prix, catégories, disponibilité et contenus publics.
+- [x] Construire un tableau de bord pour ajouter, modifier, masquer et supprimer les éléments pilotés sur le site.
+- [x] Relier le catalogue public aux données administrées sans dégrader les parcours WhatsApp existants.
+- [ ] Ajouter une gestion des médias, des réalisations et des paramètres de référencement dans l’administration.
+- [ ] Tester les droits administrateur, les mises à jour et les retours d’erreur avant mise en ligne.
+- [ ] Ajouter un champ de disponibilité administrable aux produits et l’afficher sur le site public.
+- [ ] Vérifier en session administrateur réelle les mutations d’ajout, modification de prix, masquage et suppression du tableau de bord.
+- [ ] Vérifier les états d’erreur critiques du tableau de bord pour la validation, les droits et les mutations.

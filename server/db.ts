@@ -1,6 +1,6 @@
-import { desc, eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertMediaAsset, InsertUser, mediaAssets, users } from "../drizzle/schema";
+import { CatalogProductRecord, InsertCatalogProduct, InsertMediaAsset, InsertUser, catalogProducts, mediaAssets, siteSettings, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -102,4 +102,64 @@ export async function createMediaAsset(asset: InsertMediaAsset) {
   const [created] = await db.select().from(mediaAssets).where(eq(mediaAssets.storageKey, asset.storageKey)).limit(1);
   if (!created) throw new Error("Media metadata was not saved");
   return created;
+}
+
+export async function listPublishedCatalogProducts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(catalogProducts).where(eq(catalogProducts.status, "published")).orderBy(asc(catalogProducts.sortOrder), asc(catalogProducts.id));
+}
+
+export async function listAdminCatalogProducts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(catalogProducts).orderBy(asc(catalogProducts.sortOrder), asc(catalogProducts.id));
+}
+
+export async function createCatalogProduct(product: InsertCatalogProduct) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable while creating product");
+  await db.insert(catalogProducts).values(product);
+  const [created] = await db.select().from(catalogProducts).where(eq(catalogProducts.slug, product.slug)).limit(1);
+  if (!created) throw new Error("Product was not created");
+  return created;
+}
+
+export async function updateCatalogProduct(id: number, product: Partial<InsertCatalogProduct>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable while updating product");
+  await db.update(catalogProducts).set(product).where(eq(catalogProducts.id, id));
+  const [updated] = await db.select().from(catalogProducts).where(eq(catalogProducts.id, id)).limit(1);
+  if (!updated) throw new Error("Product was not found");
+  return updated;
+}
+
+export async function deleteCatalogProduct(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable while deleting product");
+  await db.delete(catalogProducts).where(eq(catalogProducts.id, id));
+}
+
+export async function replaceCatalogProducts(products: InsertCatalogProduct[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable while initializing catalogue");
+  for (const product of products) {
+    await db.insert(catalogProducts).values(product).onDuplicateKeyUpdate({ set: product });
+  }
+  return listAdminCatalogProducts();
+}
+
+export async function listSiteSettings() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(siteSettings).orderBy(asc(siteSettings.settingKey));
+}
+
+export async function upsertSiteSetting(settingKey: string, settingValue: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable while saving settings");
+  await db.insert(siteSettings).values({ settingKey, settingValue }).onDuplicateKeyUpdate({ set: { settingValue } });
+  const [saved] = await db.select().from(siteSettings).where(eq(siteSettings.settingKey, settingKey)).limit(1);
+  if (!saved) throw new Error("Setting was not saved");
+  return saved;
 }

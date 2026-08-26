@@ -21,13 +21,17 @@ import {
 } from "@/components/ui/sidebar";
 import { startLogin } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { Globe2, ImagePlus, Loader2, LogOut, PanelLeft } from "lucide-react";
+import { Boxes, CircleCheck, FilePenLine, Globe2, ImagePlus, LayoutDashboard, Loader2, LogOut, PanelLeft } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 
 const menuItems = [
+  { icon: LayoutDashboard, label: "Vue d’ensemble", path: "/admin" },
+  { icon: Boxes, label: "Catalogue & prix", path: "/admin/catalogue" },
+  { icon: CircleCheck, label: "Disponibilités", path: "/admin/disponibilites" },
+  { icon: FilePenLine, label: "Contenus & SEO", path: "/admin/contenus" },
   { icon: ImagePlus, label: "Bibliothèque média", path: "/admin/media" },
   { icon: Globe2, label: "Voir le site", path: "/" },
 ];
@@ -78,6 +82,10 @@ export default function DashboardLayout({
         </div>
       </div>
     );
+  }
+
+  if (user.role !== "admin") {
+    return <div className="grid min-h-screen place-items-center bg-[#F7FAFF] px-6 text-center"><div className="max-w-md rounded-3xl border border-amber-100 bg-white p-8 shadow-sm"><h1 className="font-display text-2xl font-bold text-[#081A3C]">Accès réservé</h1><p className="mt-3 text-sm leading-6 text-slate-600">Ce tableau de bord est réservé au compte administrateur InnovTech.</p></div></div>;
   }
 
   return (

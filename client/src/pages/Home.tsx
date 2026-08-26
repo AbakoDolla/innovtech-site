@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import { ArrowRight, Code2, Headphones, Layers3, MessageCircle, ShieldCheck, ShoppingBag, Smartphone, Sparkles } from "lucide-react";
 import type { Lang } from "@/lib/site";
-import { fullProductCatalog, orderMessage, quoteMessage } from "@/lib/site";
+import { orderMessage, quoteMessage } from "@/lib/site";
+import { useManagedCatalog } from "@/lib/managedCatalog";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
@@ -16,12 +17,13 @@ const highlights = [
 
 export default function Home({ lang }: { lang: Lang }) {
   const t = lang === "fr";
+  const { catalog } = useManagedCatalog();
   const [categoryCarousel, setCategoryCarousel] = useState<CarouselApi>();
-  const heroProducts = [fullProductCatalog[3], fullProductCatalog[1], fullProductCatalog[2]];
+  const heroProducts = [catalog[3] || catalog[0], catalog[1] || catalog[0], catalog[2] || catalog[0]];
   const spotlightEntries = [
-    { product: fullProductCatalog[0], fr: "Les essentiels utiles", en: "Useful essentials" },
-    { product: fullProductCatalog[6], fr: "Les objets qui suivent votre rythme", en: "Tools that follow your rhythm" },
-    { product: fullProductCatalog[4], fr: "Votre espace de création", en: "Your creative space" },
+    { product: catalog[0], fr: "Les essentiels utiles", en: "Useful essentials" },
+    { product: catalog[6] || catalog[0], fr: "Les objets qui suivent votre rythme", en: "Tools that follow your rhythm" },
+    { product: catalog[4] || catalog[0], fr: "Votre espace de création", en: "Your creative space" },
   ];
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function Home({ lang }: { lang: Lang }) {
               <Link href="/services" className="home-theme-card inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white/85 px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]"><Code2 className="h-4 w-4" />{t ? "J’ai un projet digital" : "I have a digital project"}</Link>
             </div>
             <div className="home-theme-card mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-blue-100 bg-white/75 shadow-[0_12px_26px_rgba(20,68,145,0.07)] backdrop-blur">
-              {[{ value: String(fullProductCatalog.length), fr: "Équipements", en: "Equipment" }, { value: "3", fr: "Parcours", en: "Paths" }, { value: "1:1", fr: "Conseil", en: "Guidance" }].map(({ value, fr, en }) => <div key={value} className="border-r border-blue-100 px-3 py-3 last:border-r-0 sm:px-4"><strong className="home-theme-title block font-display text-lg font-bold tracking-[-0.05em] text-[#081A3C] sm:text-xl">{value}</strong><span className="home-theme-copy mt-0.5 block text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-slate-500">{t ? fr : en}</span></div>)}
+              {[{ value: String(catalog.length), fr: "Équipements", en: "Equipment" }, { value: "3", fr: "Parcours", en: "Paths" }, { value: "1:1", fr: "Conseil", en: "Guidance" }].map(({ value, fr, en }) => <div key={value} className="border-r border-blue-100 px-3 py-3 last:border-r-0 sm:px-4"><strong className="home-theme-title block font-display text-lg font-bold tracking-[-0.05em] text-[#081A3C] sm:text-xl">{value}</strong><span className="home-theme-copy mt-0.5 block text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-slate-500">{t ? fr : en}</span></div>)}
             </div>
             <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">{highlights.map(({ icon: Icon, fr, en }) => <div key={fr} className="flex items-center gap-2 text-xs font-bold text-slate-600"><span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-700"><Icon className="h-3.5 w-3.5" /></span>{t ? fr : en}</div>)}</div>
           </div>

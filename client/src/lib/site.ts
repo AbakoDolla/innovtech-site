@@ -13,6 +13,7 @@ export type CatalogProduct = {
   name: Record<Lang, string>;
   description: Record<Lang, string>;
   searchTerms: Record<Lang, string[]>;
+  availability?: Record<Lang, string>;
 };
 
 export type PortfolioProject = {
