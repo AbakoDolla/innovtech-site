@@ -10,6 +10,8 @@ Les éléments suivants sont préparés : métadonnées descriptives générales
 
 Une navigation locale vers la fiche « Mini-tracteur robotique agricole » a exposé le titre `Mini-tracteur robotique agricole | InnovTech Cameroun`, confirmant la génération de titre adaptée à la route. La lecture directe de console a ensuite retourné un état de page vide dans l’outil de contrôle ; elle n’a donc pas été utilisée comme preuve supplémentaire.
 
+Après synchronisation GitHub et propagation Vercel, la fiche produit de production a bien servi le titre spécialisé et le nouveau verrouillage de marque, composé du symbole transparent et du nom InnovTech sans fond blanc.
+
 ## Limites à respecter
 
 Les données `LocalBusiness` détaillées, ainsi qu’un profil Google Business complet, attendent une adresse professionnelle vérifiable. Les alternatives `hreflang` attendent des URLs différentes pour les pages françaises et anglaises. Ces contraintes évitent de publier des données factuellement incorrectes.
