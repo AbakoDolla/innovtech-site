@@ -105,6 +105,14 @@
   @keyframes chip-drift { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -7px, 0); } }
   @keyframes service-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
   .service-float { animation: service-float 5s ease-in-out infinite; } .service-float--slow { animation-duration: 6.5s; animation-delay: -1.5s; }
+  .admin-login-shell { background: radial-gradient(circle at 22% 18%, rgba(19,213,244,.2), transparent 24rem), radial-gradient(circle at 78% 85%, rgba(18,103,243,.28), transparent 28rem), linear-gradient(135deg, #061733, #082a5d 52%, #071b3a); }
+  .admin-login-shell::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(153,217,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(153,217,255,.08) 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(ellipse at center, black 12%, transparent 72%); content: ""; opacity: .7; }
+  .admin-login-card { background: rgba(255,255,255,.96); box-shadow: 0 30px 85px rgba(0,20,61,.22); animation: admin-card-in 520ms cubic-bezier(.23,1,.32,1) both; }
+  .admin-login-intro { background: linear-gradient(150deg, rgba(6,27,64,.68), rgba(9,57,119,.7)); }
+  .admin-login-orb { position: absolute; z-index: -1; height: 17rem; width: 17rem; border: 1px solid rgba(148,235,255,.25); border-radius: 999px; box-shadow: 0 0 0 2.5rem rgba(82,198,255,.04), 0 0 0 5.2rem rgba(82,198,255,.025); animation: admin-orbit 7s ease-in-out infinite; }
+  .admin-login-orb--one { left: -6rem; top: -5rem; } .admin-login-orb--two { bottom: -7rem; right: -5rem; animation-delay: -3s; }
+  @keyframes admin-card-in { from { opacity: 0; transform: translate3d(0, 18px, 0) scale(.985); } to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
+  @keyframes admin-orbit { 0%,100% { transform: translate3d(0,0,0) rotate(0); } 50% { transform: translate3d(0,-9px,0) rotate(7deg); } }
   /* Dark theme surfaces stay scoped to stable page and component contracts, never to utility-class string matching. */
   .dark body, .dark main, .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) { background: #081426; color: #eaf4ff; }
   .dark .site-header { border-color: rgba(103, 168, 255, .18); background: rgba(8, 20, 38, .88); }
@@ -157,5 +165,5 @@
   .dark .home-theme-title { color: #f1f7ff !important; }
   .dark .home-theme-copy { color: #b6c9df !important; }
   @media (max-width: 639px) { main section, main article { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal, .hero-grid, .hero-ring, .service-float, .service-chip, .service-code-pill { animation: none; } main section, main article, main section.is-visible, main article.is-visible, .hero-depth, .product-card, .product-card::after, .proof-card, .service-card, .service-icon-cube, .service-step, .motion-card { opacity: 1; transform: none; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal, .hero-grid, .hero-ring, .service-float, .service-chip, .service-code-pill, .admin-login-card, .admin-login-orb { animation: none; } main section, main article, main section.is-visible, main article.is-visible, .hero-depth, .product-card, .product-card::after, .proof-card, .service-card, .service-icon-cube, .service-step, .motion-card { opacity: 1; transform: none; transition: none; } }
 }

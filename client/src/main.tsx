@@ -8,9 +8,12 @@ import App from "./App";
 import { CookieConsentProvider } from "./contexts/CookieConsentContext";
 import { SupabaseAuthProvider } from "./contexts/SupabaseAuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { registerPwaServiceWorker } from "./lib/pwa";
 import "./index.css";
 
 const queryClient = new QueryClient();
+
+registerPwaServiceWorker();
 
 const trpcClient = trpc.createClient({
   links: [

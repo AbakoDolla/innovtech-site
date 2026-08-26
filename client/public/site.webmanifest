@@ -1,10 +1,12 @@
 {
-  "name": "InnovTech — Technologie et solutions numériques",
-  "short_name": "InnovTech",
+  "id": "/admin",
+  "name": "InnovTech Admin — Gestion de la plateforme",
+  "short_name": "InnovTech Admin",
   "lang": "fr",
-  "start_url": "/",
+  "start_url": "/admin",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#081426",
   "theme_color": "#1267F3",
-  "icons": [{ "src": "/media/branding/innovtech-symbol.png", "sizes": "any", "type": "image/png" }]
+  "icons": [{ "src": "/media/branding/innovtech-symbol.png", "sizes": "256x256", "type": "image/png", "purpose": "any" }]
 }

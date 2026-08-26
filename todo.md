@@ -117,8 +117,16 @@
 - [x] Appliquer et vérifier la migration `price_label_en` sur le projet Supabase InnovTech.
 - [x] Connecter les pages publiques au catalogue Supabase publié avec un fallback vers les 11 produits existants.
 - [x] Valider TypeScript, 31 tests unitaires et la compilation de production après la réintégration de la branche principale.
-- [ ] Configurer les URL de redirection Supabase Auth pour `https://innovtech-site.vercel.app` et les aperçus nécessaires.
+- [x] Configurer les URL de redirection Supabase Auth pour `https://innovtech-site.vercel.app` et les aperçus nécessaires.
 - [ ] Créer le premier compte administrateur `evansabah2006@gmail.com`, puis vérifier l’attribution automatique du rôle.
 - [ ] Importer les 11 produits dans Supabase depuis le dashboard et vérifier le catalogue public alimenté par ces données.
 - [ ] Vérifier en production Vercel l’accès Supabase, les règles RLS, la disponibilité, les prix et le masquage d’un produit.
 - [ ] Connecter Supabase Storage à la gestion des médias pour les futurs téléversements d’images et vidéos.
+- [ ] Générer, transmettre de manière contrôlée et vérifier le premier mot de passe administrateur Supabase pour l’adresse propriétaire InnovTech.
+- [ ] Rendre l’administration InnovTech installable comme PWA depuis un téléphone et un ordinateur.
+- [x] Intégrer le logo InnovTech dans l’expérience d’administration, les icônes d’installation et les métadonnées PWA.
+- [ ] Repenser l’écran de connexion Supabase avec une animation légère, une identité premium et une accessibilité mobile complète.
+- [ ] Vérifier l’expérience responsive PWA sur mobile, tablette et ordinateur avant publication.
+- [ ] Tester réellement l’installation PWA InnovTech Admin en production Vercel sur mobile et ordinateur, puis corriger le manifeste si nécessaire.
+- [ ] Transformer la connexion admin en formulaire accessible avec soumission par Entrée, annonces d’état et focus cohérent.
+- [ ] Effectuer et consigner le contrôle responsive explicite sur mobile, tablette et ordinateur pour `/admin`.
