@@ -105,7 +105,50 @@
   @keyframes chip-drift { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -7px, 0); } }
   @keyframes service-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
   .service-float { animation: service-float 5s ease-in-out infinite; } .service-float--slow { animation-duration: 6.5s; animation-delay: -1.5s; }
-  .dark body { background: #081426; color: #eaf4ff; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) { background: #081426; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) > section:first-child { background: linear-gradient(125deg, #081426 0%, #0b2441 58%, #0a3846 100%) !important; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) :is(h1, h2, h3, strong) { color: #f1f7ff; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) .text-blue-600 { color: #58a7ff !important; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) .text-blue-700 { color: #99caff !important; } .dark .site-header { border-color: rgba(103, 168, 255, .18); background: rgba(8, 20, 38, .88); } .dark .site-mobile-menu { border-color: rgba(103, 168, 255, .18); background: #0c1c34; } .dark .theme-toggle, .dark .theme-menu-row { border-color: rgba(118, 201, 255, .2); background: #102443; color: #a9eaff; } .dark .service-card, .dark .service-step, .dark .proof-card { border-color: rgba(128, 188, 255, .18); background: #0d1f3a; box-shadow: 0 18px 40px rgba(0, 0, 0, .18); } .dark .service-visual { border-color: rgba(108, 205, 238, .2); background: radial-gradient(circle at 70% 20%, rgba(19,213,244,.14), transparent 31%), linear-gradient(140deg, #0b2a43, #10213e 62%, #092238); } .dark .commerce-hero { background-image: linear-gradient(110deg, #09172b 0%, #0c1d37 52%, #0b2638 100%); } .dark .hero-orb { opacity: .55; } .dark .hero-grid, .dark .circuit-lines { opacity: .4; } .dark .home-paths { background: linear-gradient(180deg, #081426, #0b1b33); } .dark .path-card--blue { border-color: rgba(83, 148, 255, .25); background: linear-gradient(145deg, #102957, #0c1c38); color: #8ec5ff; } .dark .path-card--cyan { border-color: rgba(96, 224, 240, .22); background: linear-gradient(145deg, #0a2938, #0d1e39); color: #75e4f2; } .dark .path-card--green { border-color: rgba(75, 214, 144, .22); background: linear-gradient(145deg, #0d2a28, #0d2036); color: #7fe0aa; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) :is([class~="bg-white"], [class~="bg-white/75"], [class~="bg-white/80"], [class~="bg-white/85"], [class~="bg-slate-50"], [class~="bg-blue-50"], [class~="bg-cyan-50"], [class~="bg-[#F4F8FF]"], [class~="bg-[#EAF4FF]"]) { background-color: #0e203b !important; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) :is([class~="text-[#081A3C]"], [class~="text-slate-900"]) { color: #f1f7ff !important; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) [class~="text-slate-700"] { color: #d7e7fa !important; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) :is([class~="text-slate-600"], [class~="text-slate-500"]) { color: #b6c9df !important; } .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) :is([class~="border-blue-100"], [class~="border-white"]) { border-color: rgba(128, 188, 255, .16) !important; } .dark ::-webkit-scrollbar-track { background: #081426; } .dark ::-webkit-scrollbar-thumb { border-color: #081426; } .dark * { scrollbar-color: #4f9cff #081426; }
+  /* Dark theme surfaces stay scoped to stable page and component contracts, never to utility-class string matching. */
+  .dark body, .dark main, .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) { background: #081426; color: #eaf4ff; }
+  .dark .site-header { border-color: rgba(103, 168, 255, .18); background: rgba(8, 20, 38, .88); }
+  .dark .site-header nav { border-color: rgba(103, 168, 255, .18); background: rgba(12, 28, 52, .85); }
+  .dark .site-header nav a:not(.bg-blue-700), .dark .site-header [aria-label="Choisir la langue"] button:not(.bg-white) { color: #c8dbf4; }
+  .dark .site-mobile-menu { border-color: rgba(103, 168, 255, .18); background: linear-gradient(135deg, #0c1c34, #102747); }
+  .dark .site-mobile-menu nav a:not(.bg-blue-700), .dark .site-mobile-menu span { color: #d7e7fa; }
+  .dark .theme-toggle, .dark .theme-menu-row { border-color: rgba(118, 201, 255, .2); background: #102443; color: #a9eaff; }
+  .dark .theme-menu-row > span:last-child { background: #17355c; color: #9ed4ff; }
+  .dark .home-theme-hero, .dark .shop-page .commerce-hero, .dark .services-page > section:first-child, .dark .contact-page > section:first-child { background: linear-gradient(125deg, #081426 0%, #0b2441 58%, #0a3846 100%) !important; }
+  .dark .hero-orb { opacity: .55; } .dark .hero-grid, .dark .circuit-lines { opacity: .4; }
+  .dark .home-paths { background: linear-gradient(180deg, #081426, #0b1b33); }
+  .dark .home-paths :is(h2, h3), .dark .home-solutions :is(h2, h3), .dark .home-solutions .font-display { color: #f1f7ff; }
+  .dark .home-paths p, .dark .home-solutions p { color: #b6c9df; }
+  .dark .path-card--blue { border-color: rgba(83, 148, 255, .25); background: linear-gradient(145deg, #102957, #0c1c38); color: #8ec5ff; }
+  .dark .path-card--cyan { border-color: rgba(96, 224, 240, .22); background: linear-gradient(145deg, #0a2938, #0d1e39); color: #75e4f2; }
+  .dark .path-card--green { border-color: rgba(75, 214, 144, .22); background: linear-gradient(145deg, #0d2a28, #0d2036); color: #7fe0aa; }
+  .dark .home-paths .path-card > span:first-child, .dark .home-solutions > div > div:first-child > div.relative { background-color: #0e203b; }
+  .dark .home-solutions { background: #081426; }
+  .dark .home-solutions > div > div:first-child > div.relative { border-color: rgba(128, 188, 255, .18); }
+  .dark .home-solutions .flex.items-center { border-color: rgba(128, 188, 255, .18); background: #0e203b; color: #d7e7fa; }
+  .dark .shop-page :is(h1, h2, h3, strong), .dark .services-page :is(h1, h2, h3, strong), .dark .contact-page :is(h1, h2, h3, strong), .dark .about-page :is(h1, h2, h3, strong), .dark .project-card h3 { color: #f1f7ff; }
+  .dark .shop-page :is(p, label), .dark .services-page :is(p, label), .dark .contact-page :is(p, label), .dark .about-page :is(p, label), .dark .project-card p { color: #b6c9df; }
+  .dark .shop-page > section.container > div:has(input), .dark .shop-page .product-card, .dark .shop-page > section.container.pb-4 > div, .dark .services-page .service-card, .dark .services-page .service-step, .dark .contact-page .motion-card, .dark .contact-page aside, .dark .about-page > section:last-child article, .dark .project-card { border-color: rgba(128, 188, 255, .18); background: #0e203b; box-shadow: 0 18px 40px rgba(0, 0, 0, .18); }
+  .dark .shop-page > section.container > div:has(input) input { border-color: rgba(128, 188, 255, .24); background: #0a1930; color: #eaf4ff; }
+  .dark .shop-page > section.container > div:has(input) button:not(.bg-blue-700) { background: #142b4e; color: #a9d0ff; }
+  .dark .shop-page .product-card > div:first-child, .dark .project-card > div:first-child { background: #0a1930; }
+  .dark .shop-page .product-card :is(span, p) { color: #b6c9df; }
+  .dark .shop-page .product-card .text-cyan-700, .dark .services-page .text-cyan-600, .dark .project-card .text-cyan-600 { color: #75e4f2; }
+  .dark .shop-page .product-card .text-blue-700, .dark .shop-page > section.container > div:has(input) .text-blue-700, .dark .services-page .text-blue-700, .dark .contact-page .text-blue-700, .dark .about-page .text-blue-700, .dark .project-card .text-blue-700 { color: #8ec5ff; }
+  .dark .shop-page .product-card :is(.border-slate-100, .border-blue-100), .dark .services-page .service-card, .dark .services-page .service-card .border-t, .dark .contact-page aside, .dark .project-card { border-color: rgba(128, 188, 255, .18); }
+  .dark .shop-theme-quick-select { border-color: rgba(128, 188, 255, .18); background: #0e203b; }
+  .dark .shop-theme-quick-select a { border-color: rgba(128, 188, 255, .2); background: #132d52; color: #8ec5ff; }
+  .dark .shop-page > section.container.pb-4 > div { background: linear-gradient(135deg, #0a263d, #0e203b); }
+  .dark .services-page .service-visual { border-color: rgba(108, 205, 238, .2); background: radial-gradient(circle at 70% 20%, rgba(19,213,244,.14), transparent 31%), linear-gradient(140deg, #0b2a43, #10213e 62%, #092238); }
+  .dark .services-page > section.container.pb-4 > div { background: #0b1b33; }
+  .dark .services-page > section:first-child > div > div:last-child, .dark .services-page > section:first-child > div > div:last-child > div { border-color: rgba(128, 188, 255, .18); background: #0e203b; }
+  .dark .contact-page .motion-card, .dark .contact-page > section.container > aside { border-color: rgba(128, 188, 255, .18); }
+  .dark .contact-page .motion-card .bg-white, .dark .contact-page aside .bg-blue-50 { background: #132d52; }
+  .dark .contact-page #contact-service > div { border-color: rgba(96, 224, 240, .22); background: #0a2938; }
+  .dark .about-page > section:first-child > div:last-child, .dark .about-page > section:last-child { background: #0b1b33; }
+  .dark .about-page > section:last-child article { background: #0e203b; }
+  .dark .project-card:focus-visible { box-shadow: 0 0 0 4px rgba(103, 201, 255, .5); }
+  .dark ::-webkit-scrollbar-track { background: #081426; } .dark ::-webkit-scrollbar-thumb { border-color: #081426; } .dark * { scrollbar-color: #4f9cff #081426; }
   .dark main { background: #081426; }
   .dark .home-theme-hero { background: linear-gradient(125deg, #081426 0%, #0b2441 58%, #0a3846 100%) !important; }
   .dark .home-theme-card { border-color: rgba(128, 188, 255, .18) !important; background-color: #0e203b !important; color: #d7e7fa; }
