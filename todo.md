@@ -78,7 +78,7 @@
 - [x] Ajouter un mode sombre premium, accessible, persistant et disponible sur toutes les pages.
 - [x] Vérifier visuellement le mode sombre sur toutes les pages publiques et fiches produit en mobile et bureau, puis corriger les incohérences restantes.
 - [ ] Remplacer les surcharges de thème sombre fragiles par des styles ciblés sur les composants et pages critiques.
-- [ ] Contrôler les contrastes, focus, champs, boutons et liens du thème sombre sur Boutique, Services, Contact, À propos et les fiches produit.
+- [x] Contrôler les contrastes, focus, champs, boutons et liens du thème sombre sur Boutique, Services, Contact, À propos et les fiches produit.
 - [x] Corriger la connexion WebSocket Vite du rechargement à chaud dans l’aperçu sécurisé.
 - [x] Corriger l’affichage de la Boutique au format mobile, sans écran incomplet ni contenu masqué.
 - [x] Reconcevoir les sections « Dans la boutique », solutions numériques et appel WhatsApp jusqu’au pied de page de l’accueil.
@@ -86,6 +86,12 @@
 - [x] Aligner explicitement la section « Dans la boutique » sur les trois entrées demandées et revalider sa lecture mobile et bureau.
 - [x] Éliminer le fond blanc signalé dans la section « Dans la boutique » de l’accueil au format mobile.
 - [x] Rendre la vidéo réelle de la Boutique déclenchable clairement au clic sur mobile et bureau.
+- [x] Tester au clavier les liens, filtres, recherche et CTA de la Boutique en thème sombre.
+- [x] Tester au clavier les contrôles de quantité, partage et commande de la fiche produit en thème sombre.
+- [x] Tester au clavier les liens et boutons de Services et À propos en thème sombre.
+- [x] Tester l’activation au clavier des CTA vidéo, WhatsApp et contact de la Boutique en thème sombre.
+- [x] Tester l’activation au clavier des contrôles de quantité, partage, Facebook et WhatsApp de la fiche produit sombre.
+- [x] Tester l’activation au clavier des réalisations externes des Services et du CTA À propos en thème sombre.
 - [x] Auditer les données, cookies, scripts tiers et formulaires réellement utilisés sur InnovTech.
 - [x] Ajouter les pages de confidentialité, mentions légales, CGU et conditions de vente adaptées au fonctionnement WhatsApp.
 - [x] Mettre en place un bandeau de consentement cookies avec acceptation, refus, choix et retrait du consentement.
