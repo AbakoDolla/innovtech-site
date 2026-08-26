@@ -4,9 +4,11 @@ import { ArrowUpRight, Facebook, Instagram, Linkedin, Share2 } from "lucide-reac
 import type { Lang } from "@/lib/site";
 import { SOCIAL_PROFILES, whatsappUrl } from "@/lib/site";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
 
 export function SiteFooter({ lang }: { lang: Lang }) {
   const t = lang === "fr";
+  const { openPreferences } = useCookieConsent();
   const links = [
     [t ? "Boutique" : "Shop", "/boutique"],
     [t ? "Services" : "Services", "/services"],
@@ -49,9 +51,9 @@ export function SiteFooter({ lang }: { lang: Lang }) {
             {profiles.length > 0 ? <div className="mt-5 flex gap-3">{profiles.map(({ label, href, icon: Icon }) => <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 text-blue-100 transition hover:border-cyan-300 hover:text-cyan-300"><Icon className="h-4 w-4" /></a>)}</div> : <Link href="/boutique" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-cyan-300 transition hover:text-white"><Share2 className="h-4 w-4" />{t ? "Partager un produit" : "Share a product"}<ArrowUpRight className="h-4 w-4" /></Link>}
           </div>
         </div>
-        <div className="relative mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-blue-100/55 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} InnovTech. {t ? "Tous droits réservés." : "All rights reserved."}</span>
-          <span>{t ? "Innover · Connecter · Réussir" : "Innovate · Connect · Succeed"}</span>
+        <div className="relative mt-12 border-t border-white/10 pt-6 text-xs text-blue-100/55">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-blue-100/80"><Link href="/confidentialite" className="hover:text-cyan-200">{t ? "Confidentialité" : "Privacy"}</Link><Link href="/mentions-legales" className="hover:text-cyan-200">{t ? "Mentions légales" : "Legal notice"}</Link><Link href="/cgu" className="hover:text-cyan-200">CGU</Link><Link href="/conditions-vente" className="hover:text-cyan-200">{t ? "Conditions de vente" : "Terms of sale"}</Link><Link href="/cookies" className="hover:text-cyan-200">{t ? "Cookies" : "Cookies"}</Link><button type="button" onClick={openPreferences} className="font-bold text-cyan-200 hover:text-white">{t ? "Gérer mes cookies" : "Manage my cookies"}</button></div>
+          <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><span>© {new Date().getFullYear()} InnovTech. {t ? "Tous droits réservés." : "All rights reserved."}</span><span>{t ? "Innover · Connecter · Réussir" : "Innovate · Connect · Succeed"}</span></div>
         </div>
       </div>
     </footer>

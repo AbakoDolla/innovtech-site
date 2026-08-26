@@ -10,12 +10,15 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import { revealPageSections } from "@/lib/pageVisibility";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Legal, { type LegalPageKind } from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 
 const MediaManager = lazyWithRetry(() => import("./pages/MediaManager"));
@@ -32,6 +35,11 @@ function Router({ lang }: { lang: Lang }) {
     <Route path="/services">{() => <Services lang={lang} />}</Route>
     <Route path="/a-propos">{() => <About lang={lang} />}</Route>
     <Route path="/contact">{() => <Contact lang={lang} />}</Route>
+    <Route path="/confidentialite">{() => <Legal lang={lang} kind={"privacy" satisfies LegalPageKind} />}</Route>
+    <Route path="/mentions-legales">{() => <Legal lang={lang} kind={"legal-notice" satisfies LegalPageKind} />}</Route>
+    <Route path="/cgu">{() => <Legal lang={lang} kind={"terms" satisfies LegalPageKind} />}</Route>
+    <Route path="/conditions-vente">{() => <Legal lang={lang} kind={"sales" satisfies LegalPageKind} />}</Route>
+    <Route path="/cookies">{() => <Legal lang={lang} kind={"cookies" satisfies LegalPageKind} />}</Route>
     <Route path="/admin/media">{() => <MediaManager />}</Route>
     <Route>{() => <NotFound />}</Route>
   </Switch></Suspense>;
@@ -39,13 +47,15 @@ function Router({ lang }: { lang: Lang }) {
 
 function App() {
   const [location] = useLocation();
-  const [lang, setLang] = useState<Lang>(() => (localStorage.getItem("innovtech-language") === "en" ? "en" : "fr"));
+  const { consent } = useCookieConsent();
+  const [lang, setLang] = useState<Lang>(() => (consent?.preferences && localStorage.getItem("innovtech-language") === "en" ? "en" : "fr"));
   const isAdminRoute = location.startsWith("/admin");
   const [scrollProgress, setScrollProgress] = useState(0);
   useEffect(() => {
-    localStorage.setItem("innovtech-language", lang);
+    if (consent?.preferences) localStorage.setItem("innovtech-language", lang);
+    else localStorage.removeItem("innovtech-language");
     document.documentElement.lang = lang;
-  }, [lang]);
+  }, [lang, consent?.preferences]);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => revealPageSections());
@@ -83,7 +93,7 @@ function App() {
     return () => { observer.disconnect(); mutations.disconnect(); window.removeEventListener("scroll", updateProgress); window.removeEventListener("resize", updateProgress); document.removeEventListener("error", recoverImage, true); };
   }, []);
 
-  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#081426]"><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
+  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#081426]"><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /><CookieConsentBanner lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
 }
 
 export default App;

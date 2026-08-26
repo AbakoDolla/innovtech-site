@@ -86,3 +86,8 @@
 - [x] Aligner explicitement la section « Dans la boutique » sur les trois entrées demandées et revalider sa lecture mobile et bureau.
 - [x] Éliminer le fond blanc signalé dans la section « Dans la boutique » de l’accueil au format mobile.
 - [x] Rendre la vidéo réelle de la Boutique déclenchable clairement au clic sur mobile et bureau.
+- [x] Auditer les données, cookies, scripts tiers et formulaires réellement utilisés sur InnovTech.
+- [x] Ajouter les pages de confidentialité, mentions légales, CGU et conditions de vente adaptées au fonctionnement WhatsApp.
+- [x] Mettre en place un bandeau de consentement cookies avec acceptation, refus, choix et retrait du consentement.
+- [x] Ajouter un consentement de confidentialité explicite et non pré-coché aux formulaires collectant des données.
+- [ ] Recueillir les informations légales d’éditeur, de contact et de vente indispensables avant publication des textes définitifs.

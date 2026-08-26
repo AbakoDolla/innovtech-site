@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CalendarDays, CheckCircle2, Clock3, MessageCircle } from "lucide-react";
+import { Link } from "wouter";
 import type { Lang } from "@/lib/site";
 import { whatsappUrl } from "@/lib/site";
 
@@ -9,6 +10,7 @@ export function AppointmentPlanner({ lang }: { lang: Lang }) {
   const [service, setService] = useState("site-web");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("10:00");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const services = t
     ? [{ value: "site-web", label: "Création de site web" }, { value: "app-web", label: "Application web" }, { value: "app-mobile", label: "Application mobile" }, { value: "conseil", label: "Conseil / autre demande" }]
@@ -16,6 +18,7 @@ export function AppointmentPlanner({ lang }: { lang: Lang }) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!privacyAccepted) return;
     const selectedService = services.find((item) => item.value === service)?.label || service;
     const dateLabel = date || (t ? "à convenir" : "to be arranged");
     const message = t
@@ -49,7 +52,8 @@ export function AppointmentPlanner({ lang }: { lang: Lang }) {
               <label className="grid gap-2 text-sm font-bold text-[#081A3C]">{t ? "Date souhaitée" : "Preferred date"}<input type="date" value={date} onChange={(event) => setDate(event.target.value)} className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-slate-700 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100" /></label>
               <label className="grid gap-2 text-sm font-bold text-[#081A3C]">{t ? "Heure souhaitée" : "Preferred time"}<span className="relative"><Clock3 className="pointer-events-none absolute left-4 top-3.5 h-4 w-4 text-blue-600" /><input type="time" value={time} onChange={(event) => setTime(event.target.value)} className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm font-medium text-slate-700 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100" /></span></label>
             </div>
-            <button type="submit" className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 text-sm font-extrabold text-[#05230f] shadow-[0_12px_22px_rgba(37,211,102,0.2)] transition hover:-translate-y-0.5 hover:bg-[#32e279] focus:outline-none focus:ring-4 focus:ring-green-200"><MessageCircle className="h-4 w-4" />{t ? "Demander ce rendez-vous" : "Request this appointment"}</button>
+            <label className="mt-5 flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/60 p-3 text-xs leading-5 text-slate-600"><input type="checkbox" checked={privacyAccepted} onChange={(event) => setPrivacyAccepted(event.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-blue-700" /><span>{t ? <>J’accepte que les informations saisies soient utilisées pour préparer ma demande de rendez-vous via WhatsApp, selon la <Link href="/confidentialite" className="font-extrabold text-blue-700 underline">politique de confidentialité</Link>.</> : <>I agree that the information entered may be used to prepare my appointment request through WhatsApp, in line with the <Link href="/confidentialite" className="font-extrabold text-blue-700 underline">privacy policy</Link>.</>}</span></label>
+            <button type="submit" disabled={!privacyAccepted} className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 text-sm font-extrabold text-[#05230f] shadow-[0_12px_22px_rgba(37,211,102,0.2)] transition hover:-translate-y-0.5 hover:bg-[#32e279] focus:outline-none focus:ring-4 focus:ring-green-200 disabled:cursor-not-allowed disabled:opacity-50"><MessageCircle className="h-4 w-4" />{t ? "Demander ce rendez-vous" : "Request this appointment"}</button>
           </form>
         </div>
       </div>

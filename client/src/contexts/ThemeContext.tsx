@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useCookieConsent } from "./CookieConsentContext";
 
 type Theme = "light" | "dark";
 
@@ -41,12 +42,13 @@ export function ThemeProvider({
   defaultTheme = "light",
   switchable = false,
 }: ThemeProviderProps) {
+  const { consent } = useCookieConsent();
   const [theme, setTheme] = useState<Theme>(() =>
     resolveInitialTheme({
       defaultTheme,
       switchable,
       search: window.location.search,
-      storedTheme: localStorage.getItem("theme"),
+      storedTheme: consent?.preferences ? localStorage.getItem("theme") : null,
     }),
   );
 
@@ -58,10 +60,12 @@ export function ThemeProvider({
       root.classList.remove("dark");
     }
 
-    if (switchable) {
+    if (switchable && consent?.preferences) {
       localStorage.setItem("theme", theme);
+    } else {
+      localStorage.removeItem("theme");
     }
-  }, [theme, switchable]);
+  }, [theme, switchable, consent?.preferences]);
 
   const toggleTheme = switchable
     ? () => {
