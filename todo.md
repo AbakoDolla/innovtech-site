@@ -85,4 +85,4 @@
 - [x] Moderniser la navigation desktop et mobile pour renforcer la lisibilité et la signature InnovTech.
 - [x] Aligner explicitement la section « Dans la boutique » sur les trois entrées demandées et revalider sa lecture mobile et bureau.
 - [x] Éliminer le fond blanc signalé dans la section « Dans la boutique » de l’accueil au format mobile.
-- [ ] Rendre la vidéo réelle de la Boutique déclenchable clairement au clic sur mobile et bureau.
+- [x] Rendre la vidéo réelle de la Boutique déclenchable clairement au clic sur mobile et bureau.
