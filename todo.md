@@ -109,3 +109,5 @@
 - [ ] Ajouter un champ de disponibilité administrable aux produits et l’afficher sur le site public.
 - [ ] Vérifier en session administrateur réelle les mutations d’ajout, modification de prix, masquage et suppression du tableau de bord.
 - [ ] Vérifier les états d’erreur critiques du tableau de bord pour la validation, les droits et les mutations.
+- [ ] Préparer Vercel pour servir le backend tRPC et le tableau de bord avec le site public synchronisé.
+- [ ] Vérifier en production Vercel les routes API, la connexion administrateur et la synchronisation catalogue après publication.
