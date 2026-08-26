@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fullProductCatalog, portfolioProjects, productOrderMessage } from "./site";
+import { fullProductCatalog, portfolioProjects, productOrderMessage, whatsappUrl } from "./site";
 
 describe("InnovTech product catalogue", () => {
   it("maps every curated product to a stored image and a valid category", () => {
@@ -33,5 +33,9 @@ describe("InnovTech product catalogue", () => {
     expect(productOrderMessage("Casque sans fil", 3, "fr")).toContain("Quantité souhaitée : 3");
     expect(productOrderMessage("Wireless headphones", 2, "en")).toContain("Requested quantity: 2");
     expect(productOrderMessage("Article", 0, "fr")).toContain("Quantité souhaitée : 1");
+  });
+
+  it("routes WhatsApp actions to the configured InnovTech Business number", () => {
+    expect(whatsappUrl("Bonjour InnovTech")).toBe("https://wa.me/237650795480?text=Bonjour%20InnovTech");
   });
 });

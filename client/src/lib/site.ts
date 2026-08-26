@@ -24,8 +24,8 @@ export type PortfolioProject = {
   description: Record<Lang, string>;
 };
 
-/** Add the recipient's international WhatsApp number here when it is available, digits only. */
-export const WHATSAPP_NUMBER = "";
+/** InnovTech WhatsApp Business recipient, international digits only. */
+export const WHATSAPP_NUMBER = "237650795480";
 
 /** Add the public profile URLs once the InnovTech Facebook and Instagram pages are ready. */
 export const SOCIAL_PROFILES = {
