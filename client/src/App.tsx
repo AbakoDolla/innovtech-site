@@ -9,15 +9,15 @@ import { localMediaSrc, type Lang } from "./lib/site";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazyWithRetry } from "@/lib/lazyWithRetry";
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import ProductDetail from "./pages/ProductDetail";
+import Services from "./pages/Services";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
-const Home = lazyWithRetry(() => import("./pages/Home"));
-const Shop = lazyWithRetry(() => import("./pages/Shop"));
-const ProductDetail = lazyWithRetry(() => import("./pages/ProductDetail"));
-const Services = lazyWithRetry(() => import("./pages/Services"));
-const About = lazyWithRetry(() => import("./pages/About"));
-const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const MediaManager = lazyWithRetry(() => import("./pages/MediaManager"));
-const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 function PageLoader() {
   return <div className="grid min-h-[45vh] place-items-center" role="status" aria-live="polite"><span className="h-9 w-9 animate-spin rounded-full border-2 border-blue-100 border-t-blue-700" /><span className="sr-only">Chargement…</span></div>;

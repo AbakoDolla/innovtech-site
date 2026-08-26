@@ -65,3 +65,9 @@
 - [ ] Renseigner les URL réelles des pages Facebook, Instagram et LinkedIn InnovTech lorsqu’elles seront fournies.
 - [x] Configurer le numéro WhatsApp Business +237 650 795 480 pour les commandes, devis et rendez-vous.
 - [x] Corriger l’écran blanc de la page Boutique sur le déploiement Vercel.
+- [x] Remplacer le catalogue généraliste par les serrures biométriques, traceurs GPS, drones, ordinateurs et lunettes intelligentes demandés.
+- [x] Préparer des prix facilement modifiables dans le code sans afficher de prix non confirmés.
+- [x] Rechercher et intégrer des visuels réels sans filigrane pour le nouveau catalogue.
+- [ ] Remplacer ou confirmer les visuels spécialisés par des images propriétaires ou explicitement autorisées, avec sources exactes par produit.
+- [ ] Vérifier visuellement chaque image du catalogue spécialisé en production et sur mobile après déploiement.
+- [ ] Éliminer définitivement l’écran blanc persistant de la Boutique sur Vercel et mobile.
