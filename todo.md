@@ -84,4 +84,4 @@
 - [x] Reconcevoir les sections « Dans la boutique », solutions numériques et appel WhatsApp jusqu’au pied de page de l’accueil.
 - [x] Moderniser la navigation desktop et mobile pour renforcer la lisibilité et la signature InnovTech.
 - [x] Aligner explicitement la section « Dans la boutique » sur les trois entrées demandées et revalider sa lecture mobile et bureau.
-- [ ] Éliminer le fond blanc signalé dans la section « Dans la boutique » de l’accueil au format mobile.
+- [x] Éliminer le fond blanc signalé dans la section « Dans la boutique » de l’accueil au format mobile.
