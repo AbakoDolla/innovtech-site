@@ -64,4 +64,4 @@
 - [x] Rendre le dépôt `AbakoDolla/innovtech-site` public avec le lien du site Vercel documenté.
 - [ ] Renseigner les URL réelles des pages Facebook, Instagram et LinkedIn InnovTech lorsqu’elles seront fournies.
 - [x] Configurer le numéro WhatsApp Business +237 650 795 480 pour les commandes, devis et rendez-vous.
-- [ ] Corriger l’écran blanc de la page Boutique sur le déploiement Vercel.
+- [x] Corriger l’écran blanc de la page Boutique sur le déploiement Vercel.
