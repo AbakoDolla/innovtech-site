@@ -11,5 +11,7 @@ Les images ci-dessous sont utilisées comme **visuels de catalogue génériques*
 | `agricultural-drone.webp` | Drone agricole | [Talos Drones — Agras T40](https://talosdrones.com/) |
 | `foldable-camera-drone.jpg` | Drone polyvalent à caméra | [Potensic — ATOM SE](https://store.potensic.com/products/atom-se) |
 | `smart-glasses.webp` | Lunettes intelligentes | [RayNeo](https://www.rayneo.com/) |
+| `robotic-mini-tractor.webp` | Mini-tracteur robotique agricole | [XAG R150 — véhicule autonome](https://www.xa.com/en/products/r150) |
+| `washing-machine.jpg` | Machine à laver | [Bemis Appliance](https://www.bemisappliance.com/) |
 
 Les visuels de **laptop** et **desktop** déjà présents dans le dépôt sont conservés pour compléter ce catalogue. Les fichiers finaux sont placés dans `client/public/media/products/` pour être inclus dans le déploiement Vercel.

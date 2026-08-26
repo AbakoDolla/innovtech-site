@@ -1,7 +1,7 @@
 /** InnovTech design reminder: clear premium commerce, blue/cyan circuit accents, WhatsApp is the human conversion path. */
 export type Lang = "fr" | "en";
-export type ProductFamily = "security" | "tracking" | "drones" | "computing" | "wearables";
-export type ProductIcon = "Fingerprint" | "MapPinned" | "Plane" | "Laptop" | "Monitor" | "Glasses";
+export type ProductFamily = "security" | "tracking" | "drones" | "agriculture" | "computing" | "wearables" | "home";
+export type ProductIcon = "Fingerprint" | "MapPinned" | "Plane" | "Tractor" | "Laptop" | "Monitor" | "Glasses" | "WashingMachine";
 
 export type CatalogProduct = {
   id: string;
@@ -48,8 +48,9 @@ export function localMediaSrc(source: string) {
 }
 
 /**
- * MODIFIER LES PRIX ICI : remplacez seulement les valeurs « Prix à définir »
- * dès que vous aurez confirmé vos tarifs. Les fiches et la Boutique se mettront à jour automatiquement.
+ * ZONE DE SAISIE DES PRIX : remplacez la valeur de chaque article ci-dessous.
+ * Exemple : biometricLock: { fr: "35 000 FCFA", en: "35,000 XAF" }.
+ * Les fiches et la Boutique se mettront à jour automatiquement.
  */
 export const PRODUCT_PRICES = {
   biometricLock: { fr: "Prix à définir", en: "Price to be set" },
@@ -58,9 +59,11 @@ export const PRODUCT_PRICES = {
   tractorTracker: { fr: "Prix à définir", en: "Price to be set" },
   agricultureDrone: { fr: "Prix à définir", en: "Price to be set" },
   cameraDrone: { fr: "Prix à définir", en: "Price to be set" },
+  roboticMiniTractor: { fr: "Prix à définir", en: "Price to be set" },
   laptop: { fr: "Prix à définir", en: "Price to be set" },
   desktop: { fr: "Prix à définir", en: "Price to be set" },
   smartGlasses: { fr: "Prix à définir", en: "Price to be set" },
+  washingMachine: { fr: "Prix à définir", en: "Price to be set" },
 } as const;
 
 /** Product labels remain descriptive until InnovTech confirms exact brands and models. */
@@ -71,9 +74,11 @@ const specializedProductCatalog: CatalogProduct[] = [
   { id: "traceur-gps-tracteur", family: "tracking", icon: "MapPinned", imageSrc: "/media/products/tractor-gps-tracker.webp", price: PRODUCT_PRICES.tractorTracker, badge: { fr: "Agriculture", en: "Agriculture" }, name: { fr: "Traceur GPS pour tracteur", en: "Tractor GPS tracker" }, description: { fr: "Un équipement de suivi destiné aux engins agricoles, à confirmer selon le type de tracteur et la zone d’utilisation.", en: "A tracking device for agricultural machinery, to confirm based on tractor type and area of use." }, searchTerms: { fr: ["gps", "tracteur", "agriculture", "suivi", "engins"], en: ["gps", "tractor", "agriculture", "tracking", "machinery"] } },
   { id: "drone-agricole", family: "drones", icon: "Plane", imageSrc: "/media/products/agricultural-drone.webp", price: PRODUCT_PRICES.agricultureDrone, badge: { fr: "Agriculture", en: "Agriculture" }, name: { fr: "Drone agricole", en: "Agricultural drone" }, description: { fr: "Un drone dédié aux usages agricoles ; les capacités et accessoires sont définis selon votre besoin concret.", en: "A drone dedicated to agricultural uses; capabilities and accessories are defined for your specific need." }, searchTerms: { fr: ["drone", "agricole", "agriculture", "champ", "pulvérisation"], en: ["drone", "agricultural", "agriculture", "field", "spraying"] } },
   { id: "drone-camera-pliable", family: "drones", icon: "Plane", imageSrc: "/media/products/foldable-camera-drone.jpg", price: PRODUCT_PRICES.cameraDrone, badge: { fr: "Prise de vue", en: "Imaging" }, name: { fr: "Drone polyvalent à caméra", en: "Multipurpose camera drone" }, description: { fr: "Un drone compact pour les prises de vue et les usages de loisir ou de repérage, selon le modèle disponible.", en: "A compact drone for imaging and recreational or scouting uses, depending on the available model." }, searchTerms: { fr: ["drone", "camera", "caméra", "pliable", "photo", "vidéo"], en: ["drone", "camera", "foldable", "photo", "video"] } },
+  { id: "mini-tracteur-robotique", family: "agriculture", icon: "Tractor", imageSrc: "/media/products/robotic-mini-tractor.webp", price: PRODUCT_PRICES.roboticMiniTractor, badge: { fr: "Robotique agricole", en: "Agricultural robotics" }, name: { fr: "Mini-tracteur robotique agricole", en: "Robotic agricultural mini tractor" }, description: { fr: "Un engin autonome compact pour accompagner certains travaux agricoles, à définir selon la surface et les tâches visées.", en: "A compact autonomous machine for selected agricultural tasks, to define based on area and intended work." }, searchTerms: { fr: ["tracteur", "robot", "robotique", "agriculture", "autonome"], en: ["tractor", "robot", "robotic", "agriculture", "autonomous"] } },
   { id: "laptop-professionnel", family: "computing", icon: "Laptop", imageSrc: "/media/products/office-laptop.jpg", price: PRODUCT_PRICES.laptop, badge: { fr: "Laptop", en: "Laptop" }, name: { fr: "Laptop professionnel", en: "Professional laptop" }, description: { fr: "Un ordinateur portable à sélectionner selon la bureautique, les études, la création ou les besoins professionnels.", en: "A laptop to select for office work, studies, creation or professional needs." }, searchTerms: { fr: ["laptop", "ordinateur", "portable", "bureautique", "travail"], en: ["laptop", "computer", "notebook", "office", "work"] } },
   { id: "desktop-professionnel", family: "computing", icon: "Monitor", imageSrc: "/media/products/desktop-computer.jpg", price: PRODUCT_PRICES.desktop, badge: { fr: "Desktop", en: "Desktop" }, name: { fr: "Desktop professionnel", en: "Professional desktop" }, description: { fr: "Un poste fixe à configurer pour le travail, les études ou les usages nécessitant un espace de bureau complet.", en: "A desktop setup to configure for work, studies or uses needing a complete workstation." }, searchTerms: { fr: ["desktop", "ordinateur", "bureau", "pc", "poste"], en: ["desktop", "computer", "office", "pc", "workstation"] } },
   { id: "lunettes-intelligentes", family: "wearables", icon: "Glasses", imageSrc: "/media/products/smart-glasses.webp", price: PRODUCT_PRICES.smartGlasses, badge: { fr: "Wearable", en: "Wearable" }, name: { fr: "Lunettes intelligentes", en: "Smart glasses" }, description: { fr: "Des lunettes connectées à choisir selon l’usage recherché : affichage, caméra ou expérience mains libres.", en: "Connected glasses to select by intended use: display, camera or hands-free experience." }, searchTerms: { fr: ["lunettes", "intelligentes", "smart glasses", "connectées", "wearable"], en: ["glasses", "smart glasses", "connected", "wearable"] } },
+  { id: "machine-a-laver", family: "home", icon: "WashingMachine", imageSrc: "/media/products/washing-machine.jpg", price: PRODUCT_PRICES.washingMachine, badge: { fr: "Maison", en: "Home" }, name: { fr: "Machine à laver", en: "Washing machine" }, description: { fr: "Une machine à laver à choisir avec notre équipe selon la capacité, le type de chargement et votre installation.", en: "A washing machine to select with our team based on capacity, loading type and your installation." }, searchTerms: { fr: ["machine", "laver", "linge", "maison", "électroménager"], en: ["washing", "machine", "laundry", "home", "appliance"] } },
 ];
 
 export const fullProductCatalog = specializedProductCatalog;

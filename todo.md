@@ -71,3 +71,6 @@
 - [ ] Remplacer ou confirmer les visuels spécialisés par des images propriétaires ou explicitement autorisées, avec sources exactes par produit.
 - [ ] Vérifier visuellement chaque image du catalogue spécialisé en production et sur mobile après déploiement.
 - [x] Éliminer définitivement l’écran blanc persistant de la Boutique sur Vercel et mobile.
+- [x] Ajouter un mini-tracteur robotique agricole au catalogue spécialisé.
+- [x] Ajouter une machine à laver au catalogue spécialisé.
+- [x] Créer des zones de prix explicites et indépendantes pour chaque article du catalogue.

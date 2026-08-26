@@ -3,10 +3,10 @@ import { fullProductCatalog, portfolioProjects, productOrderMessage, whatsappUrl
 
 describe("InnovTech product catalogue", () => {
   it("maps every curated product to a stored image and a valid category", () => {
-      expect(fullProductCatalog.length).toBe(9);
+      expect(fullProductCatalog.length).toBe(11);
     fullProductCatalog.forEach(product => {
       expect(product.imageSrc).toMatch(/^\/media\/.+\.(jpg|jpeg|png|webp)$/);
-      expect(["security", "tracking", "drones", "computing", "wearables"]).toContain(product.family);
+      expect(["security", "tracking", "drones", "agriculture", "computing", "wearables", "home"]).toContain(product.family);
       expect(product.name.fr.trim()).not.toHaveLength(0);
       expect(product.name.en.trim()).not.toHaveLength(0);
     });

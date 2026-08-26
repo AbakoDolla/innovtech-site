@@ -6,7 +6,7 @@ import type { Lang, ProductFamily } from "@/lib/site";
 import { fullProductCatalog, productOrderMessage } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
-const familyLabel: Record<ProductFamily, Record<Lang, string>> = { security: { fr: "Sécurité connectée", en: "Connected security" }, tracking: { fr: "Géolocalisation", en: "Tracking" }, drones: { fr: "Drones", en: "Drones" }, computing: { fr: "Informatique", en: "Computing" }, wearables: { fr: "Wearables", en: "Wearables" } };
+const familyLabel: Record<ProductFamily, Record<Lang, string>> = { security: { fr: "Sécurité connectée", en: "Connected security" }, tracking: { fr: "Géolocalisation", en: "Tracking" }, drones: { fr: "Drones", en: "Drones" }, agriculture: { fr: "Robotique agricole", en: "Agricultural robotics" }, computing: { fr: "Informatique", en: "Computing" }, wearables: { fr: "Wearables", en: "Wearables" }, home: { fr: "Maison", en: "Home" } };
 
 export default function ProductDetail({ lang, productId }: { lang: Lang; productId: string }) {
   const product = fullProductCatalog.find((item) => item.id === productId) || fullProductCatalog[0];
