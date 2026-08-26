@@ -111,3 +111,4 @@
 - [ ] Vérifier les états d’erreur critiques du tableau de bord pour la validation, les droits et les mutations.
 - [ ] Préparer Vercel pour servir le backend tRPC et le tableau de bord avec le site public synchronisé.
 - [ ] Vérifier en production Vercel les routes API, la connexion administrateur et la synchronisation catalogue après publication.
+- [ ] Corriger le déclenchement du bouton de connexion administrateur sur le domaine Vercel.
