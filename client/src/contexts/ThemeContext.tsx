@@ -16,18 +16,39 @@ interface ThemeProviderProps {
   switchable?: boolean;
 }
 
+export function resolveInitialTheme({
+  defaultTheme,
+  switchable,
+  search,
+  storedTheme,
+}: {
+  defaultTheme: Theme;
+  switchable: boolean;
+  search: string;
+  storedTheme: string | null;
+}): Theme {
+  if (!switchable) return defaultTheme;
+
+  const requestedTheme = new URLSearchParams(search).get("theme");
+  if (requestedTheme === "light" || requestedTheme === "dark") return requestedTheme;
+  if (storedTheme === "light" || storedTheme === "dark") return storedTheme;
+
+  return defaultTheme;
+}
+
 export function ThemeProvider({
   children,
   defaultTheme = "light",
   switchable = false,
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (switchable) {
-      const stored = localStorage.getItem("theme");
-      return (stored as Theme) || defaultTheme;
-    }
-    return defaultTheme;
-  });
+  const [theme, setTheme] = useState<Theme>(() =>
+    resolveInitialTheme({
+      defaultTheme,
+      switchable,
+      search: window.location.search,
+      storedTheme: localStorage.getItem("theme"),
+    }),
+  );
 
   useEffect(() => {
     const root = document.documentElement;
