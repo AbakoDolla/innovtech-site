@@ -130,3 +130,4 @@
 - [ ] Tester réellement l’installation PWA InnovTech Admin en production Vercel sur mobile et ordinateur, puis corriger le manifeste si nécessaire.
 - [ ] Transformer la connexion admin en formulaire accessible avec soumission par Entrée, annonces d’état et focus cohérent.
 - [ ] Effectuer et consigner le contrôle responsive explicite sur mobile, tablette et ordinateur pour `/admin`.
+- [ ] Tester l’installation et l’ouverture d’InnovTech Admin en mode PWA sur mobile et ordinateur, puis consigner le résultat par format.
