@@ -1,12 +1,11 @@
-/** InnovTech design reminder: bright premium technology gallery with a clear path from discovery to WhatsApp conversation. */
+/** InnovTech design reminder: guide visitors from clear choices to a useful conversation, using real catalogue imagery. */
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
-import { ArrowRight, CheckCircle2, Code2, Headphones, Layers3, MessageCircle, ShieldCheck, ShoppingBag, Smartphone, Sparkles } from "lucide-react";
+import { ArrowRight, Code2, Headphones, Layers3, MessageCircle, ShieldCheck, ShoppingBag, Smartphone, Sparkles } from "lucide-react";
 import type { Lang } from "@/lib/site";
 import { fullProductCatalog, orderMessage, quoteMessage } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import { mediaCatalog } from "@/content/mediaCatalog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
 const highlights = [
@@ -19,6 +18,11 @@ export default function Home({ lang }: { lang: Lang }) {
   const t = lang === "fr";
   const [categoryCarousel, setCategoryCarousel] = useState<CarouselApi>();
   const heroProducts = [fullProductCatalog[3], fullProductCatalog[1], fullProductCatalog[2]];
+  const spotlightEntries = [
+    { product: fullProductCatalog[0], fr: "Les essentiels utiles", en: "Useful essentials" },
+    { product: fullProductCatalog[6], fr: "Les objets qui suivent votre rythme", en: "Tools that follow your rhythm" },
+    { product: fullProductCatalog[4], fr: "Votre espace de création", en: "Your creative space" },
+  ];
 
   useEffect(() => {
     if (!categoryCarousel) return;
@@ -28,147 +32,53 @@ export default function Home({ lang }: { lang: Lang }) {
 
   return (
     <main className="home-page">
-      <section className="relative isolate overflow-hidden bg-[linear-gradient(120deg,#FFFFFF_0%,#F3F8FF_48%,#EAFBFF_100%)] pb-16 pt-9 sm:pb-24 sm:pt-16" onMouseMove={(event) => { const bounds = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--mx", `${(event.clientX - bounds.left - bounds.width / 2) / 28}px`); event.currentTarget.style.setProperty("--my", `${(event.clientY - bounds.top - bounds.height / 2) / 38}px`); }} onMouseLeave={(event) => { event.currentTarget.style.setProperty("--mx", "0px"); event.currentTarget.style.setProperty("--my", "0px"); }}>
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(120deg,#FFFFFF_0%,#F3F8FF_48%,#EAFBFF_100%)] pb-16 pt-9 sm:pb-24 sm:pt-16">
         <div className="hero-orb left-[42%] top-6" />
         <div className="circuit-lines pointer-events-none absolute inset-0 opacity-35" />
         <div className="container relative grid items-center gap-9 lg:grid-cols-[0.86fr_1.14fr] lg:gap-5">
           <div className="max-w-2xl">
-            <div className="reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/85 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800 shadow-sm backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-600" />
-              {t ? "BIENVENUE · TROUVEZ VOTRE POINT DE DÉPART" : "WELCOME · FIND YOUR STARTING POINT"}
-            </div>
-            <h1 className="reveal mt-6 max-w-2xl font-display text-[2.8rem] font-bold leading-[0.94] tracking-[-0.065em] text-[#081A3C] sm:text-6xl lg:text-[4.9rem]">
-              {t ? <>Vous savez ce que vous cherchez. <span className="text-blue-600">Nous vous y guidons.</span></> : <>You know your goal. <span className="text-blue-600">We guide you there.</span></>}
-            </h1>
-            <p className="reveal mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-              {t ? "Choisissez votre parcours : équipez-vous, lancez un projet digital ou échangez directement avec l’équipe. Chaque chemin vous conduit à la bonne prochaine étape." : "Choose your path: equip yourself, launch a digital project or talk to our team. Each path leads to the right next step."}
-            </p>
+            <div className="reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/85 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800 shadow-sm backdrop-blur"><Sparkles className="h-3.5 w-3.5 text-cyan-600" />{t ? "BIENVENUE · TROUVEZ VOTRE POINT DE DÉPART" : "WELCOME · FIND YOUR STARTING POINT"}</div>
+            <h1 className="reveal mt-6 max-w-2xl font-display text-[2.8rem] font-bold leading-[0.94] tracking-[-0.065em] text-[#081A3C] sm:text-6xl lg:text-[4.9rem]">{t ? <>Vous savez ce que vous cherchez. <span className="text-blue-600">Nous vous y guidons.</span></> : <>You know your goal. <span className="text-blue-600">We guide you there.</span></>}</h1>
+            <p className="reveal mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">{t ? "Choisissez votre parcours : équipez-vous, lancez un projet digital ou échangez directement avec l’équipe. Chaque chemin vous conduit à la bonne prochaine étape." : "Choose your path: equip yourself, launch a digital project or talk to our team. Each path leads to the right next step."}</p>
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/boutique" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]">
-                <ShoppingBag className="h-4 w-4" /> {t ? "Je cherche un équipement" : "I need equipment"} <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link href="/services" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white/85 px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]">
-                <Code2 className="h-4 w-4" /> {t ? "J’ai un projet digital" : "I have a digital project"}
-              </Link>
+              <Link href="/boutique" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]"><ShoppingBag className="h-4 w-4" />{t ? "Je cherche un équipement" : "I need equipment"}<ArrowRight className="h-4 w-4" /></Link>
+              <Link href="/services" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white/85 px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]"><Code2 className="h-4 w-4" />{t ? "J’ai un projet digital" : "I have a digital project"}</Link>
             </div>
             <div className="mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-blue-100 bg-white/75 shadow-[0_12px_26px_rgba(20,68,145,0.07)] backdrop-blur">
               {[{ value: String(fullProductCatalog.length), fr: "Équipements", en: "Equipment" }, { value: "3", fr: "Parcours", en: "Paths" }, { value: "1:1", fr: "Conseil", en: "Guidance" }].map(({ value, fr, en }) => <div key={value} className="border-r border-blue-100 px-3 py-3 last:border-r-0 sm:px-4"><strong className="block font-display text-lg font-bold tracking-[-0.05em] text-[#081A3C] sm:text-xl">{value}</strong><span className="mt-0.5 block text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-slate-500">{t ? fr : en}</span></div>)}
             </div>
-            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
-              {highlights.map(({ icon: Icon, fr, en }) => <div key={fr} className="flex items-center gap-2 text-xs font-bold text-slate-600"><span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-700"><Icon className="h-3.5 w-3.5" /></span>{t ? fr : en}</div>)}
-            </div>
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">{highlights.map(({ icon: Icon, fr, en }) => <div key={fr} className="flex items-center gap-2 text-xs font-bold text-slate-600"><span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-700"><Icon className="h-3.5 w-3.5" /></span>{t ? fr : en}</div>)}</div>
           </div>
           <div className="reveal hero-depth relative px-1 pb-8 sm:px-5">
-            <div className="hero-grid absolute -inset-8 opacity-70" />
-            <div className="hero-ring absolute -right-7 -top-8 h-32 w-32 rounded-full border border-cyan-300/60 sm:-right-3 sm:-top-5" />
+            <div className="hero-grid absolute -inset-8 opacity-70" /><div className="hero-ring absolute -right-7 -top-8 h-32 w-32 rounded-full border border-cyan-300/60 sm:-right-3 sm:-top-5" />
             <div className="relative grid min-h-[23rem] grid-cols-[1.15fr_.85fr] gap-3 rounded-[2rem] border border-white/80 bg-white/85 p-3 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:min-h-[29rem] sm:p-4">
               <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} fetchPriority="high" decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
-              <article className="relative overflow-hidden rounded-[1.35rem] bg-cyan-50 shadow-lg"><img src={heroProducts[1].imageSrc} alt={heroProducts[1].name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[1].name[lang]}</p></article>
-              <article className="relative overflow-hidden rounded-[1.35rem] bg-blue-50 shadow-lg"><img src={heroProducts[2].imageSrc} alt={heroProducts[2].name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/30 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{heroProducts[2].name[lang]}</p></article>
+              {[heroProducts[1], heroProducts[2]].map((product, index) => <article key={product.id} className={`relative overflow-hidden rounded-[1.35rem] ${index === 0 ? "bg-cyan-50" : "bg-blue-50"} shadow-lg`}><img src={product.imageSrc} alt={product.name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{product.name[lang]}</p></article>)}
             </div>
-            <div className="absolute -right-1 top-8 hidden rounded-2xl border border-cyan-100 bg-white px-4 py-3 shadow-xl sm:block sm:-right-5">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "La promesse" : "The promise"}</p>
-              <p className="mt-1 font-display text-lg font-bold text-[#081A3C]">{t ? "Choisir juste." : "Choose better."}</p>
-            </div>
-            <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-lg sm:-left-8">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-green-100 text-[#1FAF62]"><WhatsAppIcon className="h-5 w-5" /></span>
-              <span className="text-xs font-bold leading-4 text-slate-600">{t ? <>Une question ?<br /><b className="text-slate-900">Échangez avec nous.</b></> : <>A question?<br /><b className="text-slate-900">Let’s talk.</b></>}</span>
-            </div>
+            <div className="absolute -right-1 top-8 hidden rounded-2xl border border-cyan-100 bg-white px-4 py-3 shadow-xl sm:block sm:-right-5"><p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "La promesse" : "The promise"}</p><p className="mt-1 font-display text-lg font-bold text-[#081A3C]">{t ? "Choisir juste." : "Choose better."}</p></div>
+            <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-lg sm:-left-8"><span className="grid h-9 w-9 place-items-center rounded-xl bg-green-100 text-[#1FAF62]"><WhatsAppIcon className="h-5 w-5" /></span><span className="text-xs font-bold leading-4 text-slate-600">{t ? <>Une question ?<br /><b className="text-slate-900">Échangez avec nous.</b></> : <>A question?<br /><b className="text-slate-900">Let’s talk.</b></>}</span></div>
           </div>
         </div>
       </section>
 
-      <section className="home-paths relative overflow-hidden bg-white py-12 sm:py-16">
-        <div className="container">
-          <div className="max-w-2xl"><p className="eyebrow">{t ? "Une question, trois chemins" : "One question, three paths"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-[#081A3C] sm:text-4xl">{t ? "Par où voulez-vous commencer ?" : "Where would you like to start?"}</h2><p className="mt-3 text-sm leading-6 text-slate-600 sm:text-base">{t ? "Choisissez l’action qui correspond à votre besoin actuel. Vous pourrez toujours nous écrire si vous hésitez." : "Choose the action that fits your current need. You can always message us if you are unsure."}</p></div>
-          <div className="mt-7 grid gap-4 lg:grid-cols-3">
-            {[{ icon: ShoppingBag, tone: "blue", title: t ? "Acheter un équipement" : "Buy equipment", body: t ? "Parcourez les serrures, GPS, drones, robotique agricole et équipements maison." : "Browse locks, GPS, drones, agricultural robotics and home equipment.", cta: t ? "Explorer la boutique" : "Explore the shop", href: "/boutique" }, { icon: Code2, tone: "cyan", title: t ? "Créer une solution" : "Build a solution", body: t ? "Découvrez nos offres de site web, application web et application mobile." : "Discover our website, web app and mobile app services.", cta: t ? "Voir les services" : "View services", href: "/services" }, { icon: MessageCircle, tone: "green", title: t ? "Parler à l’équipe" : "Talk to the team", body: t ? "Demandez un conseil, une disponibilité ou un rendez-vous avec un message préparé." : "Ask for guidance, availability or an appointment with a prepared message.", cta: t ? "Nous écrire" : "Message us", href: "/contact" }].map(({ icon: Icon, tone, title, body, cta, href }) => <Link key={title} href={href} className={`path-card path-card--${tone} group relative overflow-hidden rounded-[1.5rem] border p-6 shadow-[0_14px_30px_rgba(13,62,143,0.08)] transition hover:-translate-y-1`}><span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/85 shadow-sm"><Icon className="h-5 w-5" /></span><h3 className="mt-6 font-display text-xl font-bold tracking-[-0.035em] text-[#081A3C]">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{body}</p><span className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold">{cta}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></Link>)}
+      <section className="home-paths relative overflow-hidden bg-white py-12 sm:py-16"><div className="container"><div className="max-w-2xl"><p className="eyebrow">{t ? "Une question, trois chemins" : "One question, three paths"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-[#081A3C] sm:text-4xl">{t ? "Par où voulez-vous commencer ?" : "Where would you like to start?"}</h2><p className="mt-3 text-sm leading-6 text-slate-600 sm:text-base">{t ? "Choisissez l’action qui correspond à votre besoin actuel. Vous pourrez toujours nous écrire si vous hésitez." : "Choose the action that fits your current need. You can always message us if you are unsure."}</p></div><div className="mt-7 grid gap-4 lg:grid-cols-3">{[{ icon: ShoppingBag, tone: "blue", title: t ? "Acheter un équipement" : "Buy equipment", body: t ? "Parcourez les serrures, GPS, drones, robotique agricole et équipements maison." : "Browse locks, GPS, drones, agricultural robotics and home equipment.", cta: t ? "Explorer la boutique" : "Explore the shop", href: "/boutique" }, { icon: Code2, tone: "cyan", title: t ? "Créer une solution" : "Build a solution", body: t ? "Découvrez nos offres de site web, application web et application mobile." : "Discover our website, web app and mobile app services.", cta: t ? "Voir les services" : "View services", href: "/services" }, { icon: MessageCircle, tone: "green", title: t ? "Parler à l’équipe" : "Talk to the team", body: t ? "Demandez un conseil, une disponibilité ou un rendez-vous avec un message préparé." : "Ask for guidance, availability or an appointment with a prepared message.", cta: t ? "Nous écrire" : "Message us", href: "/contact" }].map(({ icon: Icon, tone, title, body, cta, href }) => <Link key={title} href={href} className={`path-card path-card--${tone} group relative overflow-hidden rounded-[1.5rem] border p-6 shadow-[0_14px_30px_rgba(13,62,143,0.08)] transition hover:-translate-y-1`}><span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/85 shadow-sm"><Icon className="h-5 w-5" /></span><h3 className="mt-6 font-display text-xl font-bold tracking-[-0.035em] text-[#081A3C]">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{body}</p><span className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold">{cta}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></Link>)}</div></div></section>
+
+      <section className="relative bg-[#F4F8FF] py-16 sm:py-20"><div className="container"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div className="max-w-xl"><p className="eyebrow">{t ? "À découvrir" : "Discover"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C] sm:text-4xl">{t ? "Choisissez ce qui vous connecte." : "Choose what keeps you connected."}</h2></div><Link href="/boutique" className="inline-flex items-center gap-2 text-sm font-extrabold text-blue-700 transition hover:gap-3">{t ? "Voir toute la boutique" : "View the whole shop"}<ArrowRight className="h-4 w-4" /></Link></div><Carousel opts={{ align: "start", loop: true }} setApi={setCategoryCarousel} className="mt-9"><CarouselContent className="-ml-5">{[{ label: t ? "Sécurité & GPS" : "Security & GPS", description: t ? "Serrures connectées, traceurs GPS et solutions de contrôle pour votre quotidien." : "Smart locks, GPS trackers and control solutions for everyday life.", icon: ShieldCheck, href: "/boutique" }, { label: t ? "Drones & agriculture" : "Drones & agriculture", description: t ? "Des équipements pensés pour la prise de vue, le terrain et la robotique agricole." : "Equipment for imaging, field work and agricultural robotics.", icon: Layers3, href: "/boutique" }, { label: t ? "Informatique & maison" : "Computing & home", description: t ? "Laptop, desktop, lunettes intelligentes et équipements utiles à la maison." : "Laptops, desktops, smart glasses and useful home equipment.", icon: Smartphone, href: "/boutique" }].map(({ label, description, icon: Icon, href }, index) => <CarouselItem key={label} className="basis-[88%] pl-5 sm:basis-1/2 md:basis-1/3"><Link href={href} className="group relative block h-full overflow-hidden rounded-3xl border border-white bg-white p-6 shadow-[0_16px_35px_rgba(13,62,143,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(13,62,143,0.15)]"><div className={`absolute right-0 top-0 h-24 w-24 rounded-bl-[3rem] ${index === 1 ? "bg-cyan-50" : "bg-blue-50"}`} /><span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-blue-700 text-white shadow-lg"><Icon className="h-5 w-5" /></span><h3 className="relative mt-8 font-display text-xl font-bold tracking-[-0.03em] text-[#081A3C]">{label}</h3><p className="relative mt-2 text-sm leading-6 text-slate-600">{description}</p><span className="relative mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-blue-700">{t ? "Découvrir" : "Discover"}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></Link></CarouselItem>)}</CarouselContent><CarouselPrevious className="-left-3 border-blue-200 bg-white text-blue-700 shadow-md hover:bg-blue-50" /><CarouselNext className="-right-3 border-blue-200 bg-white text-blue-700 shadow-md hover:bg-blue-50" /></Carousel></div></section>
+
+      <section className="home-showcase relative overflow-hidden bg-[#071A36] py-16 text-white sm:py-24">
+        <div className="circuit-lines absolute inset-0 opacity-25" />
+        <div className="container relative">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl"><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">{t ? "Dans la boutique" : "In the shop"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] sm:text-4xl">{t ? "Des produits à voir sous tous les angles." : "Products to explore from every angle."}</h2><p className="mt-3 text-sm leading-6 text-blue-100/75 sm:text-base">{t ? "Trois univers pour équiper votre quotidien, votre terrain et vos projets. Découvrez une sélection réelle, puis confirmez le modèle disponible avec nous." : "Three worlds for your daily life, field work and projects. Discover a real selection, then confirm the available model with us."}</p></div>
+            <Link href="/boutique" className="inline-flex items-center gap-2 self-start rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-extrabold text-white backdrop-blur transition hover:border-cyan-300 hover:bg-white/15 sm:self-auto">{t ? "Parcourir le catalogue" : "Browse the catalogue"}<ArrowRight className="h-4 w-4" /></Link>
           </div>
+          <div className="mt-9 grid gap-4 md:grid-cols-3">{spotlightEntries.map(({ product, fr, en }, index) => <Link key={product.id} href={`/boutique/${product.id}`} className="group relative min-h-[20rem] overflow-hidden rounded-[1.7rem] border border-white/10 bg-[#0c294d] shadow-[0_20px_48px_rgba(0,0,0,0.24)]"><img src={product.imageSrc} alt={product.name[lang]} loading={index === 0 ? "eager" : "lazy"} decoding="async" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-[#06152d] via-[#06152d]/20 to-transparent" /><div className="absolute inset-x-0 bottom-0 p-5"><span className="inline-flex rounded-full border border-white/15 bg-[#06152d]/70 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-cyan-200 backdrop-blur">0{index + 1} · {product.badge[lang]}</span><h3 className="mt-3 max-w-xs font-display text-xl font-bold tracking-[-0.03em] text-white">{t ? fr : en}</h3><p className="mt-1 text-sm font-bold text-cyan-200">{product.name[lang]}</p><p className="mt-2 line-clamp-2 text-sm leading-5 text-blue-100/80">{product.description[lang]}</p><span className="mt-4 inline-flex items-center gap-2 text-sm font-extrabold text-cyan-300">{t ? "Voir le produit" : "View product"}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></div></Link>)}</div>
         </div>
       </section>
 
-      <section className="relative bg-[#F4F8FF] py-16 sm:py-20">
-        <div className="container">
-          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-            <div className="max-w-xl">
-              <p className="eyebrow">{t ? "À découvrir" : "Discover"}</p>
-              <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C] sm:text-4xl">{t ? "Choisissez ce qui vous connecte." : "Choose what keeps you connected."}</h2>
-            </div>
-            <Link href="/boutique" className="inline-flex items-center gap-2 text-sm font-extrabold text-blue-700 transition hover:gap-3">{t ? "Voir toute la boutique" : "View the whole shop"} <ArrowRight className="h-4 w-4" /></Link>
-          </div>
-          <Carousel opts={{ align: "start", loop: true }} setApi={setCategoryCarousel} className="mt-9">
-            <CarouselContent className="-ml-5">
-            {[
-              { label: t ? "Sécurité & GPS" : "Security & GPS", description: t ? "Serrures connectées, traceurs GPS et solutions de contrôle pour votre quotidien." : "Smart locks, GPS trackers and control solutions for everyday life.", icon: ShieldCheck, href: "/boutique" },
-              { label: t ? "Drones & agriculture" : "Drones & agriculture", description: t ? "Des équipements pensés pour la prise de vue, le terrain et la robotique agricole." : "Equipment for imaging, field work and agricultural robotics.", icon: Layers3, href: "/boutique" },
-              { label: t ? "Informatique & maison" : "Computing & home", description: t ? "Laptop, desktop, lunettes intelligentes et équipements utiles à la maison." : "Laptops, desktops, smart glasses and useful home equipment.", icon: Smartphone, href: "/boutique" },
-            ].map(({ label, description, icon: Icon, href }, index) => (
-              <CarouselItem key={label} className="basis-[88%] pl-5 sm:basis-1/2 md:basis-1/3">
-              <Link href={href} className="group relative block h-full overflow-hidden rounded-3xl border border-white bg-white p-6 shadow-[0_16px_35px_rgba(13,62,143,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(13,62,143,0.15)]">
-                <div className={`absolute right-0 top-0 h-24 w-24 rounded-bl-[3rem] ${index === 1 ? "bg-cyan-50" : "bg-blue-50"}`} />
-                <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-blue-700 text-white shadow-lg"><Icon className="h-5 w-5" /></span>
-                <h3 className="relative mt-8 font-display text-xl font-bold tracking-[-0.03em] text-[#081A3C]">{label}</h3>
-                <p className="relative mt-2 text-sm leading-6 text-slate-600">{description}</p>
-                <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-blue-700">{t ? "Découvrir" : "Discover"} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
-              </Link>
-              </CarouselItem>
-            ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-3 border-blue-200 bg-white text-blue-700 shadow-md hover:bg-blue-50" />
-            <CarouselNext className="-right-3 border-blue-200 bg-white text-blue-700 shadow-md hover:bg-blue-50" />
-          </Carousel>
-        </div>
-      </section>
+      <section className="home-solutions relative overflow-hidden bg-white py-16 sm:py-24"><div className="container grid items-center gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16"><div className="relative order-2 lg:order-1"><div className="absolute -left-5 -top-5 h-24 w-24 rounded-full bg-cyan-100 blur-2xl" /><div className="relative overflow-hidden rounded-[2rem] bg-[#EAF4FF] p-3 shadow-[0_24px_54px_rgba(15,79,175,0.16)]"><img src="/media/projects/portfolio-evans.webp" alt={t ? "Aperçu d’une réalisation web InnovTech" : "InnovTech web project preview"} loading="lazy" decoding="async" className="aspect-[16/11] w-full rounded-[1.5rem] object-cover" /><div className="absolute bottom-7 left-7 right-7 rounded-2xl border border-white/70 bg-white/90 p-4 shadow-lg backdrop-blur"><p className="text-[0.62rem] font-extrabold uppercase tracking-[0.14em] text-cyan-700">{t ? "Solutions numériques" : "Digital solutions"}</p><p className="mt-1 font-display text-lg font-bold text-[#081A3C]">{t ? "Une interface claire, pensée pour votre activité." : "A clear interface built for your business."}</p></div></div></div><div className="order-1 lg:order-2"><p className="eyebrow">{t ? "Du besoin à l’écran" : "From need to screen"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-[#081A3C] sm:text-4xl">{t ? "Un site ou une application qui sert vraiment votre projet." : "A website or app that truly serves your project."}</h2><p className="mt-5 max-w-lg text-base leading-7 text-slate-600">{t ? "Nous ne proposons pas seulement des écrans. Nous clarifions votre besoin, structurons le parcours et livrons une expérience utile à vos clients." : "We do not only create screens. We clarify your needs, structure the journey and deliver an experience that is useful to your clients."}</p><div className="mt-7 grid gap-3">{[t ? "Site vitrine ou portail d’activité" : "Showcase website or business portal", t ? "Application web pour vos opérations" : "Web application for your operations", t ? "Parcours mobile simple et intuitif" : "Simple, intuitive mobile journey"].map((item, index) => <div key={item} className="flex items-center gap-3 rounded-xl border border-blue-100 bg-[#F7FAFF] px-4 py-3 text-sm font-bold text-slate-700"><span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-700 text-[0.65rem] font-extrabold text-white">0{index + 1}</span>{item}</div>)}</div><div className="mt-8 flex flex-wrap gap-3"><WhatsAppButton lang={lang} quote message={quoteMessage(t ? "un site web ou une application" : "a website or an application", lang)} /><Link href="/services" className="inline-flex items-center gap-2 rounded-xl border border-blue-200 px-5 py-3 text-sm font-extrabold text-blue-700 transition hover:bg-blue-50">{t ? "Voir les services" : "View services"}<ArrowRight className="h-4 w-4" /></Link></div></div></div></section>
 
-      <section className="container py-16 sm:py-20">
-        <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-          <div>
-            <p className="eyebrow">{t ? "Dans la boutique" : "Inside the shop"}</p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C] sm:text-4xl">{t ? "Des produits à voir sous tous les angles." : "Products worth seeing from every angle."}</h2>
-          </div>
-          <Link href="/boutique" className="inline-flex items-center gap-2 text-sm font-extrabold text-blue-700 transition hover:gap-3">{t ? "Parcourir le catalogue" : "Browse the catalogue"} <ArrowRight className="h-4 w-4" /></Link>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {mediaCatalog.productGallery.map((item, index) => (
-            <Link key={item.id} href={`/boutique?cat=${item.family}`} className="media-card group relative overflow-hidden rounded-[1.65rem] bg-[#081A3C] shadow-[0_18px_40px_rgba(13,62,143,0.14)]">
-              <img src={item.imageSrc} alt={item.label[lang]} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#081A3C]/90 via-[#081A3C]/35 to-transparent p-5 pt-16">
-                <span className="text-xs font-extrabold uppercase tracking-[0.13em] text-cyan-200">0{index + 1}</span>
-                <h3 className="mt-1 font-display text-xl font-bold text-white">{item.label[lang]}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="container py-16 sm:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.95fr]">
-          <div className="order-2 lg:order-1">
-            <div className="relative overflow-hidden rounded-[2rem] bg-[#EAF4FF] p-3 shadow-[0_24px_50px_rgba(15,79,175,0.12)]">
-              <img src="/manus-storage/laptop-workspace_416f8ab9.jpg" alt={t ? "Espace de travail numérique InnovTech" : "InnovTech digital workspace"} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-[1.55rem] object-cover" />
-            </div>
-          </div>
-          <div className="order-1 lg:order-2">
-            <p className="eyebrow">{t ? "Solutions numériques" : "Digital solutions"}</p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.045em] text-[#081A3C] sm:text-4xl">{t ? "Besoin d’un site ou d’une application ?" : "Need a website or an application?"}</h2>
-            <p className="mt-5 max-w-lg text-base leading-7 text-slate-600">{t ? "InnovTech conçoit des expériences web et mobiles utiles, rapides à comprendre et prêtes à servir votre activité." : "InnovTech designs useful web and mobile experiences that are easy to understand and ready to serve your business."}</p>
-            <div className="mt-7 grid gap-3">
-              {[t ? "Site vitrine ou portail d’activité" : "Showcase website or business portal", t ? "Application web sur mesure" : "Custom web application", t ? "Expérience mobile intuitive" : "Intuitive mobile experience"].map((item) => <div key={item} className="flex items-center gap-3 text-sm font-bold text-slate-700"><CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-500" /> {item}</div>)}
-            </div>
-            <div className="mt-8"><WhatsAppButton lang={lang} quote message={quoteMessage(t ? "un projet digital" : "a digital project", lang)} /></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="container pb-4">
-        <div className="relative overflow-hidden rounded-[2rem] bg-[#081A3C] px-6 py-9 text-white sm:px-10 sm:py-12">
-          <div className="absolute -right-8 -top-16 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />
-          <div className="relative grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">WhatsApp</p><h2 className="mt-3 max-w-xl font-display text-3xl font-bold tracking-[-0.045em] sm:text-4xl">{t ? "Un clic, puis une conversation claire." : "One click, then a clear conversation."}</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-blue-100/80">{t ? "Choisissez un article ou une solution. Votre message est préparé pour que nous puissions vous répondre avec les bonnes informations." : "Choose a product or solution. Your message is prepared so we can answer with the right information."}</p></div>
-            <WhatsAppButton lang={lang} message={orderMessage(t ? "une demande d’information" : "an information request", lang)} />
-          </div>
-        </div>
-      </section>
+      <section className="container pb-4"><div className="home-conversation relative overflow-hidden rounded-[2rem] bg-[#082248] px-6 py-9 text-white shadow-[0_22px_48px_rgba(8,26,60,0.18)] sm:px-10 sm:py-12"><div className="absolute -right-12 -top-16 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" /><div className="relative grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center"><div><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">WhatsApp Business</p><h2 className="mt-3 max-w-2xl font-display text-3xl font-bold tracking-[-0.045em] sm:text-4xl">{t ? "Vous avez choisi une direction. Parlons de la suite." : "You have chosen a direction. Let’s talk about what comes next."}</h2><p className="mt-4 max-w-2xl text-sm leading-6 text-blue-100/80">{t ? "Votre message est préparé avec les bonnes informations. Nous confirmons ensuite l’équipement, le prix ou le périmètre de votre projet." : "Your message is prepared with the right details. We then confirm the equipment, price or scope of your project."}</p></div><div className="flex flex-col gap-3 sm:flex-row lg:flex-col"><WhatsAppButton lang={lang} message={orderMessage(t ? "une demande d’information" : "an information request", lang)} /><Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-white/15">{t ? "Prendre rendez-vous" : "Book an appointment"}<ArrowRight className="h-4 w-4" /></Link></div></div></div></section>
     </main>
   );
 }

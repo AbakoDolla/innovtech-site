@@ -80,3 +80,7 @@
 - [ ] Remplacer les surcharges de thème sombre fragiles par des styles ciblés sur les composants et pages critiques.
 - [ ] Contrôler les contrastes, focus, champs, boutons et liens du thème sombre sur Boutique, Services, Contact, À propos et les fiches produit.
 - [x] Corriger la connexion WebSocket Vite du rechargement à chaud dans l’aperçu sécurisé.
+- [x] Corriger l’affichage de la Boutique au format mobile, sans écran incomplet ni contenu masqué.
+- [x] Reconcevoir les sections « Dans la boutique », solutions numériques et appel WhatsApp jusqu’au pied de page de l’accueil.
+- [x] Moderniser la navigation desktop et mobile pour renforcer la lisibilité et la signature InnovTech.
+- [x] Aligner explicitement la section « Dans la boutique » sur les trois entrées demandées et revalider sa lecture mobile et bureau.

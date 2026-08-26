@@ -39,43 +39,42 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
   }, [location]);
 
   return (
-    <header className="site-header sticky top-0 z-50 border-b border-blue-100/80 bg-white/90 backdrop-blur-xl">
-      <div className="container flex h-[74px] items-center justify-between gap-3 sm:h-[80px] sm:gap-4">
+    <header className="site-header sticky top-0 z-50 border-b border-blue-100/70 bg-white/85 shadow-[0_8px_28px_rgba(8,37,83,0.05)] backdrop-blur-2xl">
+      <div className="container flex h-[72px] items-center justify-between gap-3 sm:h-[80px] sm:gap-4">
         <Link href="/" className="group flex min-w-0 items-center" aria-label="InnovTech, accueil">
           <img
             src="/media/branding/innovtech-logo.png"
             alt="InnovTech"
             decoding="async"
             fetchPriority="high"
-            className="h-16 w-[6.5rem] object-contain transition-transform duration-200 group-hover:scale-[1.02] sm:h-[4.1rem] sm:w-auto"
+            className="h-14 w-[5.75rem] object-contain transition-transform duration-200 group-hover:scale-[1.03] sm:h-[4.1rem] sm:w-auto"
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label={t ? "Navigation principale" : "Main navigation"}>
+        <nav className="hidden items-center gap-1 rounded-full border border-blue-100 bg-slate-50/85 p-1.5 shadow-inner lg:flex" aria-label={t ? "Navigation principale" : "Main navigation"}>
           {navigation[lang].map(([label, href]) => {
             const active = location === href || (href !== "/" && location.startsWith(href));
             return (
               <Link
                 key={href}
                 href={href}
-                className={`relative py-2 text-sm font-bold transition-colors ${active ? "text-blue-700" : "text-slate-700 hover:text-blue-700"}`}
+                className={`rounded-full px-3.5 py-2 text-sm font-extrabold transition-all ${active ? "bg-blue-700 text-white shadow-[0_6px_15px_rgba(18,103,243,0.22)]" : "text-slate-600 hover:bg-white hover:text-blue-700"}`}
               >
                 {label}
-                {active && <span className="absolute inset-x-0 -bottom-[18px] h-0.5 rounded-full bg-blue-600" />}
               </Link>
             );
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
-          <button type="button" onClick={toggleTheme} aria-label={dark ? (t ? "Passer au thème clair" : "Switch to light theme") : (t ? "Passer au thème sombre" : "Switch to dark theme")} aria-pressed={dark} className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-white text-blue-700 transition hover:-translate-y-0.5 hover:bg-blue-50 active:scale-[0.97]">
+        <div className="hidden items-center gap-2 border-l border-blue-100 pl-3 lg:flex">
+          <button type="button" onClick={toggleTheme} aria-label={dark ? (t ? "Passer au thème clair" : "Switch to light theme") : (t ? "Passer au thème sombre" : "Switch to dark theme")} aria-pressed={dark} className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-100 bg-white text-blue-700 shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-50 active:scale-[0.97]">
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          <div className="flex rounded-xl border border-blue-100 bg-blue-50/70 p-1" aria-label={t ? "Choisir la langue" : "Choose language"}>
+          <div className="flex rounded-full border border-blue-100 bg-blue-50/70 p-1" aria-label={t ? "Choisir la langue" : "Choose language"}>
             <button
               type="button"
               onClick={() => onLanguageChange("fr")}
-              className={`rounded-lg px-2.5 py-1.5 text-xs font-extrabold transition ${lang === "fr" ? "bg-white text-blue-700 shadow-sm" : "text-slate-500 hover:text-blue-700"}`}
+              className={`rounded-full px-2.5 py-1.5 text-xs font-extrabold transition ${lang === "fr" ? "bg-white text-blue-700 shadow-sm" : "text-slate-500 hover:text-blue-700"}`}
               aria-pressed={lang === "fr"}
             >
               FR
@@ -83,25 +82,25 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
             <button
               type="button"
               onClick={() => onLanguageChange("en")}
-              className={`rounded-lg px-2.5 py-1.5 text-xs font-extrabold transition ${lang === "en" ? "bg-white text-blue-700 shadow-sm" : "text-slate-500 hover:text-blue-700"}`}
+              className={`rounded-full px-2.5 py-1.5 text-xs font-extrabold transition ${lang === "en" ? "bg-white text-blue-700 shadow-sm" : "text-slate-500 hover:text-blue-700"}`}
               aria-pressed={lang === "en"}
             >
               EN
             </button>
           </div>
-          <Link href="/boutique" className="inline-flex h-11 items-center gap-2 rounded-xl bg-blue-700 px-4 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]">
+          <Link href="/boutique" className="inline-flex h-11 items-center gap-2 rounded-full bg-blue-700 px-4 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]">
             <ShoppingBag className="h-4 w-4" />
             {t ? "Commander" : "Order"}
           </Link>
         </div>
 
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
-          <button type="button" onClick={toggleTheme} aria-label={dark ? (t ? "Passer au thème clair" : "Switch to light theme") : (t ? "Passer au thème sombre" : "Switch to dark theme")} aria-pressed={dark} className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-white text-blue-700 transition hover:bg-blue-50 active:scale-[0.97]">
+          <button type="button" onClick={toggleTheme} aria-label={dark ? (t ? "Passer au thème clair" : "Switch to light theme") : (t ? "Passer au thème sombre" : "Switch to dark theme")} aria-pressed={dark} className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-100 bg-white text-blue-700 shadow-sm transition hover:bg-blue-50 active:scale-[0.97]">
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
           <button
             type="button"
-            className="inline-flex h-10 items-center gap-1 rounded-xl border border-blue-100 px-2 text-xs font-extrabold text-blue-700 transition hover:bg-blue-50 active:scale-[0.97]"
+            className="inline-flex h-10 items-center gap-1 rounded-full border border-blue-100 bg-white px-2.5 text-xs font-extrabold text-blue-700 shadow-sm transition hover:bg-blue-50 active:scale-[0.97]"
             onClick={() => onLanguageChange(lang === "fr" ? "en" : "fr")}
             aria-label={t ? "Passer à l’anglais" : "Switch to French"}
           >
@@ -109,7 +108,7 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
           </button>
           <button
             type="button"
-            className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-blue-700 px-3 text-xs font-extrabold text-white transition hover:bg-blue-800 active:scale-[0.97]"
+            className="inline-flex h-10 items-center gap-1.5 rounded-full bg-blue-700 px-3.5 text-xs font-extrabold text-white shadow-[0_8px_18px_rgba(18,103,243,0.2)] transition hover:bg-blue-800 active:scale-[0.97]"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label={t ? "Ouvrir le menu" : "Open menu"}
@@ -120,19 +119,19 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
       </div>
 
       {open && (
-        <div className="site-mobile-menu border-t border-blue-100 bg-white px-4 py-5 shadow-2xl lg:hidden">
+        <div className="site-mobile-menu border-t border-blue-100 bg-[linear-gradient(135deg,#FFFFFF_0%,#F5F9FF_100%)] px-4 py-5 shadow-2xl lg:hidden">
           <nav className="mx-auto grid max-w-xl gap-2" aria-label={t ? "Navigation mobile" : "Mobile navigation"}>
             {navigation[lang].map(([label, href]) => (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`rounded-2xl px-4 py-4 text-base font-bold ${location === href ? "bg-blue-50 text-blue-700" : "text-slate-700 hover:bg-slate-50"}`}
+                className={`rounded-2xl px-4 py-4 text-base font-bold transition ${location === href ? "bg-blue-700 text-white shadow-[0_10px_22px_rgba(18,103,243,0.18)]" : "border border-transparent text-slate-700 hover:border-blue-100 hover:bg-white"}`}
               >
                 {label}
               </Link>
             ))}
-            <Link href="/boutique" className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-700 px-4 py-4 text-sm font-extrabold text-white shadow-[0_12px_24px_rgba(18,103,243,0.22)]">
+            <Link href="/boutique" className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-[#071A36] px-4 py-4 text-sm font-extrabold text-white shadow-[0_12px_24px_rgba(8,26,60,0.22)]">
               <ShoppingBag className="h-4 w-4" />{t ? "Découvrir la boutique" : "Explore the shop"}
             </Link>
             <div className="mt-1 flex items-center justify-between rounded-2xl bg-blue-50 px-4 py-3">
