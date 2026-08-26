@@ -108,6 +108,8 @@
   /* Dark theme surfaces stay scoped to stable page and component contracts, never to utility-class string matching. */
   .dark body, .dark main, .dark :is(.home-page, .shop-page, .services-page, .contact-page, .about-page) { background: #081426; color: #eaf4ff; }
   .dark .site-header { border-color: rgba(103, 168, 255, .18); background: rgba(8, 20, 38, .88); }
+  .dark .brand-lockup > span > span:first-child { color: #f1f7ff; }
+  .dark .brand-lockup > span > span:last-child { color: #9fb9d7; }
   .dark .site-header nav { border-color: rgba(103, 168, 255, .18); background: rgba(12, 28, 52, .85); }
   .dark .site-header nav a:not(.bg-blue-700), .dark .site-header [aria-label="Choisir la langue"] button:not(.bg-white) { color: #c8dbf4; }
   .dark .site-mobile-menu { border-color: rgba(103, 168, 255, .18); background: linear-gradient(135deg, #0c1c34, #102747); }

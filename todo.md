@@ -97,3 +97,6 @@
 - [x] Mettre en place un bandeau de consentement cookies avec acceptation, refus, choix et retrait du consentement.
 - [x] Ajouter un consentement de confidentialité explicite et non pré-coché aux formulaires collectant des données.
 - [ ] Recueillir les informations légales d’éditeur, de contact et de vente indispensables avant publication des textes définitifs.
+- [x] Adapter le logo InnovTech pour une intégration sans fond gênant en thèmes clair et sombre.
+- [x] Renforcer les métadonnées SEO, les données structurées et les signaux d’indexation du site InnovTech.
+- [ ] Préparer le référencement local Cameroun et international avec des informations commerciales vérifiables.

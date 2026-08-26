@@ -1,0 +1,10 @@
+{
+  "name": "InnovTech — Technologie et solutions numériques",
+  "short_name": "InnovTech",
+  "lang": "fr",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081426",
+  "theme_color": "#1267F3",
+  "icons": [{ "src": "/media/branding/innovtech-symbol.png", "sizes": "any", "type": "image/png" }]
+}

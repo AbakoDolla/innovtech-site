@@ -11,7 +11,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import { revealPageSections } from "@/lib/pageVisibility";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { CookieConsentBanner } from "./components/CookieConsentBanner";
+import { SeoManager } from "./components/SeoManager";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
@@ -93,7 +94,7 @@ function App() {
     return () => { observer.disconnect(); mutations.disconnect(); window.removeEventListener("scroll", updateProgress); window.removeEventListener("resize", updateProgress); document.removeEventListener("error", recoverImage, true); };
   }, []);
 
-  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#081426]"><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /><CookieConsentBanner lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
+  return <ErrorBoundary><TooltipProvider><div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#081426]"><SeoManager location={location} lang={lang} /><div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />{!isAdminRoute && <SiteHeader lang={lang} onLanguageChange={setLang} />}<Router lang={lang} />{!isAdminRoute && <><SiteFooter lang={lang} /><FloatingWhatsApp lang={lang} /><CookieConsentBanner lang={lang} /></>}</div><Toaster /></TooltipProvider></ErrorBoundary>;
 }
 
 export default App;

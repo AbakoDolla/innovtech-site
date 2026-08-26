@@ -42,13 +42,13 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
     <header className="site-header sticky top-0 z-50 border-b border-blue-100/70 bg-white/85 shadow-[0_8px_28px_rgba(8,37,83,0.05)] backdrop-blur-2xl">
       <div className="container flex h-[72px] items-center justify-between gap-3 sm:h-[80px] sm:gap-4">
         <Link href="/" className="group flex min-w-0 items-center" aria-label="InnovTech, accueil">
-          <img
-            src="/media/branding/innovtech-logo.png"
-            alt="InnovTech"
-            decoding="async"
-            fetchPriority="high"
-            className="h-14 w-[5.75rem] object-contain transition-transform duration-200 group-hover:scale-[1.03] sm:h-[4.1rem] sm:w-auto"
-          />
+          <span className="brand-lockup flex items-center gap-2.5 transition-transform duration-200 group-hover:scale-[1.03]">
+            <img src="/media/branding/innovtech-symbol.png" alt="" decoding="async" fetchPriority="high" className="h-11 w-11 object-contain sm:h-12 sm:w-12" />
+            <span className="flex flex-col leading-none">
+              <span className="font-display text-xl font-bold tracking-[-0.06em] text-[#081A3C] sm:text-[1.35rem]">Innov<span className="text-cyan-500">Tech</span></span>
+              <span className="mt-1 hidden text-[0.44rem] font-extrabold uppercase tracking-[0.14em] text-slate-500 sm:block">Innover · Connecter · Réussir</span>
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 rounded-full border border-blue-100 bg-slate-50/85 p-1.5 shadow-inner lg:flex" aria-label={t ? "Navigation principale" : "Main navigation"}>
