@@ -1,7 +1,8 @@
 /** InnovTech design reminder: a bright editorial header with tangible commerce actions and an accessible language switch. */
 import { Link, useLocation } from "wouter";
-import { Languages, Menu, ShoppingBag, X } from "lucide-react";
+import { Languages, Menu, Moon, ShoppingBag, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 import type { Lang } from "@/lib/site";
 
 type SiteHeaderProps = {
@@ -29,14 +30,16 @@ const navigation = {
 export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const t = lang === "fr";
+  const dark = theme === "dark";
 
   useEffect(() => {
     setOpen(false);
   }, [location]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-blue-100/80 bg-white/90 backdrop-blur-xl">
+    <header className="site-header sticky top-0 z-50 border-b border-blue-100/80 bg-white/90 backdrop-blur-xl">
       <div className="container flex h-[74px] items-center justify-between gap-3 sm:h-[80px] sm:gap-4">
         <Link href="/" className="group flex min-w-0 items-center" aria-label="InnovTech, accueil">
           <img
@@ -65,6 +68,9 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <button type="button" onClick={toggleTheme} aria-label={dark ? (t ? "Passer au thème clair" : "Switch to light theme") : (t ? "Passer au thème sombre" : "Switch to dark theme")} aria-pressed={dark} className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-white text-blue-700 transition hover:-translate-y-0.5 hover:bg-blue-50 active:scale-[0.97]">
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
           <div className="flex rounded-xl border border-blue-100 bg-blue-50/70 p-1" aria-label={t ? "Choisir la langue" : "Choose language"}>
             <button
               type="button"
@@ -90,6 +96,9 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
         </div>
 
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
+          <button type="button" onClick={toggleTheme} aria-label={dark ? (t ? "Passer au thème clair" : "Switch to light theme") : (t ? "Passer au thème sombre" : "Switch to dark theme")} aria-pressed={dark} className="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-white text-blue-700 transition hover:bg-blue-50 active:scale-[0.97]">
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
           <button
             type="button"
             className="inline-flex h-10 items-center gap-1 rounded-xl border border-blue-100 px-2 text-xs font-extrabold text-blue-700 transition hover:bg-blue-50 active:scale-[0.97]"
@@ -111,7 +120,7 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
       </div>
 
       {open && (
-        <div className="border-t border-blue-100 bg-white px-4 py-5 shadow-2xl lg:hidden">
+        <div className="site-mobile-menu border-t border-blue-100 bg-white px-4 py-5 shadow-2xl lg:hidden">
           <nav className="mx-auto grid max-w-xl gap-2" aria-label={t ? "Navigation mobile" : "Mobile navigation"}>
             {navigation[lang].map(([label, href]) => (
               <Link
@@ -133,6 +142,10 @@ export function SiteHeader({ lang, onLanguageChange }: SiteHeaderProps) {
                 <button type="button" onClick={() => onLanguageChange("en")} className={`rounded-lg px-3 py-1.5 text-xs font-extrabold ${lang === "en" ? "bg-blue-700 text-white" : "bg-white text-slate-500"}`}>EN</button>
               </div>
             </div>
+            <button type="button" onClick={toggleTheme} className="theme-menu-row flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700">
+              <span>{t ? "Apparence" : "Appearance"}</span>
+              <span className="inline-flex items-center gap-2 rounded-xl bg-white px-3 py-1.5 text-xs font-extrabold text-blue-700 shadow-sm">{dark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}{dark ? (t ? "Clair" : "Light") : (t ? "Sombre" : "Dark")}</span>
+            </button>
           </nav>
         </div>
       )}

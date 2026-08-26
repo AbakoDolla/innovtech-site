@@ -1,7 +1,7 @@
 /** InnovTech design reminder: bright premium technology gallery with a clear path from discovery to WhatsApp conversation. */
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
-import { ArrowRight, CheckCircle2, Code2, Headphones, Layers3, ShieldCheck, ShoppingBag, Smartphone, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Code2, Headphones, Layers3, MessageCircle, ShieldCheck, ShoppingBag, Smartphone, Sparkles } from "lucide-react";
 import type { Lang } from "@/lib/site";
 import { fullProductCatalog, orderMessage, quoteMessage } from "@/lib/site";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -35,24 +35,24 @@ export default function Home({ lang }: { lang: Lang }) {
           <div className="max-w-2xl">
             <div className="reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/85 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800 shadow-sm backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-cyan-600" />
-              {t ? "INNOVTECH · SÉLECTION & SOLUTIONS" : "INNOVTECH · SELECTION & SOLUTIONS"}
+              {t ? "BIENVENUE · TROUVEZ VOTRE POINT DE DÉPART" : "WELCOME · FIND YOUR STARTING POINT"}
             </div>
             <h1 className="reveal mt-6 max-w-2xl font-display text-[2.8rem] font-bold leading-[0.94] tracking-[-0.065em] text-[#081A3C] sm:text-6xl lg:text-[4.9rem]">
-              {t ? <>La tech qui fait <span className="text-blue-600">avancer</span> vos idées.</> : <>Technology that moves your <span className="text-blue-600">ideas</span> forward.</>}
+              {t ? <>Vous savez ce que vous cherchez. <span className="text-blue-600">Nous vous y guidons.</span></> : <>You know your goal. <span className="text-blue-600">We guide you there.</span></>}
             </h1>
             <p className="reveal mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-              {t ? "Produits high-tech, accessoires fiables et expériences digitales : une sélection claire pour votre quotidien et vos projets ambitieux." : "High-tech products, reliable accessories and digital experiences: a clear selection for your everyday needs and ambitious projects."}
+              {t ? "Choisissez votre parcours : équipez-vous, lancez un projet digital ou échangez directement avec l’équipe. Chaque chemin vous conduit à la bonne prochaine étape." : "Choose your path: equip yourself, launch a digital project or talk to our team. Each path leads to the right next step."}
             </p>
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/boutique" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]">
-                <ShoppingBag className="h-4 w-4" /> {t ? "Voir la sélection" : "View the selection"} <ArrowRight className="h-4 w-4" />
+                <ShoppingBag className="h-4 w-4" /> {t ? "Je cherche un équipement" : "I need equipment"} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/services" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white/85 px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]">
-                <Code2 className="h-4 w-4" /> {t ? "Construire un projet" : "Build a project"}
+                <Code2 className="h-4 w-4" /> {t ? "J’ai un projet digital" : "I have a digital project"}
               </Link>
             </div>
             <div className="mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-blue-100 bg-white/75 shadow-[0_12px_26px_rgba(20,68,145,0.07)] backdrop-blur">
-              {[{ value: "18+", fr: "Produits", en: "Products" }, { value: "3", fr: "Expertises", en: "Expertises" }, { value: "1:1", fr: "Conseil", en: "Guidance" }].map(({ value, fr, en }) => <div key={value} className="border-r border-blue-100 px-3 py-3 last:border-r-0 sm:px-4"><strong className="block font-display text-lg font-bold tracking-[-0.05em] text-[#081A3C] sm:text-xl">{value}</strong><span className="mt-0.5 block text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-slate-500">{t ? fr : en}</span></div>)}
+              {[{ value: String(fullProductCatalog.length), fr: "Équipements", en: "Equipment" }, { value: "3", fr: "Parcours", en: "Paths" }, { value: "1:1", fr: "Conseil", en: "Guidance" }].map(({ value, fr, en }) => <div key={value} className="border-r border-blue-100 px-3 py-3 last:border-r-0 sm:px-4"><strong className="block font-display text-lg font-bold tracking-[-0.05em] text-[#081A3C] sm:text-xl">{value}</strong><span className="mt-0.5 block text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-slate-500">{t ? fr : en}</span></div>)}
             </div>
             <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
               {highlights.map(({ icon: Icon, fr, en }) => <div key={fr} className="flex items-center gap-2 text-xs font-bold text-slate-600"><span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-700"><Icon className="h-3.5 w-3.5" /></span>{t ? fr : en}</div>)}
@@ -78,6 +78,15 @@ export default function Home({ lang }: { lang: Lang }) {
         </div>
       </section>
 
+      <section className="home-paths relative overflow-hidden bg-white py-12 sm:py-16">
+        <div className="container">
+          <div className="max-w-2xl"><p className="eyebrow">{t ? "Une question, trois chemins" : "One question, three paths"}</p><h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-[#081A3C] sm:text-4xl">{t ? "Par où voulez-vous commencer ?" : "Where would you like to start?"}</h2><p className="mt-3 text-sm leading-6 text-slate-600 sm:text-base">{t ? "Choisissez l’action qui correspond à votre besoin actuel. Vous pourrez toujours nous écrire si vous hésitez." : "Choose the action that fits your current need. You can always message us if you are unsure."}</p></div>
+          <div className="mt-7 grid gap-4 lg:grid-cols-3">
+            {[{ icon: ShoppingBag, tone: "blue", title: t ? "Acheter un équipement" : "Buy equipment", body: t ? "Parcourez les serrures, GPS, drones, robotique agricole et équipements maison." : "Browse locks, GPS, drones, agricultural robotics and home equipment.", cta: t ? "Explorer la boutique" : "Explore the shop", href: "/boutique" }, { icon: Code2, tone: "cyan", title: t ? "Créer une solution" : "Build a solution", body: t ? "Découvrez nos offres de site web, application web et application mobile." : "Discover our website, web app and mobile app services.", cta: t ? "Voir les services" : "View services", href: "/services" }, { icon: MessageCircle, tone: "green", title: t ? "Parler à l’équipe" : "Talk to the team", body: t ? "Demandez un conseil, une disponibilité ou un rendez-vous avec un message préparé." : "Ask for guidance, availability or an appointment with a prepared message.", cta: t ? "Nous écrire" : "Message us", href: "/contact" }].map(({ icon: Icon, tone, title, body, cta, href }) => <Link key={title} href={href} className={`path-card path-card--${tone} group relative overflow-hidden rounded-[1.5rem] border p-6 shadow-[0_14px_30px_rgba(13,62,143,0.08)] transition hover:-translate-y-1`}><span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/85 shadow-sm"><Icon className="h-5 w-5" /></span><h3 className="mt-6 font-display text-xl font-bold tracking-[-0.035em] text-[#081A3C]">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{body}</p><span className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold">{cta}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></Link>)}
+          </div>
+        </div>
+      </section>
+
       <section className="relative bg-[#F4F8FF] py-16 sm:py-20">
         <div className="container">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
@@ -90,9 +99,9 @@ export default function Home({ lang }: { lang: Lang }) {
           <Carousel opts={{ align: "start", loop: true }} setApi={setCategoryCarousel} className="mt-9">
             <CarouselContent className="-ml-5">
             {[
-              { label: t ? "Accessoires électroniques" : "Electronic accessories", description: t ? "Les essentiels qui accompagnent vos appareils au quotidien." : "Everyday essentials for your devices.", icon: ShoppingBag, href: "/boutique?cat=accessories" },
-              { label: t ? "Gadgets connectés" : "Connected gadgets", description: t ? "Des objets pratiques pour explorer de nouvelles possibilités." : "Practical objects for exploring new possibilities.", icon: Layers3, href: "/boutique?cat=connected" },
-              { label: t ? "Équipement informatique" : "Computer equipment", description: t ? "Du matériel utile pour apprendre, créer et travailler." : "Useful equipment to learn, create and work.", icon: Smartphone, href: "/boutique?cat=computing" },
+              { label: t ? "Sécurité & GPS" : "Security & GPS", description: t ? "Serrures connectées, traceurs GPS et solutions de contrôle pour votre quotidien." : "Smart locks, GPS trackers and control solutions for everyday life.", icon: ShieldCheck, href: "/boutique" },
+              { label: t ? "Drones & agriculture" : "Drones & agriculture", description: t ? "Des équipements pensés pour la prise de vue, le terrain et la robotique agricole." : "Equipment for imaging, field work and agricultural robotics.", icon: Layers3, href: "/boutique" },
+              { label: t ? "Informatique & maison" : "Computing & home", description: t ? "Laptop, desktop, lunettes intelligentes et équipements utiles à la maison." : "Laptops, desktops, smart glasses and useful home equipment.", icon: Smartphone, href: "/boutique" },
             ].map(({ label, description, icon: Icon, href }, index) => (
               <CarouselItem key={label} className="basis-[88%] pl-5 sm:basis-1/2 md:basis-1/3">
               <Link href={href} className="group relative block h-full overflow-hidden rounded-3xl border border-white bg-white p-6 shadow-[0_16px_35px_rgba(13,62,143,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(13,62,143,0.15)]">

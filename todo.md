@@ -74,3 +74,8 @@
 - [x] Ajouter un mini-tracteur robotique agricole au catalogue spécialisé.
 - [x] Ajouter une machine à laver au catalogue spécialisé.
 - [x] Créer des zones de prix explicites et indépendantes pour chaque article du catalogue.
+- [x] Repenser l’accueil pour orienter clairement les visiteurs vers les produits, services ou WhatsApp.
+- [x] Ajouter un mode sombre premium, accessible, persistant et disponible sur toutes les pages.
+- [ ] Vérifier visuellement le mode sombre sur toutes les pages publiques et fiches produit en mobile et bureau, puis corriger les incohérences restantes.
+- [ ] Remplacer les surcharges de thème sombre fragiles par des styles ciblés sur les composants et pages critiques.
+- [ ] Contrôler les contrastes, focus, champs, boutons et liens du thème sombre sur Boutique, Services, Contact, À propos et les fiches produit.
