@@ -32,7 +32,7 @@ export const mediaCatalog = {
   productVideos: [
     {
       id: "serrure-connectee",
-      videoSrc: "/manus-storage/innovtech-serrure-connectee_b90fe309.mp4",
+      videoSrc: "https://github.com/AbakoDolla/innovtech-site/releases/download/innovtech-media-v1/innovtech-serrure-connectee.mp4",
       title: { fr: "La sécurité connectée, en situation réelle.", en: "Connected security, in a real setting." } satisfies BilingualText,
       description: {
         fr: "Serrure intelligente avec accès par empreinte digitale, clavier tactile et poignée réversible.",
