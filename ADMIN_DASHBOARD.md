@@ -20,3 +20,7 @@ Les produits administrés sont stockés dans `catalog_products` et les paramètr
 ## Vérification visuelle
 
 Les vues `/admin`, `/admin/catalogue` et `/admin/disponibilites` ont été contrôlées dans la session administrateur locale. La navigation, les cartes de synthèse, les états de catalogue vide et les messages d’initialisation sont lisibles. Le catalogue est volontairement vide dans la base à ce stade : le bouton d’import doit être déclenché avec le compte propriétaire afin de copier les onze produits publics vers la gestion administrable.
+
+## Hébergement du backend
+
+Le déploiement Vercel existant est statique : sa route `/api/trpc/catalog.list` renvoie actuellement `index.html` au lieu de l’API. Il affiche donc correctement la porte de connexion `/admin`, mais ne peut pas administrer les données en production sans une configuration serveur supplémentaire. La publication de ce projet full-stack sur l’hébergement applicatif intégré fournit le backend tRPC et la base de données déjà configurés ; l’URL d’administration reste alors `https://votre-domaine/admin` et peut être affectée ultérieurement à un sous-domaine distinct.
