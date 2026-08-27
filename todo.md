@@ -142,3 +142,4 @@
 - [x] Versionner le cache PWA de l’administration pour que les mises à jour du panneau e-commerce remplacent l’ancienne interface installée.
 - [x] Téléverser une photo temporaire en production, l’associer à une fiche publiée, vérifier son rendu public, puis supprimer la fiche, la métadonnée et l’objet Storage de validation.
 - [x] Contrôler le rendu responsive de l’écran de connexion `/admin` aux formats mobile, tablette et ordinateur.
+- [x] Téléverser un clip MP4 technique temporaire, vérifier son lecteur public sur une fiche publiée, puis supprimer le produit et tous les objets et métadonnées de validation.

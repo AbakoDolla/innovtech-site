@@ -8,6 +8,7 @@ Le panneau `/admin` de production a été ouvert dans une session propriétaire.
 |---|---|
 | Téléversement image | Une image de validation a été téléversée vers le bucket `innovtech-media` et enregistrée dans la bibliothèque média. |
 | Synchronisation boutique | Cette image a été associée à un produit temporaire publié et s’est affichée immédiatement sur sa fiche publique. |
+| Téléversement vidéo | Un clip MP4 technique temporaire a été téléversé, associé au même type de fiche de validation et affiché par un lecteur public prêt à être lu. |
 | Nettoyage | Le produit temporaire, la ligne de métadonnée et l’objet Storage ont été supprimés. Les lectures de contrôle ont confirmé zéro métadonnée et zéro objet pour le fichier de test. |
 | Suppression depuis l’interface | Les médias non associés affichent maintenant une action de suppression définitive. Elle vérifie d’abord qu’aucun produit ne référence le fichier, puis demande confirmation. |
 | Mise à jour PWA | Le cache de la coque a été versionné en `innovtech-shell-v2`; l’activation et le nettoyage de l’ancien cache ont été contrôlés dans le navigateur. |
@@ -15,4 +16,4 @@ Le panneau `/admin` de production a été ouvert dans une session propriétaire.
 
 ## Contrôles restant à réaliser
 
-Le téléversement et la lecture publique d’une **vidéo réelle appartenant à InnovTech** restent à effectuer dès qu’un fichier MP4 ou WebM approprié sera disponible. L’installation native finale de la PWA doit également être confirmée sur un téléphone et un ordinateur réels.
+Le téléversement et la lecture publique d’une **vidéo de produit réelle appartenant à InnovTech** restent à effectuer dès qu’un fichier MP4 ou WebM approprié sera disponible. L’installation native finale de la PWA doit également être confirmée sur un téléphone et un ordinateur réels.
