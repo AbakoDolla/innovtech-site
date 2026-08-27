@@ -5,7 +5,7 @@ import { can, roleLabels, type CollaboratorRole } from "@/lib/adminCommerce";
 import { isStandalonePwa, shouldUseAdminManifest } from "@/lib/pwa";
 import { Boxes, ClipboardList, Download, Globe2, LayoutDashboard, Loader2, LockKeyhole, LogOut, Settings2, ShieldCheck, Sparkles, Tags, UsersRound } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation, useSearch } from "wouter";
 import { toast } from "sonner";
 
 function linksForRole(role: CollaboratorRole | null) {
@@ -129,13 +129,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { user, isAdmin, role, signOut } = useSupabaseAuth();
   const { installed, install, canInstall } = useAdminPwa();
   const [location] = useLocation();
+  const search = useSearch();
+  const activeHref = `${location}${search ? (search.startsWith("?") ? search : `?${search}`) : ""}`;
   if (!user || !isAdmin) return <LoginScreen />;
 
   return <div className="min-h-screen bg-[#F7FAFF] text-[#081A3C] lg:grid lg:grid-cols-[272px_1fr]">
     <aside className="border-b border-blue-100 bg-white p-4 sm:p-5 lg:min-h-screen lg:border-b-0 lg:border-r">
       <div className="flex items-center justify-between gap-3 rounded-2xl bg-[#081A3C] p-3"><Link href="/admin"><BrandMark compact /></Link><Button variant="ghost" size="icon" className="text-white hover:bg-white/10 hover:text-white" onClick={() => void signOut()} aria-label="Se déconnecter"><LogOut className="h-4 w-4" /></Button></div>
       <div className="mt-3 flex items-center justify-between gap-2 px-1"><p className="min-w-0 truncate text-xs font-bold text-slate-500">{user.email}</p>{role && <span className="shrink-0 rounded-full bg-blue-50 px-2 py-1 text-[0.6rem] font-extrabold uppercase tracking-[.08em] text-blue-700">{roleLabels[role]}</span>}</div>
-      <nav className="mt-5 flex gap-1 overflow-x-auto pb-1 lg:grid lg:overflow-visible">{linksForRole(role).map((item) => <Link key={item.href} href={item.href} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold transition ${location === item.href || (item.href === "/admin" && location === "/admin") ? "bg-blue-700 text-white" : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"}`}><item.icon className="h-4 w-4" />{item.label}</Link>)}</nav>
+      <nav className="mt-5 flex gap-1 overflow-x-auto pb-1 lg:grid lg:overflow-visible">{linksForRole(role).map((item) => <Link key={item.href} href={item.href} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold transition ${(item.href === "/admin" ? !search : activeHref === item.href) ? "bg-blue-700 text-white" : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"}`}><item.icon className="h-4 w-4" />{item.label}</Link>)}</nav>
       <Button type="button" variant="outline" className="mt-5 hidden w-full justify-between lg:flex" onClick={() => void install()}><span className="flex items-center gap-2"><Download className="h-4 w-4 text-blue-700" />{installed ? "Application installée" : "Installer l’application"}</span><span className="text-[0.65rem] font-extrabold text-slate-400">{canInstall ? "PWA" : "Guide"}</span></Button>
     </aside>
     <main className="min-w-0 p-4 sm:p-7">{children}</main>
