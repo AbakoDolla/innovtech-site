@@ -14,6 +14,9 @@ Le panneau `/admin` de production a été ouvert dans une session propriétaire.
 | Mise à jour PWA | Le cache de la coque a été versionné en `innovtech-shell-v2`; l’activation et le nettoyage de l’ancien cache ont été contrôlés dans le navigateur. |
 | Responsive de l’accès admin | L’écran de connexion a été vérifié aux formats 390×844, 768×1024 et 1280×720. Les champs, les actions et l’indication d’installation restent accessibles. |
 | Pages publiques après branchement | L’accueil et la boutique ont été contrôlés localement au format ordinateur. La navigation, les cartes de catégories et les CTA restent visibles ; le bandeau de consentement masque volontairement une partie du contenu jusqu’au choix du visiteur. |
+| Modules de gestion publiés | Les sections Produits, Demandes, Catégories, Équipe et Réglages ont été ouvertes en production dans une session propriétaire. Les contrôles de recherche, filtres, stock, promotions, demandes WhatsApp, rôles, invitation, export et réglages bilingues sont visibles. |
+| Navigation par rôle | Les onglets utilisent maintenant le paramètre d’URL de la section et le module Produits, puis Demandes, Catégories, Équipe et Réglages, ont tous été ouverts correctement. L’onglet actif correspond au module affiché. |
+| Sécurité des rôles | Les migrations définissent les rôles propriétaire, gestionnaire catalogue, commercial et lecteur ; les tables privées ont perdu leurs privilèges anonymes et une migration bloque toute promotion involontaire au rôle propriétaire. |
 
 ## Contrôles restant à réaliser
 

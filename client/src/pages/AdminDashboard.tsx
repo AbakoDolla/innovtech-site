@@ -1,5 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { CommerceSettingsPanel } from "@/components/AdminCommerceSettings";
+import { CommerceProductsPanel } from "@/components/AdminProductsPanel";
+import { AdminHeroPreview } from "@/components/AdminHeroPreview";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,6 +65,8 @@ export default function AdminDashboard() {
   const [draft, setDraft] = useState<Draft>(blank);
   const [catalogSearch, setCatalogSearch] = useState("");
   const [catalogStatus, setCatalogStatus] = useState<"all" | Draft["status"]>("all");
+  const [catalogAvailability, setCatalogAvailability] = useState<"all" | "available" | "on_request" | "unavailable">("all");
+  const [catalogPromotion, setCatalogPromotion] = useState<"all" | "active" | "inactive">("all");
   const hasOpenedNewRoute = useRef(false);
   const section = new URLSearchParams(search).get("section") || "overview";
   const canManageCatalog = can(role, "catalog_manage");
@@ -116,8 +120,12 @@ export default function AdminDashboard() {
   const filteredProducts = useMemo(() => products.filter((item) => {
     const term = catalogSearch.trim().toLowerCase();
     const matchText = !term || [item.name_fr, item.name_en, item.category, item.slug].some((value) => value.toLowerCase().includes(term));
-    return matchText && (catalogStatus === "all" || item.status === catalogStatus);
-  }), [catalogSearch, catalogStatus, products]);
+    const matchStatus = catalogStatus === "all" || item.status === catalogStatus;
+    const matchAvailability = catalogAvailability === "all" || item.availability_status === catalogAvailability;
+    const hasPromotion = isPromotionActive(item);
+    const matchPromotion = catalogPromotion === "all" || (catalogPromotion === "active" ? hasPromotion : !hasPromotion);
+    return matchText && matchStatus && matchAvailability && matchPromotion;
+  }), [catalogAvailability, catalogPromotion, catalogSearch, catalogStatus, products]);
 
   const openProduct = (item?: SupabaseCatalogRow) => {
     if (!canManageCatalog) { toast.error("Votre rôle permet la consultation, mais pas la modification des produits."); return; }
@@ -184,11 +192,11 @@ export default function AdminDashboard() {
     <header className="overflow-hidden rounded-[2rem] bg-[#081A3C] p-6 text-white shadow-[0_24px_70px_rgba(8,26,60,.22)] sm:p-10"><p className="text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300">InnovTech Commerce · {role ? roleLabels[role] : "Accès sécurisé"}</p><div className="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><h1 className="font-display text-3xl font-bold tracking-[-0.055em] sm:text-5xl">{section === "overview" ? "Votre activité, au même endroit." : section === "products" ? "Produits et promotions." : section === "requests" ? "Demandes commerciales." : section === "categories" ? "Catégories de boutique." : section === "team" ? "Votre équipe." : "Réglages de diffusion."}</h1><p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100/80">Les actions autorisées par votre rôle sont synchronisées avec la boutique publique, sans modifier le code du site.</p></div>{canManageCatalog && <Button size="lg" className="bg-[#1FAF62] text-white hover:bg-[#168b4c]" onClick={() => openProduct()}><Plus className="mr-2 h-4 w-4" />Nouveau produit</Button>}</div></header>
     {loading ? <div className="grid min-h-64 place-items-center"><Loader2 className="h-8 w-8 animate-spin text-blue-700" /></div> : <>
       {section === "overview" && <Overview stats={stats} requests={requests} canExport={can(role, "export_manage")} onExport={exportData} onOpenProducts={() => setLocation("/admin?section=products")} onOpenRequests={() => setLocation("/admin?section=requests")} />}
-      {section === "products" && <ProductsPanel products={filteredProducts} categories={categories} search={catalogSearch} status={catalogStatus} onSearch={setCatalogSearch} onStatus={setCatalogStatus} canManage={canManageCatalog} onNew={() => openProduct()} onEdit={openProduct} onToggle={(item) => void toggleVisibility(item)} />}
+      {section === "products" && <CommerceProductsPanel products={filteredProducts} categories={categories} search={catalogSearch} status={catalogStatus} availability={catalogAvailability} promotion={catalogPromotion} onSearch={setCatalogSearch} onStatus={setCatalogStatus} onAvailability={setCatalogAvailability} onPromotion={setCatalogPromotion} canManage={canManageCatalog} onNew={() => openProduct()} onEdit={openProduct} onToggle={(item) => void toggleVisibility(item)} />}
       {section === "requests" && can(role, "requests_read") && <RequestsPanel requests={requests} products={products} team={team} userId={user?.id || null} canManage={can(role, "requests_manage")} onRefresh={load} />}
       {section === "categories" && can(role, "categories_manage") && <CategoriesPanel categories={categories} onRefresh={load} />}
       {section === "team" && can(role, "collaborators_manage") && <TeamPanel team={team} currentUserId={user?.id || ""} onRefresh={load} />}
-      {section === "settings" && can(role, "settings_manage") && <CommerceSettingsPanel commercial={commercialSettings} hero={heroSettings} assets={assets} onCommercialChange={setCommercialSettings} onHeroChange={setHeroSettings} pending={pending} onSave={() => void saveSettings()} />}
+      {section === "settings" && can(role, "settings_manage") && <><CommerceSettingsPanel commercial={commercialSettings} hero={heroSettings} assets={assets} onCommercialChange={setCommercialSettings} onHeroChange={setHeroSettings} pending={pending} onSave={() => void saveSettings()} /><AdminHeroPreview hero={heroSettings} /></>}
       {!["overview", "products", "requests", "categories", "team", "settings"].includes(section) && <EmptyPanel />}
     </>}
     {editing && <ProductEditor draft={draft} set={set} assets={assets} categories={categories} pending={pending} uploading={uploading} deletingAssetId={deletingAssetId} canManageMedia={can(role, "media_manage")} onCancel={() => { setEditing(null); setDraft(blank); }} onSave={() => void saveProduct()} onUpload={upload} onDeleteAsset={(asset) => void deleteUnusedAsset(asset)} />}
