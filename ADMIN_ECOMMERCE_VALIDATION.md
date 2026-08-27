@@ -13,6 +13,7 @@ Le panneau `/admin` de production a été ouvert dans une session propriétaire.
 | Suppression depuis l’interface | Les médias non associés affichent maintenant une action de suppression définitive. Elle vérifie d’abord qu’aucun produit ne référence le fichier, puis demande confirmation. |
 | Mise à jour PWA | Le cache de la coque a été versionné en `innovtech-shell-v2`; l’activation et le nettoyage de l’ancien cache ont été contrôlés dans le navigateur. |
 | Responsive de l’accès admin | L’écran de connexion a été vérifié aux formats 390×844, 768×1024 et 1280×720. Les champs, les actions et l’indication d’installation restent accessibles. |
+| Pages publiques après branchement | L’accueil et la boutique ont été contrôlés localement au format ordinateur. La navigation, les cartes de catégories et les CTA restent visibles ; le bandeau de consentement masque volontairement une partie du contenu jusqu’au choix du visiteur. |
 
 ## Contrôles restant à réaliser
 

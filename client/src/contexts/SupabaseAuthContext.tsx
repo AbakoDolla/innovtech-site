@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import type { CollaboratorRole } from "@/lib/adminCommerce";
 import type { Session, User } from "@supabase/supabase-js";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
@@ -7,6 +8,7 @@ type SupabaseAuthValue = {
   user: User | null;
   loading: boolean;
   isAdmin: boolean;
+  role: CollaboratorRole | null;
   signIn: (email: string, password: string) => Promise<AuthResult>;
   signUp: (email: string, password: string) => Promise<AuthResult>;
   signOut: () => Promise<void>;
@@ -18,11 +20,14 @@ export function SupabaseAuthProvider({ children }: { children: React.ReactNode }
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState<CollaboratorRole | null>(null);
 
   const resolveAdmin = useCallback(async (user: User | null) => {
-    if (!user) { setIsAdmin(false); return; }
-    const { data } = await supabase.from("innovtech_admins").select("user_id").eq("user_id", user.id).maybeSingle();
-    setIsAdmin(Boolean(data));
+    if (!user) { setIsAdmin(false); setRole(null); return; }
+    const { data } = await supabase.from("innovtech_admins").select("user_id, role, active").eq("user_id", user.id).maybeSingle();
+    const resolvedRole = data?.active ? data.role as CollaboratorRole : null;
+    setRole(resolvedRole);
+    setIsAdmin(Boolean(resolvedRole));
   }, []);
 
   useEffect(() => {
@@ -45,6 +50,7 @@ export function SupabaseAuthProvider({ children }: { children: React.ReactNode }
     user: session?.user ?? null,
     loading,
     isAdmin,
+    role,
     async signIn(email, password) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       return error ? { error: error.message } : { message: "Connexion réussie." };
@@ -56,7 +62,7 @@ export function SupabaseAuthProvider({ children }: { children: React.ReactNode }
       return { message: data.session ? "Compte créé et connecté." : "Compte créé. Vérifiez votre e-mail puis connectez-vous." };
     },
     async signOut() { await supabase.auth.signOut(); },
-  }), [isAdmin, loading, session]);
+  }), [isAdmin, loading, role, session]);
 
   return <SupabaseAuthContext.Provider value={value}>{children}</SupabaseAuthContext.Provider>;
 }

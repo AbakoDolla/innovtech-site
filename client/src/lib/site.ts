@@ -15,6 +15,12 @@ export type CatalogProduct = {
   description: Record<Lang, string>;
   searchTerms: Record<Lang, string[]>;
   availability?: Record<Lang, string>;
+  stockQuantity?: number | null;
+  promotion?: {
+    price: Record<Lang, string>;
+    startsAt?: string | null;
+    endsAt?: string | null;
+  };
 };
 
 export type PortfolioProject = {
@@ -99,8 +105,8 @@ export const portfolioProjects: PortfolioProject[] = [
   { id: "star-life", url: "https://star-live-co.vercel.app", imageSrc: "/media/projects/star-life-services.webp", category: { fr: "Site corporate", en: "Corporate website" }, title: { fr: "Star-Life & Company", en: "Star-Life & Company" }, description: { fr: "Un site de présentation multiservices avec offres, formulaires de demande et contact direct.", en: "A multi-service showcase with offers, request forms and direct contact." } },
 ];
 
-export function whatsappUrl(message: string) {
-  const recipient = WHATSAPP_NUMBER.trim();
+export function whatsappUrl(message: string, number = WHATSAPP_NUMBER) {
+  const recipient = number.replace(/\D/g, "").trim();
   return `https://wa.me/${recipient ? recipient : ""}?text=${encodeURIComponent(message)}`;
 }
 

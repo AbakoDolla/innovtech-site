@@ -143,3 +143,17 @@
 - [x] Téléverser une photo temporaire en production, l’associer à une fiche publiée, vérifier son rendu public, puis supprimer la fiche, la métadonnée et l’objet Storage de validation.
 - [x] Contrôler le rendu responsive de l’écran de connexion `/admin` aux formats mobile, tablette et ordinateur.
 - [x] Téléverser un clip MP4 technique temporaire, vérifier son lecteur public sur une fiche publiée, puis supprimer le produit et tous les objets et métadonnées de validation.
+- [ ] Définir les rôles administrateur propriétaire, gestionnaire catalogue, commercial et lecteur, avec leurs permissions explicites.
+- [ ] Ajouter une gestion des collaborateurs par invitation e-mail, activation, désactivation et révocation sécurisées.
+- [ ] Créer un espace de gestion des demandes et commandes WhatsApp avec fiche client, produits, quantité, statut et notes internes.
+- [ ] Ajouter les états de disponibilité et de stock simple aux produits, avec synchronisation automatique vers la boutique publique.
+- [ ] Ajouter les promotions avec prix de référence, prix promotionnel, période de validité et badge public.
+- [ ] Ajouter une recherche et des filtres d’administration pour les produits, les visibilités, les disponibilités et les promotions.
+- [ ] Créer un tableau de bord de synthèse des produits, demandes commerciales et éléments nécessitant une attention.
+- [ ] Rendre les catégories de la boutique créables, modifiables, ordonnables et masquables depuis l’administration.
+- [ ] Ajouter des réglages commerciaux administrables : numéro WhatsApp, messages préremplis, délais et informations de livraison.
+- [ ] Ajouter un export CSV du catalogue et des demandes commerciales, limité aux rôles autorisés.
+- [ ] Ajouter une gestion bilingue de la bannière d’accueil avec publication et aperçu sans modification de code.
+- [ ] Vérifier les règles RLS pour chaque rôle, les restrictions d’export et la révocation immédiate d’un collaborateur.
+- [ ] Empêcher toute élévation involontaire d’un collaborateur au rôle propriétaire, y compris via une modification directe protégée par RLS.
+- [ ] Réduire l’exposition anonyme des tables privées d’administration et de demandes commerciales signalée par l’audit de sécurité Supabase.

@@ -5,6 +5,7 @@ import { ArrowRight, Code2, Headphones, Layers3, MessageCircle, ShieldCheck, Sho
 import type { Lang } from "@/lib/site";
 import { orderMessage, quoteMessage } from "@/lib/site";
 import { useManagedCatalog } from "@/lib/managedCatalog";
+import { useManagedSettings } from "@/lib/managedSettings";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
@@ -18,6 +19,7 @@ const highlights = [
 export default function Home({ lang }: { lang: Lang }) {
   const t = lang === "fr";
   const { catalog } = useManagedCatalog();
+  const { hero } = useManagedSettings();
   const [categoryCarousel, setCategoryCarousel] = useState<CarouselApi>();
   const heroProducts = [catalog[3] || catalog[0], catalog[1] || catalog[0], catalog[2] || catalog[0]];
   const spotlightEntries = [
@@ -39,11 +41,11 @@ export default function Home({ lang }: { lang: Lang }) {
         <div className="circuit-lines pointer-events-none absolute inset-0 opacity-35" />
         <div className="container relative grid items-center gap-9 lg:grid-cols-[0.86fr_1.14fr] lg:gap-5">
           <div className="max-w-2xl">
-            <div className="home-theme-card reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/85 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800 shadow-sm backdrop-blur"><Sparkles className="h-3.5 w-3.5 text-cyan-600" />{t ? "BIENVENUE · TROUVEZ VOTRE POINT DE DÉPART" : "WELCOME · FIND YOUR STARTING POINT"}</div>
-            <h1 className="home-theme-title reveal mt-6 max-w-2xl font-display text-[2.8rem] font-bold leading-[0.94] tracking-[-0.065em] text-[#081A3C] sm:text-6xl lg:text-[4.9rem]">{t ? <>Vous savez ce que vous cherchez. <span className="text-blue-600">Nous vous y guidons.</span></> : <>You know your goal. <span className="text-blue-600">We guide you there.</span></>}</h1>
-            <p className="home-theme-copy reveal mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">{t ? "Choisissez votre parcours : équipez-vous, lancez un projet digital ou échangez directement avec l’équipe. Chaque chemin vous conduit à la bonne prochaine étape." : "Choose your path: equip yourself, launch a digital project or talk to our team. Each path leads to the right next step."}</p>
+            <div className="home-theme-card reveal inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/85 px-3.5 py-2 text-xs font-extrabold tracking-wide text-blue-800 shadow-sm backdrop-blur"><Sparkles className="h-3.5 w-3.5 text-cyan-600" />{t ? hero.eyebrowFr : hero.eyebrowEn}</div>
+            <h1 className="home-theme-title reveal mt-6 max-w-2xl font-display text-[2.8rem] font-bold leading-[0.94] tracking-[-0.065em] text-[#081A3C] sm:text-6xl lg:text-[4.9rem]">{t ? hero.titleFr : hero.titleEn}</h1>
+            <p className="home-theme-copy reveal mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">{t ? hero.bodyFr : hero.bodyEn}</p>
             <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/boutique" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]"><ShoppingBag className="h-4 w-4" />{t ? "Je cherche un équipement" : "I need equipment"}<ArrowRight className="h-4 w-4" /></Link>
+              <Link href={hero.primaryHref || "/boutique"} className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,243,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-800 active:scale-[0.97]"><ShoppingBag className="h-4 w-4" />{t ? hero.primaryCtaFr : hero.primaryCtaEn}<ArrowRight className="h-4 w-4" /></Link>
               <Link href="/services" className="home-theme-card inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white/85 px-5 py-3.5 text-sm font-extrabold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 active:scale-[0.97]"><Code2 className="h-4 w-4" />{t ? "J’ai un projet digital" : "I have a digital project"}</Link>
             </div>
             <div className="home-theme-card mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-blue-100 bg-white/75 shadow-[0_12px_26px_rgba(20,68,145,0.07)] backdrop-blur">
@@ -54,7 +56,7 @@ export default function Home({ lang }: { lang: Lang }) {
           <div className="reveal hero-depth relative px-1 pb-8 sm:px-5">
             <div className="hero-grid absolute -inset-8 opacity-70" /><div className="hero-ring absolute -right-7 -top-8 h-32 w-32 rounded-full border border-cyan-300/60 sm:-right-3 sm:-top-5" />
             <div className="home-theme-card relative grid min-h-[23rem] grid-cols-[1.15fr_.85fr] gap-3 rounded-[2rem] border border-white/80 bg-white/85 p-3 shadow-[0_30px_70px_rgba(16,72,165,0.16)] backdrop-blur sm:min-h-[29rem] sm:p-4">
-              <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} fetchPriority="high" decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
+              <article className="relative row-span-2 overflow-hidden rounded-[1.45rem] bg-[#081A3C] shadow-lg"><img src={hero.imageUrl || heroProducts[0].imageSrc} alt={heroProducts[0].name[lang]} fetchPriority="high" decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#081A3C]/70 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4"><span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-blue-700">{t ? "Sélection du moment" : "Trending selection"}</span><p className="mt-3 font-display text-lg font-bold text-white sm:text-xl">{heroProducts[0].name[lang]}</p></div></article>
               {[heroProducts[1], heroProducts[2]].map((product, index) => <article key={product.id} className={`relative overflow-hidden rounded-[1.35rem] ${index === 0 ? "bg-cyan-50" : "bg-blue-50"} shadow-lg`}><img src={product.imageSrc} alt={product.name[lang]} decoding="async" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-tr from-[#081A3C]/35 via-transparent" /><p className="absolute bottom-3 left-3 rounded-lg bg-white/95 px-2 py-1 text-[0.62rem] font-extrabold text-[#081A3C]">{product.name[lang]}</p></article>)}
             </div>
             <div className="absolute -right-1 top-8 hidden rounded-2xl border border-cyan-100 bg-white px-4 py-3 shadow-xl sm:block sm:-right-5"><p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-400">{t ? "La promesse" : "The promise"}</p><p className="mt-1 font-display text-lg font-bold text-[#081A3C]">{t ? "Choisir juste." : "Choose better."}</p></div>

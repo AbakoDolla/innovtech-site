@@ -1,12 +1,14 @@
 /** InnovTech design reminder: WhatsApp actions use the sole green accent and always explain the next human step. */
 import type { Lang } from "@/lib/site";
 import { whatsappUrl } from "@/lib/site";
+import { useManagedSettings } from "@/lib/managedSettings";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
-export function WhatsAppButton({ lang, message, compact = false, quote = false }: { lang: Lang; message: string; compact?: boolean; quote?: boolean }) {
+export function WhatsAppButton({ lang, message, compact = false, quote = false, number }: { lang: Lang; message: string; compact?: boolean; quote?: boolean; number?: string }) {
+  const { commercial } = useManagedSettings();
   return (
     <a
-      href={whatsappUrl(message)}
+      href={whatsappUrl(message, number || commercial.whatsappNumber)}
       target="_blank"
       rel="noreferrer"
       aria-label={lang === "fr" ? (quote ? "Demander un devis sur WhatsApp" : "Commander via WhatsApp") : (quote ? "Request a quote on WhatsApp" : "Order on WhatsApp")}

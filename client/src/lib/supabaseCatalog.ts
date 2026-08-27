@@ -6,6 +6,8 @@ export type SupabaseCatalogRow = {
   image_url: string; status: "draft" | "published" | "hidden"; availability_status: string;
   availability_note_fr: string; availability_note_en: string; badge_fr: string; badge_en: string;
   search_terms_fr: unknown; search_terms_en: unknown; gallery_urls: unknown; video_urls: unknown; sort_order: number;
+  stock_quantity?: number | null; promotion_enabled?: boolean; promotion_price_label?: string; promotion_price_label_en?: string;
+  promotion_starts_at?: string | null; promotion_ends_at?: string | null;
 };
 
 function terms(value: unknown) { return Array.isArray(value) ? value.filter((term): term is string => typeof term === "string") : []; }
@@ -24,5 +26,11 @@ export function toCatalogProduct(row: SupabaseCatalogRow): CatalogProduct {
     description: { fr: row.description_fr, en: row.description_en },
     searchTerms: { fr: terms(row.search_terms_fr), en: terms(row.search_terms_en) },
     availability: { fr: row.availability_note_fr || "Disponibilité à confirmer avec notre équipe.", en: row.availability_note_en || "Availability to confirm with our team." },
+    stockQuantity: row.stock_quantity ?? null,
+    promotion: row.promotion_enabled && row.promotion_price_label ? {
+      price: { fr: row.promotion_price_label, en: row.promotion_price_label_en || row.promotion_price_label },
+      startsAt: row.promotion_starts_at,
+      endsAt: row.promotion_ends_at,
+    } : undefined,
   };
 }
