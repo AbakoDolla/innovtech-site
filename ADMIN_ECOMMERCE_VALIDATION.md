@@ -17,6 +17,10 @@ Le panneau `/admin` de production a été ouvert dans une session propriétaire.
 | Modules de gestion publiés | Les sections Produits, Demandes, Catégories, Équipe et Réglages ont été ouvertes en production dans une session propriétaire. Les contrôles de recherche, filtres, stock, promotions, demandes WhatsApp, rôles, invitation, export et réglages bilingues sont visibles. |
 | Navigation par rôle | Les onglets utilisent maintenant le paramètre d’URL de la section et le module Produits, puis Demandes, Catégories, Équipe et Réglages, ont tous été ouverts correctement. L’onglet actif correspond au module affiché. |
 | Sécurité des rôles | Les migrations définissent les rôles propriétaire, gestionnaire catalogue, commercial et lecteur ; les tables privées ont perdu leurs privilèges anonymes et une migration bloque toute promotion involontaire au rôle propriétaire. |
+| Filtres catalogue avancés | Le module Produits publié affiche les filtres Statut, Disponibilité et Promotion, en plus de la recherche textuelle. |
+| Aperçu de bannière | Le module Réglages publié affiche un aperçu français et anglais de la bannière, avec son texte, son CTA et son visuel de secours ou sélectionné. |
+| Réglages commerciaux → site | Un délai de réponse français temporaire a été enregistré dans Supabase, affiché sur la fiche produit publique, puis restauré à sa valeur initiale. |
+| Bannière → accueil | Un titre français temporaire a été enregistré, affiché sur l’accueil public, puis restauré à son texte initial. |
 
 ## Contrôles restant à réaliser
 

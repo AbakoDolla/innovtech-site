@@ -148,17 +148,17 @@
 - [x] Créer un espace de gestion des demandes et commandes WhatsApp avec fiche client, produits, quantité, statut et notes internes.
 - [x] Ajouter les états de disponibilité et de stock simple aux produits, avec synchronisation automatique vers la boutique publique.
 - [x] Ajouter les promotions avec prix de référence, prix promotionnel, période de validité et badge public.
-- [ ] Ajouter une recherche et des filtres d’administration pour les produits, les visibilités, les disponibilités et les promotions.
+- [x] Ajouter une recherche et des filtres d’administration pour les produits, les visibilités, les disponibilités et les promotions.
 - [x] Créer un tableau de bord de synthèse des produits, demandes commerciales et éléments nécessitant une attention.
 - [x] Rendre les catégories de la boutique créables, modifiables, ordonnables et masquables depuis l’administration.
-- [ ] Ajouter des réglages commerciaux administrables : numéro WhatsApp, messages préremplis, délais et informations de livraison.
+- [x] Ajouter des réglages commerciaux administrables : numéro WhatsApp, messages préremplis, délais et informations de livraison.
 - [x] Ajouter un export CSV du catalogue et des demandes commerciales, limité aux rôles autorisés.
-- [ ] Ajouter une gestion bilingue de la bannière d’accueil avec publication et aperçu sans modification de code.
+- [x] Ajouter une gestion bilingue de la bannière d’accueil avec publication et aperçu sans modification de code.
 - [ ] Vérifier les règles RLS pour chaque rôle, les restrictions d’export et la révocation immédiate d’un collaborateur.
 - [x] Empêcher toute élévation involontaire d’un collaborateur au rôle propriétaire, y compris via une modification directe protégée par RLS.
 - [x] Réduire l’exposition anonyme des tables privées d’administration et de demandes commerciales signalée par l’audit de sécurité Supabase.
 - [x] Corriger la lecture des paramètres de navigation du dashboard afin que Produits, Demandes, Catégories, Équipe et Réglages ouvrent bien leur module.
 - [ ] Tester réellement l’invitation d’un collaborateur en production et ajouter un contrôle de révocation définitive sécurisé dans l’interface Équipe.
-- [ ] Ajouter dans Produits des filtres dédiés à la disponibilité et aux promotions, puis les vérifier en production.
-- [ ] Afficher publiquement le délai de réponse et les informations de livraison administrés, puis valider leur effet en production.
-- [ ] Ajouter un aperçu fidèle de la bannière d’accueil dans l’administration et vérifier une modification complète dashboard → site public.
+- [x] Ajouter dans Produits des filtres dédiés à la disponibilité et aux promotions, puis les vérifier en production.
+- [x] Afficher publiquement le délai de réponse et les informations de livraison administrés, puis valider leur effet en production.
+- [x] Ajouter un aperçu fidèle de la bannière d’accueil dans l’administration et vérifier une modification complète dashboard → site public.
