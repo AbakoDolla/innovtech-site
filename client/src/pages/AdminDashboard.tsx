@@ -8,7 +8,7 @@ import { supabase } from "@/lib/supabase";
 import type { SupabaseCatalogRow } from "@/lib/supabaseCatalog";
 import { listProductMedia, type SupabaseMediaAsset, uploadProductMedia } from "@/lib/supabaseMedia";
 import { Check, Eye, EyeOff, Film, ImagePlus, Loader2, Pencil, Plus, Save, Upload, X } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 
 type Draft = Omit<SupabaseCatalogRow, "id">;
@@ -41,9 +41,11 @@ export default function AdminDashboard() {
   const [uploading, setUploading] = useState(false);
   const [editing, setEditing] = useState<string | "new" | null>(null);
   const [draft, setDraft] = useState<Draft>(blank);
+  const hasOpenedNewRoute = useRef(false);
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("new") === "1") {
+    if (!hasOpenedNewRoute.current && new URLSearchParams(window.location.search).get("new") === "1") {
+      hasOpenedNewRoute.current = true;
       setDraft({ ...blank, sort_order: products.length });
       setEditing("new");
     }

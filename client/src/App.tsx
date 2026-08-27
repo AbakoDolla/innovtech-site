@@ -8,7 +8,6 @@ import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { localMediaSrc, type Lang } from "./lib/site";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import { revealPageSections } from "@/lib/pageVisibility";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { CookieConsentBanner } from "./components/CookieConsentBanner";
@@ -22,8 +21,6 @@ import Contact from "./pages/Contact";
 import Legal, { type LegalPageKind } from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
-
-const MediaManager = lazyWithRetry(() => import("./pages/MediaManager"));
 
 function PageLoader() {
   return <div className="grid min-h-[45vh] place-items-center" role="status" aria-live="polite"><span className="h-9 w-9 animate-spin rounded-full border-2 border-blue-100 border-t-blue-700" /><span className="sr-only">Chargement…</span></div>;
