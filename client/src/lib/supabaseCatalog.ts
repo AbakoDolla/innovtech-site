@@ -5,10 +5,11 @@ export type SupabaseCatalogRow = {
   description_fr: string; description_en: string; price_label: string; price_label_en: string | null;
   image_url: string; status: "draft" | "published" | "hidden"; availability_status: string;
   availability_note_fr: string; availability_note_en: string; badge_fr: string; badge_en: string;
-  search_terms_fr: unknown; search_terms_en: unknown; sort_order: number;
+  search_terms_fr: unknown; search_terms_en: unknown; gallery_urls: unknown; video_urls: unknown; sort_order: number;
 };
 
 function terms(value: unknown) { return Array.isArray(value) ? value.filter((term): term is string => typeof term === "string") : []; }
+function mediaUrls(value: unknown) { return Array.isArray(value) ? value.filter((url): url is string => typeof url === "string" && /^https?:\/\//.test(url)) : []; }
 
 export function toCatalogProduct(row: SupabaseCatalogRow): CatalogProduct {
   return {
@@ -16,6 +17,7 @@ export function toCatalogProduct(row: SupabaseCatalogRow): CatalogProduct {
     family: row.category as ProductFamily,
     icon: row.icon as ProductIcon,
     imageSrc: row.image_url,
+    media: { images: Array.from(new Set([row.image_url, ...mediaUrls(row.gallery_urls)].filter(Boolean))), videos: mediaUrls(row.video_urls) },
     price: { fr: row.price_label, en: row.price_label_en || row.price_label },
     badge: { fr: row.badge_fr, en: row.badge_en },
     name: { fr: row.name_fr, en: row.name_en },

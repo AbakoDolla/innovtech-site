@@ -43,10 +43,10 @@ function Router({ lang }: { lang: Lang }) {
     <Route path="/conditions-vente">{() => <Legal lang={lang} kind={"sales" satisfies LegalPageKind} />}</Route>
     <Route path="/cookies">{() => <Legal lang={lang} kind={"cookies" satisfies LegalPageKind} />}</Route>
     <Route path="/admin">{() => <AdminDashboard />}</Route>
-    <Route path="/admin/catalogue">{() => <AdminDashboard section="catalog" />}</Route>
-    <Route path="/admin/disponibilites">{() => <AdminDashboard section="availability" />}</Route>
-    <Route path="/admin/contenus">{() => <AdminDashboard section="content" />}</Route>
-    <Route path="/admin/media">{() => <AdminDashboard section="media" />}</Route>
+    <Route path="/admin/catalogue">{() => <AdminDashboard />}</Route>
+    <Route path="/admin/disponibilites">{() => <AdminDashboard />}</Route>
+    <Route path="/admin/contenus">{() => <AdminDashboard />}</Route>
+    <Route path="/admin/media">{() => <AdminDashboard />}</Route>
     <Route>{() => <NotFound />}</Route>
   </Switch></Suspense>;
 }

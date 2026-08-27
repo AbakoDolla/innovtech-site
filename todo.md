@@ -131,3 +131,9 @@
 - [ ] Transformer la connexion admin en formulaire accessible avec soumission par Entrée, annonces d’état et focus cohérent.
 - [ ] Effectuer et consigner le contrôle responsive explicite sur mobile, tablette et ordinateur pour `/admin`.
 - [ ] Tester l’installation et l’ouverture d’InnovTech Admin en mode PWA sur mobile et ordinateur, puis consigner le résultat par format.
+- [ ] Simplifier la navigation d’administration autour d’un espace unique « Produits » adapté au e-commerce.
+- [ ] Créer un éditeur de produit complet : nom, catégorie, description FR/EN, prix FR/EN, disponibilité et visibilité.
+- [ ] Ajouter dans l’éditeur une galerie permettant d’ajouter, remplacer, prévisualiser et supprimer les images et vidéos d’un produit.
+- [ ] Connecter l’éditeur produit à Supabase Storage et aux métadonnées média sécurisées par RLS.
+- [ ] Ajouter les boutons visibles « Nouveau produit » et « Modifier » avec enregistrement et messages de succès/erreur.
+- [ ] Vérifier le parcours complet de création et modification d’un produit sur mobile, tablette et ordinateur en production.

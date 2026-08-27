@@ -8,6 +8,7 @@ export type CatalogProduct = {
   family: ProductFamily;
   icon: ProductIcon;
   imageSrc: string;
+  media?: { images: string[]; videos: string[] };
   price: Record<Lang, string>;
   badge: Record<Lang, string>;
   name: Record<Lang, string>;

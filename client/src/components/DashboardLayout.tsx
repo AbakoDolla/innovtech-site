@@ -2,17 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSupabaseAuth } from "@/contexts/SupabaseAuthContext";
 import { isStandalonePwa, shouldUseAdminManifest } from "@/lib/pwa";
-import { Boxes, CheckCircle2, Download, FilePenLine, Globe2, ImagePlus, LayoutDashboard, Loader2, LockKeyhole, LogOut, ShieldCheck, Sparkles } from "lucide-react";
+import { Boxes, Download, Globe2, LayoutDashboard, Loader2, LockKeyhole, LogOut, ShieldCheck, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
 
 const links = [
-  { icon: LayoutDashboard, label: "Vue d’ensemble", href: "/admin" },
-  { icon: Boxes, label: "Catalogue & prix", href: "/admin/catalogue" },
-  { icon: FilePenLine, label: "Disponibilités", href: "/admin/disponibilites" },
-  { icon: FilePenLine, label: "Contenus & SEO", href: "/admin/contenus" },
-  { icon: ImagePlus, label: "Médias", href: "/admin/media" },
+  { icon: LayoutDashboard, label: "Mes produits", href: "/admin" },
+  { icon: Boxes, label: "Ajouter un produit", href: "/admin?new=1" },
   { icon: Globe2, label: "Voir le site", href: "/" },
 ];
 
