@@ -139,3 +139,4 @@
 - [ ] Vérifier le parcours complet de création et modification d’un produit sur mobile, tablette et ordinateur en production.
 - [ ] Téléverser puis retirer en production une photo et une vidéo de démonstration dont InnovTech détient les droits, afin de valider l’affichage public galerie/vidéo et le nettoyage Storage de bout en bout.
 - [ ] Ajouter un retrait définitif protégé des médias non rattachés à un produit, avec prévention lorsqu’un fichier est encore utilisé dans le catalogue.
+- [ ] Versionner le cache PWA de l’administration pour que les mises à jour du panneau e-commerce remplacent l’ancienne interface installée.

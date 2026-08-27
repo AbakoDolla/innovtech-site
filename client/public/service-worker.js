@@ -1,4 +1,4 @@
-const CACHE_NAME = "innovtech-shell-v1";
+const CACHE_NAME = "innovtech-shell-v2";
 const APP_SHELL = ["/", "/admin", "/site.webmanifest", "/admin.webmanifest", "/media/branding/innovtech-symbol.png"];
 
 self.addEventListener("install", (event) => {
