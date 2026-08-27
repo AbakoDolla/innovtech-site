@@ -101,7 +101,7 @@
 - [x] Renforcer les métadonnées SEO, les données structurées et les signaux d’indexation du site InnovTech.
 - [ ] Préparer le référencement local Cameroun et international avec des informations commerciales vérifiables.
 - [x] Créer une URL d’administration sécurisée, distincte des parcours publics InnovTech.
-- [ ] Créer un backend et un modèle de données pour administrer produits, prix, catégories, disponibilité et contenus publics.
+- [x] Créer un backend et un modèle de données pour administrer produits, prix, catégories, disponibilité et contenus publics.
 - [x] Construire un tableau de bord pour ajouter, modifier, masquer et supprimer les éléments pilotés sur le site.
 - [x] Relier le catalogue public aux données administrées sans dégrader les parcours WhatsApp existants.
 - [ ] Ajouter une gestion des médias, des réalisations et des paramètres de référencement dans l’administration.
@@ -111,7 +111,7 @@
 - [ ] Vérifier les états d’erreur critiques du tableau de bord pour la validation, les droits et les mutations.
 - [ ] Préparer Vercel pour servir le backend tRPC et le tableau de bord avec le site public synchronisé.
 - [ ] Vérifier en production Vercel les routes API, la connexion administrateur et la synchronisation catalogue après publication.
-- [ ] Corriger le déclenchement du bouton de connexion administrateur sur le domaine Vercel.
+- [x] Corriger le déclenchement du bouton de connexion administrateur sur le domaine Vercel.
 - [x] Remplacer le garde OAuth Manus indisponible dans la région par Supabase Auth pour les routes d’administration.
 - [x] Versionner les migrations Supabase du dashboard, des champs d’affichage et du prix anglais.
 - [x] Appliquer et vérifier la migration `price_label_en` sur le projet Supabase InnovTech.
@@ -119,21 +119,22 @@
 - [x] Valider TypeScript, 31 tests unitaires et la compilation de production après la réintégration de la branche principale.
 - [x] Configurer les URL de redirection Supabase Auth pour `https://innovtech-site.vercel.app` et les aperçus nécessaires.
 - [ ] Créer le premier compte administrateur `evansabah2006@gmail.com`, puis vérifier l’attribution automatique du rôle.
-- [ ] Importer les 11 produits dans Supabase depuis le dashboard et vérifier le catalogue public alimenté par ces données.
-- [ ] Vérifier en production Vercel l’accès Supabase, les règles RLS, la disponibilité, les prix et le masquage d’un produit.
-- [ ] Connecter Supabase Storage à la gestion des médias pour les futurs téléversements d’images et vidéos.
+- [x] Importer les 11 produits dans Supabase depuis le dashboard et vérifier le catalogue public alimenté par ces données.
+- [x] Vérifier en production Vercel l’accès Supabase, les règles RLS, la disponibilité, les prix et le masquage d’un produit.
+- [x] Connecter Supabase Storage à la gestion des médias pour les futurs téléversements d’images et vidéos.
 - [ ] Générer, transmettre de manière contrôlée et vérifier le premier mot de passe administrateur Supabase pour l’adresse propriétaire InnovTech.
 - [ ] Rendre l’administration InnovTech installable comme PWA depuis un téléphone et un ordinateur.
 - [x] Intégrer le logo InnovTech dans l’expérience d’administration, les icônes d’installation et les métadonnées PWA.
-- [ ] Repenser l’écran de connexion Supabase avec une animation légère, une identité premium et une accessibilité mobile complète.
+- [x] Repenser l’écran de connexion Supabase avec une animation légère, une identité premium et une accessibilité mobile complète.
 - [ ] Vérifier l’expérience responsive PWA sur mobile, tablette et ordinateur avant publication.
 - [ ] Tester réellement l’installation PWA InnovTech Admin en production Vercel sur mobile et ordinateur, puis corriger le manifeste si nécessaire.
-- [ ] Transformer la connexion admin en formulaire accessible avec soumission par Entrée, annonces d’état et focus cohérent.
+- [x] Transformer la connexion admin en formulaire accessible avec soumission par Entrée, annonces d’état et focus cohérent.
 - [ ] Effectuer et consigner le contrôle responsive explicite sur mobile, tablette et ordinateur pour `/admin`.
 - [ ] Tester l’installation et l’ouverture d’InnovTech Admin en mode PWA sur mobile et ordinateur, puis consigner le résultat par format.
-- [ ] Simplifier la navigation d’administration autour d’un espace unique « Produits » adapté au e-commerce.
+- [x] Simplifier la navigation d’administration autour d’un espace unique « Produits » adapté au e-commerce.
 - [ ] Créer un éditeur de produit complet : nom, catégorie, description FR/EN, prix FR/EN, disponibilité et visibilité.
 - [ ] Ajouter dans l’éditeur une galerie permettant d’ajouter, remplacer, prévisualiser et supprimer les images et vidéos d’un produit.
-- [ ] Connecter l’éditeur produit à Supabase Storage et aux métadonnées média sécurisées par RLS.
-- [ ] Ajouter les boutons visibles « Nouveau produit » et « Modifier » avec enregistrement et messages de succès/erreur.
+- [x] Connecter l’éditeur produit à Supabase Storage et aux métadonnées média sécurisées par RLS.
+- [x] Ajouter les boutons visibles « Nouveau produit » et « Modifier » avec enregistrement et messages de succès/erreur.
 - [ ] Vérifier le parcours complet de création et modification d’un produit sur mobile, tablette et ordinateur en production.
+- [ ] Téléverser puis retirer en production une photo et une vidéo de démonstration dont InnovTech détient les droits, afin de valider l’affichage public galerie/vidéo et le nettoyage Storage de bout en bout.
