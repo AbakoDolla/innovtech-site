@@ -157,3 +157,4 @@
 - [ ] Vérifier les règles RLS pour chaque rôle, les restrictions d’export et la révocation immédiate d’un collaborateur.
 - [ ] Empêcher toute élévation involontaire d’un collaborateur au rôle propriétaire, y compris via une modification directe protégée par RLS.
 - [ ] Réduire l’exposition anonyme des tables privées d’administration et de demandes commerciales signalée par l’audit de sécurité Supabase.
+- [ ] Corriger la lecture des paramètres de navigation du dashboard afin que Produits, Demandes, Catégories, Équipe et Réglages ouvrent bien leur module.

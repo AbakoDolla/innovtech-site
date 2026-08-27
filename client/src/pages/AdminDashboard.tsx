@@ -11,7 +11,7 @@ import type { SupabaseCatalogRow } from "@/lib/supabaseCatalog";
 import { listProductMedia, removeProductMedia, type SupabaseMediaAsset, uploadProductMedia } from "@/lib/supabaseMedia";
 import { Check, ClipboardList, Download, Eye, EyeOff, Film, ImagePlus, Loader2, Pencil, Plus, Save, Search, Settings2, Tag, Trash2, Upload, UserPlus, UsersRound, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "wouter";
+import { useLocation, useSearch } from "wouter";
 import { toast } from "sonner";
 
 type Draft = Omit<SupabaseCatalogRow, "id">;
@@ -47,6 +47,7 @@ export function productUsesMedia(product: Pick<SupabaseCatalogRow, "image_url" |
 export default function AdminDashboard() {
   const { user, role } = useSupabaseAuth();
   const [location, setLocation] = useLocation();
+  const search = useSearch();
   const [products, setProducts] = useState<SupabaseCatalogRow[]>([]);
   const [assets, setAssets] = useState<SupabaseMediaAsset[]>([]);
   const [requests, setRequests] = useState<CustomerRequest[]>([]);
@@ -63,7 +64,7 @@ export default function AdminDashboard() {
   const [catalogSearch, setCatalogSearch] = useState("");
   const [catalogStatus, setCatalogStatus] = useState<"all" | Draft["status"]>("all");
   const hasOpenedNewRoute = useRef(false);
-  const section = new URLSearchParams(location.split("?")[1] || "").get("section") || "overview";
+  const section = new URLSearchParams(search).get("section") || "overview";
   const canManageCatalog = can(role, "catalog_manage");
 
   useEffect(() => {
